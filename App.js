@@ -1,12 +1,26 @@
-import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import TabNavigator from './Components/TabNavigator';
+
+const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator
+        screenOptions={{
+          headerStyle: {backgroundColor: "#63AE8D"},
+          headerTintColor: "white",
+        }}
+      >
+        <Stack.Screen
+          name="BottomTabNavigator"
+          component={TabNavigator}
+          options={{title: "Chat Sprout"}}
+        />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
 
