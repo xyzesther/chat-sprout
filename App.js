@@ -29,7 +29,11 @@ export default function App() {
           <Stack.Screen
             name="AddNote"
             component={AddNoteScreen}
-            options={{headerShown: false}}
+            options={{
+              headerShown: true,
+              headerBackTitleVisible: false,
+              title: 'Add Note',
+            }}
           />
         </Stack.Navigator>
       </NavigationContainer>
