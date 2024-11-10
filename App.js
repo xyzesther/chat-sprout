@@ -3,11 +3,17 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import TabNavigator from './Components/TabNavigator';
 import { colors } from './styles/styles';
+import { createTamagui,TamaguiProvider } from 'tamagui'
+import defaultConfig from '@tamagui/config/v3'
+
+const config = createTamagui(defaultConfig)
 
 const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
+    <TamaguiProvider config={config}>
+
     <NavigationContainer>
       <Stack.Navigator
         screenOptions={{
@@ -22,5 +28,7 @@ export default function App() {
         />
       </Stack.Navigator>
     </NavigationContainer>
+    </TamaguiProvider>
+
   );
 }
