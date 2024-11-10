@@ -39,8 +39,8 @@ export default function TabNavigator() {
       })}
     >
       <Tab.Screen name="Learn" component={LearnScreen} />
-      <Tab.Screen name="Explore" component={ExploreScreen} />
       <Tab.Screen name="Notebook" component={NotebookScreen} />
+      <Tab.Screen name="Explore" component={ExploreScreen} />
       <Tab.Screen name="Account" component={AccountScreen} />
     </Tab.Navigator>
   )
