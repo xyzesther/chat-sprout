@@ -11,4 +11,17 @@ export const colors = {
   }
 };
 
-export const iconSize = 24;
+export const image = {
+  iconImg: 24,
+};
+
+export const fontSize = {
+  header: 24,
+  tab: 12,
+};
+
+export const spacing = {
+  sm: 5,
+  md: 10,
+  lg: 20,
+};
