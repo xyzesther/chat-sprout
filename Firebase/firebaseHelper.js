@@ -1,7 +1,7 @@
 import { collection, addDoc, deleteDoc, doc, getDocs, } from 'firebase/firestore';
 import { database } from './firebaseSetup';
 
-export async function writeToDB(data, collectionName) {
+export async function writeToDB(collectionName, data) {
   try {
     const docRef = addDoc(collection(database, collectionName), data);
     return docRef;
