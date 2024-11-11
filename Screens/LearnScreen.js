@@ -1,17 +1,17 @@
 import { StyleSheet, View, Button } from "react-native";
 import React from "react";
-import conversations from "../data/conversations.json";
+import conversationData from "../data/conversations.json";
 
 export default function LearnScreen({ navigation }) {
-  const topic1 = conversations[0].topics[0];
-  const topic2 = conversations[0].topics[1];
-  const topic3 = conversations[0].topics[2];
-  // const topic4 = conversations[1].topics[0];
-  // const topic5 = conversations[1].topics[1];
-  // const topic6 = conversations[1].topics[2];
-  // const topic7 = conversations[2].topics[0];
-  // const topic8 = conversations[2].topics[1];
-  // const topic9 = conversations[2].topics[2];
+  const topic1 = conversationData[0].topics[0];
+  const topic2 = conversationData[0].topics[1];
+  const topic3 = conversationData[0].topics[2];
+  // const topic4 = conversationData[1].topics[0];
+  // const topic5 = conversationData[1].topics[1];
+  // const topic6 = conversationData[1].topics[2];
+  // const topic7 = conversationData[2].topics[0];
+  // const topic8 = conversationData[2].topics[1];
+  // const topic9 = conversationData[2].topics[2];
 
   return (
     <View>

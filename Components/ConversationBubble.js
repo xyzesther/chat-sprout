@@ -15,26 +15,27 @@ function ConversationBubble({ message, isSender, audio }) {
       {!isSender && <View style={styles.triangleLeft} />}
       <YStack
         padding="$2"
-        borderRadius="$6"
+        borderRadius="$5"
         backgroundColor={colors.lightTheme}
         maxWidth="90%"
         marginVertical="$2"
         flexDirection="row"
-        alignItems="center"
+        alignItems="flex-start"
+        position="relative" // 确保子元素可以使用绝对定位
       >
         {audio && (
-          <TouchableOpacity onPress={() => console.log("Play audio:", audio)}>
-            <Ionicons
-              name="play-circle"
-              size={24}
-              color={colors.theme}
-              style={styles.icon}
-            />
+          <TouchableOpacity
+            onPress={() => console.log("Play audio:", audio)}
+            style={styles.iconContainer} // 使用绝对定位的样式
+          >
+            <Ionicons name="play-circle" size={24} color={colors.theme} />
           </TouchableOpacity>
         )}
-        <SizableText size={"$5"} color="black" style={styles.text}>
-          {message}
-        </SizableText>
+        <View style={styles.messageContainer}>
+          <SizableText size={"$5"} color="black" style={styles.text}>
+            {message}
+          </SizableText>
+        </View>
       </YStack>
       {isSender && <View style={styles.triangleRight} />}
     </View>
@@ -80,8 +81,13 @@ const styles = StyleSheet.create({
     transform: [{ rotate: "-45deg" }],
     marginLeft: -6,
   },
-  icon: {
-    marginRight: 8,
+  iconContainer: {
+    marginRight: 4,
+  },
+  messageContainer: {
+    flex: 1,
+    flexDirection: "row",
+    flexWrap: "wrap",
   },
   text: {
     flexShrink: 1,
