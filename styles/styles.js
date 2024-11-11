@@ -1,14 +1,20 @@
+import tinycolor from "tinycolor2";
+
+const theme = "#63AE8D";
+const lightTheme = tinycolor(theme).lighten(35).toString();
+
 export const colors = {
-  theme: '#63AE8D',
-  disabled: '#D1D1D1',
-  background: { 
-    white: '#fff',
+  theme,
+  lightTheme,
+  disabled: "#D1D1D1",
+  background: {
+    white: "#fff",
   },
   text: {
-    primary: 'white',
-    secondary: '#483d8b',
-    black: 'black',
-  }
+    primary: "white",
+    secondary: "#483d8b",
+    black: "black",
+  },
 };
 
 export const image = {

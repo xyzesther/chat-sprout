@@ -1,9 +1,8 @@
-import { StyleSheet, Text, View, Button } from "react-native";
+import { StyleSheet, View, Button } from "react-native";
 import React from "react";
 import conversations from "../data/conversations.json";
 
 export default function LearnScreen({ navigation }) {
-  // const navigation = useNavigation();
   const topic1 = conversations[0].topics[0];
   const topic2 = conversations[0].topics[1];
   const topic3 = conversations[0].topics[2];
@@ -16,9 +15,6 @@ export default function LearnScreen({ navigation }) {
 
   return (
     <View>
-      <Text>LearnScreen</Text>
-
-      {/* add buttons of topics  */}
       <Button
         title={topic1.topic_name}
         onPress={() =>
@@ -28,7 +24,6 @@ export default function LearnScreen({ navigation }) {
           })
         }
       />
-
       <Button
         title={topic2.topic_name}
         onPress={() =>
@@ -38,7 +33,6 @@ export default function LearnScreen({ navigation }) {
           })
         }
       />
-
       <Button
         title={topic3.topic_name}
         onPress={() =>
@@ -48,10 +42,6 @@ export default function LearnScreen({ navigation }) {
           })
         }
       />
-
-      {/* press the topic button leads to conversations of this topic */}
-
-      {/* create a conversation page to display - navigation? go forth and go back */}
     </View>
   );
 }

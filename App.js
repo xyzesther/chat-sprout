@@ -41,6 +41,7 @@ export default function App() {
             component={ConversationScreen}
             options={({ navigation, route }) => ({
               title: route.params?.title || "Conversation",
+              headerBackTitleVisible: false,
             })}
           />
         </Stack.Navigator>
