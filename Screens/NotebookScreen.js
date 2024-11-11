@@ -3,8 +3,9 @@ import { StyleSheet, View, Text, SafeAreaView } from 'react-native';
 import { NoteList } from '../Components/NoteList';
 import { database } from '../Firebase/firebaseSetup';
 import { collection, onSnapshot } from 'firebase/firestore';
-import { Button } from 'tamagui';
+import { Button, ScrollView } from 'tamagui';
 import { Plus } from '@tamagui/lucide-icons';
+import { colors, spacing } from '../styles/styles';
 
 export default function NotebookScreen({ navigation }) {
   const [notes, setNotes] = useState([]);
@@ -41,15 +42,17 @@ export default function NotebookScreen({ navigation }) {
 
   return (
     <SafeAreaView style={styles.container}>
-      <View>
-        {notes.length > 0 ? (
-          <NoteList notes={notes} onNotePress={handleNotePress} />
-        ) : (
-          <Text style={styles.noteListEmpty}>
-            Add a note to get started!
-          </Text>
-        )}
-      </View>
+      <ScrollView> 
+        <View style={styles.noteList}>
+          {notes.length > 0 ? (
+            <NoteList notes={notes} onNotePress={handleNotePress} />
+          ) : (
+            <Text style={styles.noteListEmptyText}>
+              Add a note to get started!
+            </Text>
+          )}
+        </View>
+      </ScrollView>
     </SafeAreaView>
   );
 }
@@ -57,13 +60,18 @@ export default function NotebookScreen({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    padding: 16,
+    backgroundColor: colors.background.white,
   },
-  noteListEmpty: {
+
+  noteList: {
+    flex: 1,
+    marginTop: spacing.lg,
+    marginBottom: spacing.lg,
+    alignItems: 'center',
+  },
+
+  noteListEmptyText: {
     textAlign: 'center',
-    marginTop: 20,
-    fontSize: 16,
-    color: '#888',
+    color: colors.text.secondary,
   },
 });
