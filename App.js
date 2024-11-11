@@ -31,7 +31,6 @@ export default function App() {
             name="AddNote"
             component={AddNoteScreen}
             options={{
-              headerShown: true,
               headerBackTitleVisible: false,
               title: "Add Note",
             }}
