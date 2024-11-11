@@ -12,8 +12,12 @@ export const colors = {
   },
   text: {
     primary: "white",
-    secondary: "#483d8b",
+    secondary: "#63AE8D",
     black: "black",
+  },
+  icon: {
+    primary: "#63AE8D",
+    secondary: "darkgray",
   },
 };
 
@@ -31,3 +35,17 @@ export const spacing = {
   md: 10,
   lg: 20,
 };
+
+export const borderRadius = {
+  sm: 2,
+  md: 5,
+  lg: 10,
+};
+
+export const borderWidth = {
+  null: 0,
+  sm: 1,
+  md: 2,
+  lg: 3,
+};
+  

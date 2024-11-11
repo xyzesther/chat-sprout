@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, View, Text, SafeAreaView } from 'react-native';
 import { NoteList } from '../Components/NoteList';
+import { SearchBar } from '../Components/SearchBar';
 import { database } from '../Firebase/firebaseSetup';
 import { collection, onSnapshot } from 'firebase/firestore';
-import { Button } from 'tamagui';
-import { Plus } from '@tamagui/lucide-icons';
+import { Button, ScrollView, Input, XStack } from 'tamagui';
+import { Plus, Search, XCircle } from '@tamagui/lucide-icons';
+import { colors, spacing, borderRadius, borderWidth } from '../styles/styles';
 
 export default function NotebookScreen({ navigation }) {
   const [notes, setNotes] = useState([]);
+  const [searchQuery, setSearchQuery] = useState('');
   const collectionName = 'notes';
 
   useEffect(() => {
@@ -35,21 +38,32 @@ export default function NotebookScreen({ navigation }) {
     return () => unsubscribe();
   }, []);
 
+  // Filter notes based on search query
+  const filteredNotes = notes.filter(note =>
+    note.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    note.content.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
   const handleNotePress = (note) => {
     console.log('Selected note:', note);
   };
 
   return (
     <SafeAreaView style={styles.container}>
-      <View>
-        {notes.length > 0 ? (
-          <NoteList notes={notes} onNotePress={handleNotePress} />
-        ) : (
-          <Text style={styles.noteListEmpty}>
-            Add a note to get started!
-          </Text>
-        )}
-      </View>
+      <ScrollView>
+        <View style={styles.searchBar}>
+          <SearchBar searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
+        </View>
+        <View style={styles.noteList}>
+          {notes.length === 0 ? (
+            <Text style={styles.noteListEmptyText}>Add a note to get started!</Text>
+          ) : filteredNotes.length > 0 ? (
+            <NoteList notes={filteredNotes} onNotePress={handleNotePress} />
+          ) : (
+            <Text style={styles.noteListEmptyText}>No notes found for "{searchQuery}"</Text>
+          )}
+        </View>
+      </ScrollView>
     </SafeAreaView>
   );
 }
@@ -57,13 +71,21 @@ export default function NotebookScreen({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    padding: 16,
+    backgroundColor: colors.background.white,
   },
-  noteListEmpty: {
+
+  searchBar: {
+    padding: spacing.md,
+  },
+
+  noteList: {
+    marginBottom: spacing.lg,
+    alignItems: 'center',
+  },
+
+  noteListEmptyText: {
+    marginTop: spacing.lg,
     textAlign: 'center',
-    marginTop: 20,
-    fontSize: 16,
-    color: '#888',
+    color: colors.text.black,
   },
 });
