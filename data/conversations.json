@@ -1,0 +1,162 @@
+[
+  {
+    "theme_id": 0,
+    "theme_name": "School and Office",
+    "theme_description": "Talk to people you know",
+    "topics": [
+      {
+        "topic_id": 0,
+        "topic_name": "Greeting",
+        "conversations": [
+          {
+            "conversation_id": 0,
+            "speaker1": "Riley",
+            "content1": "How are you?",
+            "audio1": "audio1",
+            "speaker2": "Alex",
+            "content2": "I’m doing great, thank you for asking. And you?",
+            "audio2": "audio2"
+          },
+          {
+            "conversation_id": 1,
+            "speaker1": "Riley",
+            "content1": "Hi, good morning! How’s everything going?",
+            "audio1": "audio1",
+            "speaker2": "Taylor",
+            "content2": "Good morning! It’s going well, just heading to class/meeting. How about you?",
+            "audio2": "audio2"
+          },
+          {
+            "conversation_id": 2,
+            "speaker1": "Sam",
+            "content1": "Good to see you again! How’s everything?",
+            "audio1": "audio1",
+            "speaker2": "Alex",
+            "content2": "It’s been good. Just working on a new project. How about you?",
+            "audio2": "audio2"
+          },
+          {
+            "conversation_id": 3,
+            "speaker1": "Taylor",
+            "content1": "Hey, Riley, how’s it going?",
+            "audio1": "audio1",
+            "speaker2": "Riley",
+            "content2": "Hey! Not too bad, just grabbing some coffee. How about you?",
+            "audio2": "audio2"
+          },
+          {
+            "conversation_id": 4,
+            "speaker1": "Taylor",
+            "content1": "Good to see you again! How’s everything?",
+            "audio1": "audio1",
+            "speaker2": "Sam",
+            "content2": "I’m good, thank you. Really enjoy working with everyone on this project.",
+            "audio2": "audio2"
+          }
+        ]
+      },
+      {
+        "topic_id": 1,
+        "topic_name": "Chat More",
+        "conversations": [
+          {
+            "conversation_id": 0,
+            "speaker1": "Alex",
+            "content1": "I’ve recently gotten into hiking. It’s a great way to unwind over the weekend. Do you enjoy outdoor activities as well?",
+            "audio1": "audio1",
+            "speaker2": "Taylor",
+            "content2": "Yes, I love hiking too! I’m actually planning a hiking trip next weekend. Do you have any favorite trails you’d recommend?",
+            "audio2": "audio2"
+          },
+          {
+            "conversation_id": 1,
+            "speaker1": "Taylor",
+            "content1": "What do you like to do in your free time? I’m always interested in learning about new hobbies.",
+            "audio1": "audio1",
+            "speaker2": "Alex",
+            "content2": "I’m really into photography, especially landscape photography.",
+            "audio2": "audio2"
+          },
+          {
+            "conversation_id": 2,
+            "speaker1": "Sam",
+            "content1": "I’m currently learning more about data analysis. Have you had any experience with it?",
+            "audio1": "audio1",
+            "speaker2": "Riley",
+            "content2": "Yes, I’ve been working on that skill for a while—it’s really valuable in my field.",
+            "audio2": "audio2"
+          },
+          {
+            "conversation_id": 3,
+            "speaker1": "Riley",
+            "content1": "I believe we both know Alex Morgan. I’ve worked with them on a project before—how do you know them?",
+            "audio1": "audio1",
+            "speaker2": "Taylor",
+            "content2": "We worked together on a similar project last year! They’re great to collaborate with.",
+            "audio2": "audio2"
+          },
+          {
+            "conversation_id": 4,
+            "speaker1": "Alex",
+            "content1": "I recently started learning to play the guitar. It’s been a fun challenge! Do you play any instruments?",
+            "audio1": "audio1",
+            "speaker2": "Sam",
+            "content2": "Yes, I play the piano. I find it really relaxing.",
+            "audio2": "audio2"
+          }
+        ]
+      },
+      {
+        "topic_id": 2,
+        "topic_name": "Compliment",
+        "conversations": [
+          {
+            "conversation_id": 0,
+            "speaker1": "Sam",
+            "content1": "I really admire how calm you stay, even in stressful situations.",
+            "audio1": "audio1",
+            "speaker2": "Taylor",
+            "content2": "Thanks, Sam! It’s taken practice. I can share some tips if you’d like.",
+            "audio2": "audio2"
+          },
+          {
+            "conversation_id": 1,
+            "speaker1": "Alex",
+            "content1": "Your presentation was really insightful, especially the way you broke down that complex topic to make it easy to understand.",
+            "audio1": "audio1",
+            "speaker2": "Riley",
+            "content2": "Thank you! I’m glad you found it helpful. I always try to make sure things are easy to follow.",
+            "audio2": "audio2"
+          },
+          {
+            "conversation_id": 2,
+            "speaker1": "Alex",
+            "content1": "Your positive energy lifts the whole team!",
+            "audio1": "audio1",
+            "speaker2": "Taylor",
+            "content2": "That’s nice of you to say. I try to keep things upbeat.",
+            "audio2": "audio2"
+          },
+          {
+            "conversation_id": 3,
+            "speaker1": "Taylor",
+            "content1": "Your feedback at the last meeting was really helpful. It gave me a new perspective.",
+            "audio1": "audio1",
+            "speaker2": "Riley",
+            "content2": "Glad to hear that! It’s great to share different ideas.",
+            "audio2": "audio2"
+          },
+          {
+            "conversation_id": 4,
+            "speaker1": "Taylor",
+            "content1": "Hi, Sam! I like your new glasses—they suit you really well.",
+            "audio1": "audio1",
+            "speaker2": "Sam",
+            "content2": "Thanks, Taylor! I just got them, glad you noticed!",
+            "audio2": "audio2"
+          }
+        ]
+      }
+    ]
+  }
+]
