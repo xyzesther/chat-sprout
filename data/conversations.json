@@ -1,0 +1,482 @@
+[
+  {
+    "theme_id": 0,
+    "theme_name": "School and Office",
+    "theme_description": "Talk to people you know",
+    "topics": [
+      {
+        "topic_id": 0,
+        "topic_name": "Greeting",
+        "conversations": [
+          {
+            "conversation_id": 0,
+            "speaker1": "Riley",
+            "content1": "How are you?",
+            "audio1": "audio1",
+            "speaker2": "Alex",
+            "content2": "I'm doing great, thank you for asking. And you?",
+            "audio2": "audio2"
+          },
+          {
+            "conversation_id": 1,
+            "speaker1": "Riley",
+            "content1": "Hi, good morning! How's everything going?",
+            "audio1": "audio1",
+            "speaker2": "Taylor",
+            "content2": "Good morning! It's going well, just heading to class/meeting. How about you?",
+            "audio2": "audio2"
+          },
+          {
+            "conversation_id": 2,
+            "speaker1": "Sam",
+            "content1": "Good to see you again! How's everything?",
+            "audio1": "audio1",
+            "speaker2": "Alex",
+            "content2": "It's been good. Just working on a new project. How about you?",
+            "audio2": "audio2"
+          },
+          {
+            "conversation_id": 3,
+            "speaker1": "Taylor",
+            "content1": "Hey, Riley, how's it going?",
+            "audio1": "audio1",
+            "speaker2": "Riley",
+            "content2": "Hey! Not too bad, just grabbing some coffee. How about you?",
+            "audio2": "audio2"
+          },
+          {
+            "conversation_id": 4,
+            "speaker1": "Taylor",
+            "content1": "Good to see you again! How's everything?",
+            "audio1": "audio1",
+            "speaker2": "Sam",
+            "content2": "I'm good, thank you. Really enjoy working with everyone on this project.",
+            "audio2": "audio2"
+          }
+        ]
+      },
+      {
+        "topic_id": 1,
+        "topic_name": "Chat More",
+        "conversations": [
+          {
+            "conversation_id": 0,
+            "speaker1": "Alex",
+            "content1": "I've recently gotten into hiking. It's a great way to unwind over the weekend. Do you enjoy outdoor activities as well?",
+            "audio1": "audio1",
+            "speaker2": "Taylor",
+            "content2": "Yes, I love hiking too! I'm actually planning a hiking trip next weekend. Do you have any favorite trails you'd recommend?",
+            "audio2": "audio2"
+          },
+          {
+            "conversation_id": 1,
+            "speaker1": "Taylor",
+            "content1": "What do you like to do in your free time? I'm always interested in learning about new hobbies.",
+            "audio1": "audio1",
+            "speaker2": "Alex",
+            "content2": "I'm really into photography, especially landscape photography.",
+            "audio2": "audio2"
+          },
+          {
+            "conversation_id": 2,
+            "speaker1": "Sam",
+            "content1": "I'm currently learning more about data analysis. Have you had any experience with it?",
+            "audio1": "audio1",
+            "speaker2": "Riley",
+            "content2": "Yes, I've been working on that skill for a while - it's really valuable in my field.",
+            "audio2": "audio2"
+          },
+          {
+            "conversation_id": 3,
+            "speaker1": "Riley",
+            "content1": "I believe we both know Alex Morgan. I've worked with them on a project before - how do you know them?",
+            "audio1": "audio1",
+            "speaker2": "Taylor",
+            "content2": "We worked together on a similar project last year! They're great to collaborate with.",
+            "audio2": "audio2"
+          },
+          {
+            "conversation_id": 4,
+            "speaker1": "Alex",
+            "content1": "I recently started learning to play the guitar. It's been a fun challenge! Do you play any instruments?",
+            "audio1": "audio1",
+            "speaker2": "Sam",
+            "content2": "Yes, I play the piano. I find it really relaxing.",
+            "audio2": "audio2"
+          }
+        ]
+      },
+      {
+        "topic_id": 2,
+        "topic_name": "Compliment",
+        "conversations": [
+          {
+            "conversation_id": 0,
+            "speaker1": "Sam",
+            "content1": "I really admire how calm you stay, even in stressful situations.",
+            "audio1": "audio1",
+            "speaker2": "Taylor",
+            "content2": "Thanks, Sam! It's taken practice. I can share some tips if you'd like.",
+            "audio2": "audio2"
+          },
+          {
+            "conversation_id": 1,
+            "speaker1": "Alex",
+            "content1": "Your presentation was really insightful, especially the way you broke down that complex topic to make it easy to understand.",
+            "audio1": "audio1",
+            "speaker2": "Riley",
+            "content2": "Thank you! I'm glad you found it helpful. I always try to make sure things are easy to follow.",
+            "audio2": "audio2"
+          },
+          {
+            "conversation_id": 2,
+            "speaker1": "Alex",
+            "content1": "Your positive energy lifts the whole team!",
+            "audio1": "audio1",
+            "speaker2": "Taylor",
+            "content2": "That's nice of you to say. I try to keep things upbeat.",
+            "audio2": "audio2"
+          },
+          {
+            "conversation_id": 3,
+            "speaker1": "Taylor",
+            "content1": "Your feedback at the last meeting was really helpful. It gave me a new perspective.",
+            "audio1": "audio1",
+            "speaker2": "Riley",
+            "content2": "Glad to hear that! It's great to share different ideas.",
+            "audio2": "audio2"
+          },
+          {
+            "conversation_id": 4,
+            "speaker1": "Taylor",
+            "content1": "Hi, Sam! I like your new glasses - they suit you really well.",
+            "audio1": "audio1",
+            "speaker2": "Sam",
+            "content2": "Thanks, Taylor! I just got them, glad you noticed!",
+            "audio2": "audio2"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "theme_id": 1,
+    "theme_name": "Event and Meetup",
+    "theme_description": "Meet new people",
+    "topics": [
+      {
+        "topic_id": 0,
+        "topic_name": "Group Conversation",
+        "conversations": [
+          {
+            "speaker1": "Alex",
+            "content1": "This seems like a great discussion. Mind if I join you?",
+            "speaker2": "Riley",
+            "content2": "Not at all! We were just debating the pros and cons of remote work.",
+            "audio1": "audio1",
+            "audio2": "audio2",
+            "conversation_id": 0
+          },
+          {
+            "speaker1": "Riley",
+            "content1": "Is it okay if I join in? I'd love to hear more about what you're discussing.",
+            "speaker2": "Taylor",
+            "content2": "Absolutely! We're just talking about our weekend plans.",
+            "audio1": "audio1",
+            "audio2": "audio2",
+            "conversation_id": 1
+          },
+          {
+            "speaker1": "Alex",
+            "content1": "I was wondering, could you elaborate on the impact of remote work on productivity? I'd love to understand more.",
+            "speaker2": "Sam",
+            "content2": "Sure, I was talking about how flexible hours can actually lead to higher individual productivity, but it might impact team collaboration.",
+            "audio1": "audio1",
+            "audio2": "audio2",
+            "conversation_id": 2
+          },
+          {
+            "speaker1": "Taylor",
+            "content1": "Great point on using AI in customer service. It reminds me of when I helped implement a chatbot system at my previous job. Have you worked on something similar?",
+            "speaker2": "Riley",
+            "content2": "Yes, I worked on a similar project last year. We integrated AI to handle basic queries, and it cut response time a lot.",
+            "audio1": "audio1",
+            "audio2": "audio2",
+            "conversation_id": 3
+          },
+          {
+            "speaker1": "Alex",
+            "content1": "That's a great perspective! I'd add that understanding cultural differences is also key when working with international teams. I'm curious, what do you think?",
+            "speaker2": "Sam",
+            "content2": "Absolutely, and handling time zone differences early on can help a lot too.",
+            "audio1": "audio1",
+            "audio2": "audio2",
+            "conversation_id": 4
+          }
+        ]
+      },
+      {
+        "topic_id": 1,
+        "topic_name": "Talk to Speaker",
+        "conversations": [
+          {
+            "speaker1": "Sam",
+            "content1": "Thanks for the great talk! I'm curious, what got you interested in focusing on digital privacy in the first place?",
+            "speaker2": "Alex",
+            "content2": "It started when I worked on a project where a data breach occurred - it really made me want to help prevent it in the future.",
+            "audio1": "audio1",
+            "audio2": "audio2",
+            "conversation_id": 0
+          },
+          {
+            "speaker1": "Riley",
+            "content1": "I appreciated your perspective on sustainable business practices. Do you have any favorite books, podcasts, or courses that you'd recommend for learning more about this topic?",
+            "speaker2": "Taylor",
+            "content2": "Definitely check out ...",
+            "audio1": "audio1",
+            "audio2": "audio2",
+            "conversation_id": 1
+          },
+          {
+            "speaker1": "Taylor",
+            "content1": "Your advice on employee training was useful. What's one new thing you added to your training that made a big difference?",
+            "speaker2": "Riley",
+            "content2": "We added peer mentoring, and it worked really well...",
+            "audio1": "audio1",
+            "audio2": "audio2",
+            "conversation_id": 2
+          },
+          {
+            "speaker1": "Riley",
+            "content1": "I enjoyed your case study on launching new products. What's one thing you wish you had known before starting that project?",
+            "speaker2": "Alex",
+            "content2": "I wish I had spent more time on user research. It would have saved us a lot of time and iterations down the line.",
+            "audio1": "audio1",
+            "audio2": "audio2",
+            "conversation_id": 3
+          },
+          {
+            "speaker1": "Alex",
+            "content1": "Your talk on diversity in the workplace was inspiring. What motivated you to prioritize this in your own team?",
+            "speaker2": "Sam",
+            "content2": "I started out in a team where everyone had the same background, and it really limited our ideas...",
+            "audio1": "audio1",
+            "audio2": "audio2",
+            "conversation_id": 4
+          }
+        ]
+      },
+      {
+        "topic_id": 2,
+        "topic_name": "Connect",
+        "conversations": [
+          {
+            "speaker1": "Riley",
+            "content1": "If you're on LinkedIn, I'd love to connect. Can I send you a request?",
+            "speaker2": "Sam",
+            "content2": "Of course! Feel free to send it over.",
+            "audio1": "audio1",
+            "audio2": "audio2",
+            "conversation_id": 0
+          },
+          {
+            "speaker1": "Sam",
+            "content1": "It was great chatting with you! Would you mind if I added you on LinkedIn to stay in touch?",
+            "speaker2": "Alex",
+            "content2": "Of course, I'd like that. Let's connect there!",
+            "audio1": "audio1",
+            "audio2": "audio2",
+            "conversation_id": 1
+          },
+          {
+            "speaker1": "Riley",
+            "content1": "I really enjoyed your presentation on sustainable fashion. Could I grab your business card or connect with you on LinkedIn?",
+            "speaker2": "Sam",
+            "content2": "Thank you! Here's my card, and yes, let's connect on LinkedIn too!",
+            "audio1": "audio1",
+            "audio2": "audio2",
+            "conversation_id": 2
+          },
+          {
+            "speaker1": "Alex",
+            "content1": "It was great hearing your perspective on the challenges in legal practice today. I'd love to keep in touch - can I connect with you on LinkedIn?",
+            "speaker2": "Taylor",
+            "content2": "Absolutely, I'd be happy to connect.",
+            "audio1": "audio1",
+            "audio2": "audio2",
+            "conversation_id": 3
+          },
+          {
+            "speaker1": "Riley",
+            "content1": "Your insights on mental health initiatives in the workplace were really helpful. Would it be okay if I followed up with you on LinkedIn?",
+            "speaker2": "Taylor",
+            "content2": "Of course, I'd love that.",
+            "audio1": "audio1",
+            "audio2": "audio2",
+            "conversation_id": 4
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "theme_id": 2,
+    "theme_name": "Job Fair",
+    "theme_description": "Talk to employer",
+    "topics": [
+      {
+        "topic_id": 0,
+        "topic_name": "Know More about Company",
+        "conversations": [
+          {
+            "conversation_id": 0,
+            "speaker1": "Alex",
+            "content1": "Hi, nice to meet you! It's pretty busy here today. I'm curious about the company culture at ABC - what's it like working here?",
+            "speaker2": "Taylor",
+            "content2": "It's a great place to work! We have a really collaborative vibe, and everyone's encouraged to share ideas and be innovative.",
+            "audio1": "audio1",
+            "audio2": "audio2"
+          },
+          {
+            "conversation_id": 1,
+            "speaker1": "Riley",
+            "content1": "How does the company handle work-life balance? I've heard it can be challenging in this industry.",
+            "speaker2": "Sam",
+            "content2": "It's something we take seriously. We offer flexible schedules and remote work options, and managers are supportive about taking time off when needed.",
+            "audio1": "audio1",
+            "audio2": "audio2"
+          },
+          {
+            "conversation_id": 2,
+            "speaker1": "Taylor",
+            "content1": "What kind of support does the company offer for personal and career growth?",
+            "speaker2": "Alex",
+            "content2": "We've got a lot of resources - access to online courses, mentorship programs, and clear promotion paths. There's a big focus on helping people level up their skills.",
+            "audio1": "audio1",
+            "audio2": "audio2"
+          },
+          {
+            "conversation_id": 3,
+            "speaker1": "Riley",
+            "content1": "Hi! Thanks for taking the time to chat. Does the company offer any specific training or mentorship for new hires?",
+            "speaker2": "Sam",
+            "content2": "Absolutely! We've got a solid onboarding program, and new hires are paired with a mentor to help them get up to speed and feel supported.",
+            "audio1": "audio1",
+            "audio2": "audio2"
+          },
+          {
+            "conversation_id": 4,
+            "speaker1": "Riley",
+            "content1": "I'd love to understand more about how the teams are set up here. What does a typical team look like?",
+            "speaker2": "Sam",
+            "content2": "Most teams have 4-6 people. It usually includes a lead, a financial analyst, a sales rep, and someone focused on client support. We try to keep it balanced to cover all the bases.",
+            "audio1": "audio1",
+            "audio2": "audio2"
+          }
+        ]
+      },
+      {
+        "topic_id": 1,
+        "topic_name": "Candidate Expectation",
+        "conversations": [
+          {
+            "conversation_id": 0,
+            "speaker1": "Riley",
+            "content1": "Hi, I'm Riley. This event has been great so far. I'm really interested in learning more about ABC Company. Could you tell me a bit about your role?",
+            "speaker2": "Taylor",
+            "content2": "Sure, I'm Taylor. I'm part of the HR team, focusing on finding and hiring new talent.",
+            "audio1": "audio1",
+            "audio2": "audio2"
+          },
+          {
+            "conversation_id": 1,
+            "speaker1": "Sam",
+            "content1": "What does the ideal candidate for a project manager role look like?",
+            "speaker2": "Taylor",
+            "content2": "We're looking for someone with solid experience in agile project management, great communication skills, and the ability to juggle multiple projects at once.",
+            "audio1": "audio1",
+            "audio2": "audio2"
+          },
+          {
+            "conversation_id": 2,
+            "speaker1": "Riley",
+            "content1": "What skills or qualities do you consider most important when hiring?",
+            "speaker2": "Sam",
+            "content2": "Problem-solving is a big one for us, along with strong teamwork skills and the ability to adapt quickly.",
+            "audio1": "audio1",
+            "audio2": "audio2"
+          },
+          {
+            "conversation_id": 3,
+            "speaker1": "Taylor",
+            "content1": "Are there any specific experiences or certifications that really make a candidate stand out?",
+            "speaker2": "Riley",
+            "content2": "Definitely. Having a PMP certification or experience using tools like Jira and Trello gives candidates a big advantage.",
+            "audio1": "audio1",
+            "audio2": "audio2"
+          },
+          {
+            "conversation_id": 4,
+            "speaker1": "Alex",
+            "content1": "Outside of technical skills, what other qualities do you look for in candidates?",
+            "speaker2": "Sam",
+            "content2": "We put a lot of emphasis on strong communication, leadership potential, and being able to work well with different teams.",
+            "audio1": "audio1",
+            "audio2": "audio2"
+          }
+        ]
+      },
+      {
+        "topic_id": 2,
+        "topic_name": "Application Process",
+        "conversations": [
+          {
+            "conversation_id": 0,
+            "speaker1": "Riley",
+            "content1": "Are there any entry-level jobs or internship spots available?",
+            "speaker2": "Taylor",
+            "content2": "Yes, we've got a few entry-level positions and an internship program focused on event planning and managing social media.",
+            "audio1": "audio1",
+            "audio2": "audio2"
+          },
+          {
+            "conversation_id": 1,
+            "speaker1": "Alex",
+            "content1": "Does the company have any hiring plans coming up soon?",
+            "speaker2": "Sam",
+            "content2": "Yes, we're planning to grow our team next quarter, especially in public relations and nonprofit fundraising.",
+            "audio1": "audio1",
+            "audio2": "audio2"
+          },
+          {
+            "conversation_id": 2,
+            "speaker1": "Taylor",
+            "content1": "Can you share more about the roles you're hiring for right now?",
+            "speaker2": "Riley",
+            "content2": "Absolutely! We're currently looking to fill positions in content creation, project management, and community outreach.",
+            "audio1": "audio1",
+            "audio2": "audio2"
+          },
+          {
+            "conversation_id": 3,
+            "speaker1": "Sam",
+            "content1": "What does the application process look like for these roles? And how long does it usually take?",
+            "speaker2": "Alex",
+            "content2": "It starts with an online application, followed by a phone interview, and ends with a final round. The whole process usually takes around 3 to 4 weeks.",
+            "audio1": "audio1",
+            "audio2": "audio2"
+          },
+          {
+            "conversation_id": 4,
+            "speaker1": "Riley",
+            "content1": "How many interview rounds do candidates typically go through?",
+            "speaker2": "Taylor",
+            "content2": "Usually two or three rounds - first a phone screen, then a skills assessment, and finally a chat with the team lead.",
+            "audio1": "audio1",
+            "audio2": "audio2"
+          }
+        ]
+      }
+    ]
+  }
+]
