@@ -21,12 +21,12 @@ function ConversationBubble({ message, isSender, audio }) {
         marginVertical="$2"
         flexDirection="row"
         alignItems="flex-start"
-        position="relative" // 确保子元素可以使用绝对定位
+        position="relative"
       >
         {audio && (
           <TouchableOpacity
             onPress={() => console.log("Play audio:", audio)}
-            style={styles.iconContainer} // 使用绝对定位的样式
+            style={styles.iconContainer}
           >
             <Ionicons name="play-circle" size={24} color={colors.theme} />
           </TouchableOpacity>
