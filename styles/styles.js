@@ -9,6 +9,7 @@ export const colors = {
   disabled: "#D1D1D1",
   background: {
     white: "#fff",
+    transparent: "rgba(0, 0, 0, 0)",
   },
   text: {
     primary: "white",
@@ -23,6 +24,8 @@ export const colors = {
 
 export const image = {
   iconImg: 24,
+  buttonImg: 60,
+  thumbnail: 100,
 };
 
 export const fontSize = {
@@ -32,6 +35,7 @@ export const fontSize = {
 };
 
 export const spacing = {
+  xs: 2,
   sm: 5,
   md: 10,
   lg: 20,
@@ -41,6 +45,7 @@ export const borderRadius = {
   sm: 2,
   md: 5,
   lg: 10,
+  xl: 30,
 };
 
 export const borderWidth = {
