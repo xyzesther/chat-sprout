@@ -46,7 +46,7 @@ export default function NotebookScreen({ navigation }) {
   );
 
   function handleNotePress(note) {
-    console.log('Selected note:', note);
+    navigation.navigate('AddNote', { note });
   };
 
   // Delete a note from the database
