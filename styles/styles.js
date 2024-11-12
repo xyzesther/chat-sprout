@@ -10,6 +10,7 @@ export const colors = {
   background: {
     white: "#fff",
     transparent: "rgba(0, 0, 0, 0)",
+    card: "#C6C6E6"
   },
   text: {
     primary: "white",
