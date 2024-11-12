@@ -28,6 +28,7 @@ export const image = {
 export const fontSize = {
   header: 24,
   tab: 12,
+  body: 16,
 };
 
 export const spacing = {
