@@ -1,23 +1,45 @@
-import React, { useState } from 'react';
-import { StyleSheet, SafeAreaView, TextInput } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { StyleSheet, SafeAreaView } from 'react-native';
 import { writeToDB } from '../Firebase/firebaseHelper';
 import { Button } from 'tamagui';
+import RichTextEditor from '../Components/RichTextEditor';
+import { borderWidth, colors, fontSize, image } from '../styles/styles';
 
 export default function AddNoteScreen({ navigation }) {
   const [noteContent, setNoteContent] = useState('');
+  const [images, setImages] = useState([]);
   const collectionName = 'notes';
 
+  useEffect(() => {
+    navigation.setOptions({
+      headerRight: () => (
+        <Button
+          size="$2"
+          chromeless
+          color={colors.text.primary}
+          fontSize={fontSize.body}
+          onPress={handleSaveNote}
+        >
+          Save
+        </Button>
+      ),
+    });
+  }, [navigation, noteContent, images]);
+
   async function handleSaveNote() {
-    if (noteContent.trim()) {
+    if (noteContent.trim() || images.length > 0) {
       // Automatically set the first line of the note as the title
       const lines = noteContent.split('\n');
-      const title = noteContent.split('\n')[0];
+      const title = lines[0];
       const content = lines.slice(1).join('\n');
+
+      console.log("Images to be saved:", images);
        
       // Create a new note document
       const newNote = {
         title: title,
         content: content,
+        images: images,
         timestamp: new Date().toISOString(),
       };
 
@@ -33,19 +55,12 @@ export default function AddNoteScreen({ navigation }) {
 
   return (
     <SafeAreaView style={styles.container}>
-      <TextInput 
-        placeholder='Type Something Here!' 
-        keyboardType='default' 
-        style={styles.input}
-        value={noteContent}
-        onChangeText={setNoteContent}
-        multiline={true}
+      <RichTextEditor
+        content={noteContent}
+        setContent={setNoteContent}
+        images={images}
+        setImages={setImages}
       />
-      <Button 
-        onPress={handleSaveNote}
-      >
-        Save Note
-      </Button>
     </SafeAreaView>
   );
 }
@@ -53,16 +68,6 @@ export default function AddNoteScreen({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  input: {
-    width: '80%',
-    padding: 10,
-    borderColor: '#ccc',
-    borderWidth: 1,
-    borderRadius: 8,
-    marginBottom: 20,
+    backgroundColor: colors.lightTheme,
   },
 });
