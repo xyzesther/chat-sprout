@@ -10,6 +10,7 @@ export const colors = {
   background: {
     white: "#fff",
     transparent: "rgba(0, 0, 0, 0)",
+    card: "#C6C6E6"
   },
   text: {
     primary: "white",
@@ -18,7 +19,8 @@ export const colors = {
   },
   icon: {
     primary: "#63AE8D",
-    secondary: "darkgray",
+    black: "black",
+    unfocused: "darkgray",
   },
 };
 

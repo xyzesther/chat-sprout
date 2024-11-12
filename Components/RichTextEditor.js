@@ -60,7 +60,7 @@ export default function RichTextEditor({ content, setContent, images, setImages 
                 }}
               />
               <XCircle
-                color={colors.icon.secondary}
+                color={colors.icon.unfocused}
                 onPress={() => handleDeleteImage(index)}
                 style={{
                   position: 'absolute',

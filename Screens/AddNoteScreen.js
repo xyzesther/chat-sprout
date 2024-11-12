@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, SafeAreaView } from 'react-native';
-import { writeToDB } from '../Firebase/firebaseHelper';
+import { updateToDB, writeToDB } from '../Firebase/firebaseHelper';
 import { Button } from 'tamagui';
 import RichTextEditor from '../Components/RichTextEditor';
 import { borderWidth, colors, fontSize, image } from '../styles/styles';
 
-export default function AddNoteScreen({ navigation }) {
-  const [noteContent, setNoteContent] = useState('');
-  const [images, setImages] = useState([]);
+export default function AddNoteScreen({ navigation, route }) {
+  const existingNote = route.params?.note;
+  const [noteContent, setNoteContent] = useState(existingNote ? `${existingNote.title}\n${existingNote.content}` : '');
+  const [images, setImages] = useState(existingNote?.images || []);
   const collectionName = 'notes';
 
   useEffect(() => {
@@ -20,7 +21,7 @@ export default function AddNoteScreen({ navigation }) {
           fontSize={fontSize.body}
           onPress={handleSaveNote}
         >
-          Save
+          {existingNote ? "Update" : "Save"}
         </Button>
       ),
     });
@@ -43,9 +44,13 @@ export default function AddNoteScreen({ navigation }) {
         timestamp: new Date().toISOString(),
       };
 
-      // Call the writeToDB function to write the note to the database  
+      // Call the updateToDB or writeToDB function to write the note to the database  
       try {
-        await writeToDB(collectionName, newNote);
+        if (existingNote) {
+          await updateToDB(collectionName, existingNote.id, newNote);
+        } else {
+          await writeToDB(collectionName, newNote);
+        }
         navigation.goBack();
       } catch (error) {
         console.log('Error adding a new note: ', error);
