@@ -1,10 +1,23 @@
 import { StyleSheet, Text, View } from "react-native";
-import React from "react";
+import React, { useState } from "react";
 import { fontSize } from "../styles/styles";
-import { Button, Card, Dialog } from "tamagui";
+import { Button, Card } from "tamagui";
 import { colors } from "../styles/styles";
+import ProfileEditPassword from "./ProfileEditPassword";
+import ProfileEditName from "./ProfileEditName";
 
 const Profile = () => {
+  const [isPasswordSheetOpen, setPasswordSheetOpen] = useState(false);
+  const [isNameSheetOpen, setNameSheetOpen] = useState(false);
+
+  const handleSavePassword = (newPassword) => {
+    console.log(`Updated Password: ${newPassword}`);
+  };
+
+  const handleSaveName = (newName) => {
+    console.log(`Updated Name: ${newName}`);
+  };
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Profile</Text>
@@ -20,9 +33,9 @@ const Profile = () => {
           backgroundColor="transparent"
           style={styles.infoContainer}
         >
-          <Text style={styles.item}> email</Text>
-          <Text style={styles.display}> abc@email.com </Text>
-          <View style={styles.edit}></View>
+          <Text style={styles.item}>Email</Text>
+          <Text style={styles.display}>abc@email.com</Text>
+          <View style={styles.edit} />
         </Card>
         <View style={styles.separator} />
 
@@ -31,10 +44,10 @@ const Profile = () => {
           backgroundColor="transparent"
           style={styles.infoContainer}
         >
-          <Text style={styles.item}> password</Text>
-          <Text style={styles.display}> ******** </Text>
+          <Text style={styles.item}>Password</Text>
+          <Text style={styles.display}>********</Text>
           <View style={styles.edit}>
-            <Button>Edit</Button>
+            <Button onPress={() => setPasswordSheetOpen(true)}>Edit</Button>
           </View>
         </Card>
         <View style={styles.separator} />
@@ -44,13 +57,25 @@ const Profile = () => {
           backgroundColor="transparent"
           style={styles.infoContainer}
         >
-          <Text style={styles.item}> name</Text>
-          <Text style={styles.display}> abcnameabc </Text>
+          <Text style={styles.item}>Name</Text>
+          <Text style={styles.display}>abcnameabc</Text>
           <View style={styles.edit}>
-            <Button>Edit</Button>
+            <Button onPress={() => setNameSheetOpen(true)}>Edit</Button>
           </View>
         </Card>
       </Card>
+
+      <ProfileEditPassword
+        isOpen={isPasswordSheetOpen}
+        onClose={() => setPasswordSheetOpen(false)}
+        onSave={handleSavePassword}
+      />
+
+      <ProfileEditName
+        isOpen={isNameSheetOpen}
+        onClose={() => setNameSheetOpen(false)}
+        onSave={handleSaveName}
+      />
     </View>
   );
 };
@@ -74,7 +99,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
-    justifyItems: "center",
     height: 50,
   },
   item: {
