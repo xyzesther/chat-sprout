@@ -10,9 +10,8 @@ export function NoteList({ notes, onNotePress }) {
           <ListItem
             hoverTheme
             pressTheme
-            icon={Asterisk}
             title={note.title}
-            subTitle={note.content}
+            subTitle={new Date(note.timestamp).toDateString()}
             iconAfter={ChevronRight}
             onPress={() => onNotePress(note)}
           />
