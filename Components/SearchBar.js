@@ -25,7 +25,7 @@ export function SearchBar({ searchQuery, setSearchQuery }) {
       />
       {searchQuery ? (
         <XCircle 
-          color={colors.icon.secondary} 
+          color={colors.icon.unfocused} 
           size={"$1"} 
           onPress={() => setSearchQuery('')}
         />
