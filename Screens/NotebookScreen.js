@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, View, Text, SafeAreaView } from 'react-native';
+import { StyleSheet, View, Text, SafeAreaView, Alert } from 'react-native';
 import { NoteList } from '../Components/NoteList';
 import { SearchBar } from '../Components/SearchBar';
 import { database } from '../Firebase/firebaseSetup';
 import { collection, onSnapshot } from 'firebase/firestore';
-import { Button, ScrollView, Input, XStack } from 'tamagui';
-import { Plus, Search, XCircle } from '@tamagui/lucide-icons';
-import { colors, spacing, borderRadius, borderWidth } from '../styles/styles';
+import { Button, ScrollView } from 'tamagui';
+import { Plus } from '@tamagui/lucide-icons';
+import { colors, spacing } from '../styles/styles';
+import { deleteFromDB } from '../Firebase/firebaseHelper';
 
 export default function NotebookScreen({ navigation }) {
   const [notes, setNotes] = useState([]);
@@ -44,8 +45,34 @@ export default function NotebookScreen({ navigation }) {
     note.content.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
-  const handleNotePress = (note) => {
+  function handleNotePress(note) {
     console.log('Selected note:', note);
+  };
+
+  // Delete a note from the database
+  function handleDeleteNote(note) {
+    Alert.alert(
+      "Delete Note",
+      `Are you sure to delete the note"?`,
+      [
+        { text: "Cancel", style: "cancel" },
+        {
+          text: "Delete",
+          style: "destructive",
+          onPress: async () => {
+            try {
+              // Delete note from the database
+              await deleteFromDB(collectionName, note.id);
+              // Update local state to remove the deleted note
+              setNotes((prevNotes) => prevNotes.filter((n) => n.id !== note.id));
+            } catch (error) {
+              console.error("Error deleting note: ", error);
+            }
+          }
+        }
+      ],
+      { cancelable: true }
+    );
   };
 
   return (
@@ -58,7 +85,11 @@ export default function NotebookScreen({ navigation }) {
           {notes.length === 0 ? (
             <Text style={styles.noteListEmptyText}>Add a note to get started!</Text>
           ) : filteredNotes.length > 0 ? (
-            <NoteList notes={filteredNotes} onNotePress={handleNotePress} />
+            <NoteList 
+              notes={filteredNotes} 
+              onNotePress={handleNotePress} 
+              onDeletePress={handleDeleteNote}
+            />
           ) : (
             <Text style={styles.noteListEmptyText}>No notes found for "{searchQuery}"</Text>
           )}

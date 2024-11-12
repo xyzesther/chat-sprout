@@ -18,7 +18,8 @@ export const colors = {
   },
   icon: {
     primary: "#63AE8D",
-    secondary: "darkgray",
+    black: "black",
+    unfocused: "darkgray",
   },
 };
 
