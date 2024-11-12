@@ -1,20 +1,22 @@
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, TouchableOpacity, View } from "react-native";
 import React from "react";
 import ConversationBubble from "./ConversationBubble";
 import { Card } from "tamagui";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
-import { colors } from "../styles/styles";
+import { colors, image, spacing } from "../styles/styles";
 
-const ConversationCard = ({ conversation }) => {
+export default function ConversationCard({ conversation, onAddToNotebook }) {
   return (
     <View style={styles.card}>
-      <Card paddingVertical="$2" marginVertical="$3" backgroundColor="#C6C6E6">
+      <Card paddingVertical="$2" marginVertical="$3" backgroundColor={colors.background.card}>
         <View style={styles.iconContainer}>
-          <MaterialCommunityIcons
-            name="notebook-plus"
-            size={24}
-            color={colors.theme}
-          />
+          <TouchableOpacity onPress={() => onAddToNotebook(conversation)} style={{ padding: spacing.sm }}>
+            <MaterialCommunityIcons
+              name="notebook-plus"
+              size={image.iconImg}
+              color={colors.theme}
+            />
+          </TouchableOpacity>
         </View>
         <ConversationBubble
           message={conversation.content1}
@@ -31,12 +33,10 @@ const ConversationCard = ({ conversation }) => {
   );
 };
 
-export default ConversationCard;
-
 const styles = StyleSheet.create({
   iconContainer: {
     position: "absolute",
-    top: 8,
-    right: 8,
+    top: spacing.xs,
+    right: spacing.xs,
   },
 });
