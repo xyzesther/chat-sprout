@@ -1,13 +1,15 @@
 import React from 'react';
 import { Button, ListItem, Separator, YGroup } from 'tamagui';
-import { ChevronRight, XCircle } from '@tamagui/lucide-icons';
-import { colors, image } from '../styles/styles';
+import { ChevronRight } from '@tamagui/lucide-icons';
+import { colors } from '../styles/styles';
 import AntDesign from '@expo/vector-icons/AntDesign';
 
 export function NoteList({ notes, onNotePress, onDeletePress }) {
+  const sortedNotes = [...notes].sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+
   return (
     <YGroup alignSelf="center" bordered width={"95%"} size="$5" separator={<Separator />}>
-      {notes.map((note, index) => (
+      {sortedNotes.map((note, index) => (
         <YGroup.Item key={note.id || index}>
           <ListItem
             hoverTheme
@@ -24,6 +26,7 @@ export function NoteList({ notes, onNotePress, onDeletePress }) {
             }
             iconAfter={<ChevronRight />}
             onPress={() => onNotePress(note)}
+            backgroundColor={colors.lightTheme}
           />
         </YGroup.Item>
       ))}
