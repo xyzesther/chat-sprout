@@ -10,15 +10,15 @@ Our app is designed to simplify social situations and help you establish meaning
 
 ### Current State
 1. *Finished learning related feature: browse some conversation starters and play the audio.*
-![App Screenshot](./assets/learn-play-audio.png)
+![App Screenshot](./assets/screenshots/learn-play-audio.png)
 2. *Conversation can be added as a note to notebook*
-![App Screenshot](./assets/add-conversation-to-notes.png)
+![App Screenshot](./assets/screenshots/add-conversation-to-notes.png)
 3. *Finished notebook related features: browse the notes, add/edit/delete notes.*
-![App Screenshot](./assets/notes-related-screenshots.png)
+![App Screenshot](./assets/screenshots/notes-related-screenshots.png)
 4. *Account Screen: display user profile and notification setting*
-![App Screenshot](./assets/profile-setting.png)
+![App Screenshot](./assets/screenshots/profile-setting.png)
 5. *Explore Screen: will implement the external API, EventBrite or Google Places*
-![App Screenshot](./assets/explore.png)
+![App Screenshot](./assets/screenshots/explore.png)
 ---
 
 ### Data Model and Collections
