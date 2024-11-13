@@ -1,6 +1,11 @@
-### ChatSprout - Grow Your Networking Skills
+### Chat Sprout - Grow Your Networking Skills
 
-Do you feel anxious at networking events or struggle with making small talk in professional settings? Chat Sprout prepares you for every networking opportunity. 
+Do you feel anxious at networking events or struggle with making small talk in professional settings? Chat Sprout is designed to help students, international students, and newcomers who want to build confidence in social interactions. 
+
+Whether you're attending conferences, industry forums, or interviews, Chat Sprout provides practical tools to help you engage with others seamlessly.
+
+Our app is designed to simplify social situations and help you establish meaningful connections in a professional environment. With tailored conversation starters, icebreaker topics, and common phrases, Chat Sprout prepares you for every networking opportunity. 
+ 
 
 
 ---
@@ -14,14 +19,19 @@ Do you feel anxious at networking events or struggle with making small talk in p
 ---
 
 ### Data Model and Collections
-1. **Notes Collection -** stores notes that users create or save from conversations.
+1. **Themes-topics-conversations collection -** stores the learning sources we used in our app. Currently stored as a JSON file and not yet stored in the Firebase database.
+   - Create: Not allowed to create on the mobile app.
+   - Read: Retrieved for learn feature.
+   - Update: Not allowed to update on the mobile app.
+   - Delete: Not allowed to delete on the mobile app.
+2. **Notes Collection -** stores notes that users create or save from conversations.
    - Create: When a user adds a new note or saves a conversation as a note.
    - Read: Retrieve all notes for a user.
    - Update: When a user edits the content, title, or images of an existing note.
    - Delete: When a user deletes a specific note.
-2. **Users Collection -** stores user profile information and settings.
+3. **Users Collection -** stores user profile information and settings.
    - Create: When a new user signs up, a new user document is created in this collection.
-   - Read: Retrieve user information and notification for account pages.
+   - Read: Retrieve user information and notification setting for account pages.
    - Update: When a user updates their profile information or changes notification preferences.
    - Delete: Not provided on the mobile app.
 
