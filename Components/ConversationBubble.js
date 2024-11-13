@@ -1,11 +1,90 @@
 import { StyleSheet, View, TouchableOpacity } from "react-native";
-import React from "react";
-import { YStack, SizableText } from "tamagui";
+import React, { useState, useEffect } from "react";
+import { YStack, SizableText, Spinner } from "tamagui";
 import { colors } from "../styles/styles";
 import { Ionicons } from "@expo/vector-icons";
+import { Audio } from "expo-av";
+
+let currentPlayingSound = null;
+
+let totalAudioCount = 0;
+let loadedAudioCount = 0;
+let allAudioLoaded = false;
+const allAudioLoadedListeners = [];
+
+function notifyAllAudioLoaded() {
+  allAudioLoadedListeners.forEach((listener) => listener());
+}
 
 function ConversationBubble({ message, isSender, audio }) {
   const bubbleColor = isSender ? "white" : "ivory";
+  const [sound, setSound] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [allLoaded, setAllLoaded] = useState(allAudioLoaded);
+
+  useEffect(() => {
+    totalAudioCount++;
+    async function loadSound() {
+      console.log("Loading Sound");
+      const { sound } = await Audio.Sound.createAsync({ uri: audio });
+      setSound(sound);
+      setIsLoading(false);
+      loadedAudioCount++;
+
+      if (loadedAudioCount === totalAudioCount) {
+        allAudioLoaded = true;
+        notifyAllAudioLoaded();
+      }
+
+      sound.setOnPlaybackStatusUpdate((status) => {
+        if (status.didJustFinish) {
+          console.log("Playback finished");
+          currentPlayingSound = null;
+        }
+      });
+    }
+
+    loadSound();
+
+    return () => {
+      if (sound) {
+        console.log("Unloading Sound");
+        sound.unloadAsync();
+      }
+    };
+  }, [audio]);
+
+  async function playSound() {
+    if (currentPlayingSound && currentPlayingSound !== sound) {
+      console.log("Stopping current playing sound");
+      await currentPlayingSound.stopAsync();
+    }
+
+    if (sound) {
+      console.log("Playing Sound");
+      currentPlayingSound = sound;
+      await sound.replayAsync();
+    }
+  }
+
+  useEffect(() => {
+    const listener = () => setAllLoaded(true);
+    allAudioLoadedListeners.push(listener);
+    return () => {
+      const index = allAudioLoadedListeners.indexOf(listener);
+      if (index !== -1) {
+        allAudioLoadedListeners.splice(index, 1);
+      }
+    };
+  }, []);
+
+  useEffect(() => {
+    return () => {
+      allAudioLoaded = false;
+      totalAudioCount = 0;
+      loadedAudioCount = 0;
+    };
+  }, []);
 
   return (
     <View
@@ -22,7 +101,7 @@ function ConversationBubble({ message, isSender, audio }) {
       <YStack
         padding="$2"
         borderRadius="$5"
-        backgroundColor={bubbleColor} // 根据 isSender 设置背景色
+        backgroundColor={bubbleColor}
         maxWidth="90%"
         marginVertical="$2"
         flexDirection="row"
@@ -30,11 +109,12 @@ function ConversationBubble({ message, isSender, audio }) {
         position="relative"
       >
         {audio && (
-          <TouchableOpacity
-            onPress={() => console.log("Play audio:", audio)}
-            style={styles.iconContainer}
-          >
-            <Ionicons name="play-circle" size={24} color={colors.theme} />
+          <TouchableOpacity onPress={playSound} style={styles.iconContainer}>
+            {allLoaded ? (
+              <Ionicons name="play-circle" size={24} color={colors.theme} />
+            ) : (
+              <Spinner size="small" color={colors.theme} />
+            )}
           </TouchableOpacity>
         )}
         <View style={styles.messageContainer}>
@@ -91,6 +171,8 @@ const styles = StyleSheet.create({
   },
   iconContainer: {
     marginRight: 4,
+    width: 30,
+    alignItems: "center",
   },
   messageContainer: {
     flex: 1,

@@ -12,46 +12,46 @@
             "conversation_id": 0,
             "speaker1": "Riley",
             "content1": "How are you?",
-            "audio1": "audio1",
+            "audio1": "https://drive.google.com/uc?export=download&id=1Z_cgoA3XmbRjyytHtNbfJSj1KIC-_MAO",
             "speaker2": "Alex",
             "content2": "I'm doing great, thank you for asking. And you?",
-            "audio2": "audio2"
+            "audio2": "https://drive.google.com/uc?export=download&id=1moSi_b6ntPTkG-HE4vPW3x-Sbaor2m2L"
           },
           {
             "conversation_id": 1,
             "speaker1": "Riley",
             "content1": "Hi, good morning! How's everything going?",
-            "audio1": "audio1",
+            "audio1": "https://drive.google.com/uc?export=download&id=180qexk9ZbUj079bLWThGQltFjHTnsOL9",
             "speaker2": "Taylor",
             "content2": "Good morning! It's going well, just heading to class/meeting. How about you?",
-            "audio2": "audio2"
+            "audio2": "https://drive.google.com/uc?export=download&id=1hUsuBKLBttT51e4uY5Yz_86Kv9jPh_XR"
           },
           {
             "conversation_id": 2,
             "speaker1": "Sam",
             "content1": "Good to see you again! How's everything?",
-            "audio1": "audio1",
+            "audio1": "https://drive.google.com/uc?export=download&id=17puzCZZfyGlAJjYPOllNwnnBFIV5HJG8",
             "speaker2": "Alex",
             "content2": "It's been good. Just working on a new project. How about you?",
-            "audio2": "audio2"
+            "audio2": "https://drive.google.com/uc?export=download&id=1FGCxzEEM9VwLeuvtxy0NcFYBA_Ly7fUP"
           },
           {
             "conversation_id": 3,
             "speaker1": "Taylor",
             "content1": "Hey, Riley, how's it going?",
-            "audio1": "audio1",
+            "audio1": "https://drive.google.com/uc?export=download&id=1cxaU9H2tjccWz3LIWS2OErYrQZVJp2cS",
             "speaker2": "Riley",
             "content2": "Hey! Not too bad, just grabbing some coffee. How about you?",
-            "audio2": "audio2"
+            "audio2": "https://drive.google.com/uc?export=download&id=1rAuK7x2qbkztdsEM5jKmjLPZQGwDfsUn"
           },
           {
             "conversation_id": 4,
             "speaker1": "Taylor",
             "content1": "Good to see you again! How's everything?",
-            "audio1": "audio1",
+            "audio1": "https://drive.google.com/uc?export=download&id=1rAR5aduKgyKvr9D5b7kacUkOWlwy_46A",
             "speaker2": "Sam",
             "content2": "I'm good, thank you. Really enjoy working with everyone on this project.",
-            "audio2": "audio2"
+            "audio2": "https://drive.google.com/uc?export=download&id=1cP32lgzmSbn6qexD7iRPINEPF8eARS9D"
           }
         ]
       },
@@ -63,19 +63,19 @@
             "conversation_id": 0,
             "speaker1": "Alex",
             "content1": "I've recently gotten into hiking. It's a great way to unwind over the weekend. Do you enjoy outdoor activities as well?",
-            "audio1": "audio1",
+            "audio1": "https://drive.google.com/uc?export=download&id=",
             "speaker2": "Taylor",
             "content2": "Yes, I love hiking too! I'm actually planning a hiking trip next weekend. Do you have any favorite trails you'd recommend?",
-            "audio2": "audio2"
+            "audio2": "https://drive.google.com/uc?export=download&id="
           },
           {
             "conversation_id": 1,
             "speaker1": "Taylor",
             "content1": "What do you like to do in your free time? I'm always interested in learning about new hobbies.",
-            "audio1": "audio1",
+            "audio1": "https://drive.google.com/uc?export=download&id=audio1",
             "speaker2": "Alex",
             "content2": "I'm really into photography, especially landscape photography.",
-            "audio2": "audio2"
+            "audio2": "https://drive.google.com/uc?export=download&id="
           },
           {
             "conversation_id": 2,
