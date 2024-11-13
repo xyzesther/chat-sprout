@@ -8,7 +8,11 @@ import { colors } from "../styles/styles";
 const ConversationCard = ({ conversation }) => {
   return (
     <View style={styles.card}>
-      <Card paddingVertical="$2" marginVertical="$3" backgroundColor="#C6C6E6">
+      <Card
+        paddingVertical="$2"
+        marginVertical="$3"
+        backgroundColor={colors.lightTheme}
+      >
         <View style={styles.iconContainer}>
           <MaterialCommunityIcons
             name="notebook-plus"
