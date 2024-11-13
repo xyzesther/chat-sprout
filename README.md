@@ -9,6 +9,25 @@ Do you feel anxious at networking events or struggle with making small talk in p
 1. **
 2. *Finished the Notebook related features*
 ![App Screenshot](./assets/notes-related-screenshots.png)
+3. *Conversation can be added as a note to notebook*
+![App Screenshot](./assets/add-conversation-to-notes.png)
+---
+
+### Data Model and Collections
+1. **Notes Collection -** stores notes that users create or save from conversations.
+   - Create: When a user adds a new note or saves a conversation as a note.
+   - Read: Retrieve all notes for a user.
+   - Update: When a user edits the content, title, or images of an existing note.
+   - Delete: When a user deletes a specific note.
+2. **Users Collection -** stores user profile information and settings.
+   - Create: When a new user signs up, a new user document is created in this collection.
+   - Read: Retrieve user information and notification for account pages.
+   - Update: When a user updates their profile information or changes notification preferences.
+   - Delete: Not provided on the mobile app.
+
+
+
+
 
 ---
 
