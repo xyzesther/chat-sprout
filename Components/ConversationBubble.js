@@ -5,6 +5,8 @@ import { colors } from "../styles/styles";
 import { Ionicons } from "@expo/vector-icons";
 
 function ConversationBubble({ message, isSender, audio }) {
+  const bubbleColor = isSender ? "white" : "ivory";
+
   return (
     <View
       style={[
@@ -12,11 +14,15 @@ function ConversationBubble({ message, isSender, audio }) {
         isSender ? styles.senderContainer : styles.receiverContainer,
       ]}
     >
-      {!isSender && <View style={styles.triangleLeft} />}
+      {!isSender && (
+        <View
+          style={[styles.triangleLeft, { borderBottomColor: bubbleColor }]}
+        />
+      )}
       <YStack
         padding="$2"
         borderRadius="$5"
-        backgroundColor={colors.lightTheme}
+        backgroundColor={bubbleColor} // 根据 isSender 设置背景色
         maxWidth="90%"
         marginVertical="$2"
         flexDirection="row"
@@ -37,7 +43,11 @@ function ConversationBubble({ message, isSender, audio }) {
           </SizableText>
         </View>
       </YStack>
-      {isSender && <View style={styles.triangleRight} />}
+      {isSender && (
+        <View
+          style={[styles.triangleRight, { borderBottomColor: bubbleColor }]}
+        />
+      )}
     </View>
   );
 }
@@ -65,7 +75,6 @@ const styles = StyleSheet.create({
     borderStyle: "solid",
     backgroundColor: "transparent",
     borderRightColor: "transparent",
-    borderBottomColor: colors.lightTheme,
     transform: [{ rotate: "45deg" }],
     marginRight: -6,
   },
@@ -77,7 +86,6 @@ const styles = StyleSheet.create({
     borderStyle: "solid",
     backgroundColor: "transparent",
     borderLeftColor: "transparent",
-    borderBottomColor: colors.lightTheme,
     transform: [{ rotate: "-45deg" }],
     marginLeft: -6,
   },

@@ -8,7 +8,11 @@ import { colors, image, spacing } from "../styles/styles";
 export default function ConversationCard({ conversation, onAddToNotebook }) {
   return (
     <View style={styles.card}>
-      <Card paddingVertical="$2" marginVertical="$3" backgroundColor={colors.background.card}>
+      <Card
+        paddingVertical="$2"
+        marginVertical="$3"
+        backgroundColor={colors.lightTheme}
+      >
         <View style={styles.iconContainer}>
           <TouchableOpacity onPress={() => onAddToNotebook(conversation)} style={{ padding: spacing.sm }}>
             <MaterialCommunityIcons
