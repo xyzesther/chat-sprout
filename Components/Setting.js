@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Text, View, StyleSheet } from "react-native";
+import { Text, View, StyleSheet, Platform } from "react-native";
 import { Switch, YStack, XStack, Button } from "tamagui";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import { fontSize } from "../styles/styles";
@@ -18,8 +18,17 @@ const Setting = () => {
   };
 
   const handleTimeChange = (event, selectedTime) => {
-    const currentTime = selectedTime || reminderTime;
-    setReminderTime(currentTime);
+    if (event.type === "dismissed") {
+      setShowTimePicker(false);
+      return;
+    }
+
+    if (selectedTime) {
+      setReminderTime(selectedTime);
+      if (Platform.OS === "android") {
+        setShowTimePicker(false);
+      }
+    }
   };
 
   const toggleTimePicker = () => {
@@ -54,9 +63,9 @@ const Setting = () => {
           </Button>
           {showTimePicker && (
             <DateTimePicker
-              value={reminderTime}
+              value={reminderTime || new Date()}
               mode="time"
-              display="spinner"
+              display={Platform.OS === "ios" ? "spinner" : "default"}
               onChange={handleTimeChange}
             />
           )}
