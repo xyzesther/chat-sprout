@@ -9,7 +9,7 @@ Our app is designed to simplify social situations and help you establish meaning
 ---
 
 ### Current State
-**Notice: expo SDK is upgraded to version 52 yesterday, it may not be compatible with our app's current package, but our app can work on ios simulator and will update our expo SDK after iteration 1*
+**Notice: The Expo SDK was upgraded to version 52 yesterday, which may cause compatibility issues with our app's current packages. However, the app is functional on both iOS and Android simulators when running on Expo SDK 51, and we plan to update our Expo SDK after Iteration 1.*
 
 1. *Finished learning related feature: browse some conversation starters and play the audio.*
 ![App Screenshot](./assets/screenshots/learn-play-audio.png)
