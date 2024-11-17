@@ -31,7 +31,7 @@ const ImageManager = {
 
     const result = await ImagePicker.launchCameraAsync({
       allowsEditing: true,
-      quality: 1,
+      quality: 0.1,
     });
 
     if (result.canceled || result.assets.length === 0) return null;
@@ -45,7 +45,7 @@ const ImageManager = {
 
     const result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
-      quality: 1,
+      quality: 0.1,
     });
 
     if (result.canceled || result.assets.length === 0) return null;
@@ -55,13 +55,16 @@ const ImageManager = {
   // Upload Image to Firebase storage
   async uploadImage(uri) {
     try {
+      let uploadURL = "";
       const response = await fetch(uri);
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
       const blob = await response.blob();
       const imageName = uri.substring(uri.lastIndexOf('/') + 1);
       const imageRef = ref(storage, `notes/${imageName}`);
       const uploadTask = await uploadBytesResumable(imageRef, blob);
       const downloadURL = await getDownloadURL(uploadTask.ref);
-      console.log('Image uploaded successfully:', downloadURL);
       return downloadURL;
     } catch (error) {
       console.error('Error uploading image:', error);
