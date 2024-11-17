@@ -31,15 +31,20 @@ export default function AddNoteScreen({ navigation, route }) {
   }, [navigation, noteContent, images]);
 
   async function handleImageAction(actionType) {
-    let result;
+    let uri;
     if (actionType === 'library') {
-      result = await ImageManager.selectFromLibrary();
+      uri = await ImageManager.selectFromLibrary();
     } else if (actionType === 'camera') {
-      result = await ImageManager.takePhoto();
+      uri = await ImageManager.takePhoto();
     }
 
-    if (result) {
-      setImages((prevImages) => [...prevImages, result]);
+    if (uri) {
+      const downloadURL = await ImageManager.uploadImage(uri);
+      if (downloadURL) {
+        setImages((prevImages) => [...prevImages, uri]);
+      } else {
+        Alert.alert('Upload Failed', 'Unable to upload the image. Please try again.');
+      }
     }
     setIsModalOpen(false);
   }
@@ -50,8 +55,6 @@ export default function AddNoteScreen({ navigation, route }) {
       const lines = noteContent.split('\n');
       const title = lines[0];
       const content = lines.slice(1).join('\n');
-
-      console.log("Images to be saved:", images);
        
       // Create a new note document
       const newNote = {

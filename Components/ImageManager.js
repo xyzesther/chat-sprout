@@ -1,5 +1,7 @@
 import { Alert } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
+import { storage } from '../Firebase/firebaseSetup';
+import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
 
 const ImageManager = {
   // Verify Camera Permissions
@@ -32,7 +34,8 @@ const ImageManager = {
       quality: 1,
     });
 
-    return !result.canceled && result.assets.length > 0 ? result.assets[0].uri : null;
+    if (result.canceled || result.assets.length === 0) return null;
+    return result.assets[0].uri;
   },
 
   // Select an Image from Library
@@ -45,7 +48,25 @@ const ImageManager = {
       quality: 1,
     });
 
-    return !result.canceled && result.assets.length > 0 ? result.assets[0].uri : null;
+    if (result.canceled || result.assets.length === 0) return null;
+    return result.assets[0].uri;
+  },
+
+  // Upload Image to Firebase storage
+  async uploadImage(uri) {
+    try {
+      const response = await fetch(uri);
+      const blob = await response.blob();
+      const imageName = uri.substring(uri.lastIndexOf('/') + 1);
+      const imageRef = ref(storage, `notes/${imageName}`);
+      const uploadTask = await uploadBytesResumable(imageRef, blob);
+      const downloadURL = await getDownloadURL(uploadTask.ref);
+      console.log('Image uploaded successfully:', downloadURL);
+      return downloadURL;
+    } catch (error) {
+      console.error('Error uploading image:', error);
+      return null;
+    }
   },
 };
 
