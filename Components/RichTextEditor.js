@@ -1,29 +1,10 @@
 import React from 'react';
 import { ScrollView, Image } from 'react-native';
-import { Button, TextArea, YStack, View } from 'tamagui';
-import * as ImagePicker from 'expo-image-picker';
-import { colors, borderWidth, spacing, borderRadius, image } from '../styles/styles';
-import { Camera, XCircle } from '@tamagui/lucide-icons';
+import { TextArea, YStack, View } from 'tamagui';
+import { colors, borderWidth, spacing, borderRadius } from '../styles/styles';
+import { XCircle } from '@tamagui/lucide-icons';
 
-export default function RichTextEditor({ content, setContent, images, setImages }) {
-  async function handleImageInsert() {
-    const result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.Images,
-      quality: 1,
-    });
-  
-    if (!result.canceled && result.assets && result.assets.length > 0) {
-      const uri = result.assets[0].uri;
-      console.log("Selected Image URI:", uri);
-      setImages((prevImages) => [...prevImages, uri]);
-    } else {
-      console.log("Image selection was canceled or failed");
-    }
-  };
-
-  function handleDeleteImage(index) {
-    setImages((prevImages) => prevImages.filter((_, i) => i !== index));
-  }
+export default function RichTextEditor({ content, setContent, images, onImageRemove }) {
 
   return (
     <YStack flex={1} padding="$4">
@@ -61,7 +42,7 @@ export default function RichTextEditor({ content, setContent, images, setImages 
               />
               <XCircle
                 color={colors.icon.unfocused}
-                onPress={() => handleDeleteImage(index)}
+                onPress={() => onImageRemove(index)}
                 style={{
                   position: 'absolute',
                   right: 0,
@@ -80,26 +61,11 @@ export default function RichTextEditor({ content, setContent, images, setImages 
           value={content}
           onChangeText={setContent}
           multiline
+          placeholder="Type your note here..."
           flex={1}
           padding={spacing.md}
         />
       </ScrollView>
-
-      <Button 
-        icon={Camera} 
-        size="$2" 
-        borderColor={colors.theme}
-        onPress={handleImageInsert}
-        style={{
-          position: 'absolute',
-          bottom: spacing.lg,
-          right: spacing.lg,
-          width: image.buttonImg,
-          height: image.buttonImg,
-          borderRadius: borderRadius.xl,
-          backgroundColor: colors.theme,
-        }}
-      />
     </YStack>
   );
 }
