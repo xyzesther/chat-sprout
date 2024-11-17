@@ -24,7 +24,7 @@
     "@tamagui/switch": "^1.116.14",
     "@tamagui/web": "^1.116.14",
     "expo": "^51.0.39",
-    "expo-image-picker": "^15.0.7",
+    "expo-image-picker": "~15.0.7",
     "expo-status-bar": "~1.12.1",
     "firebase": "^11.0.1",
     "react": "^18.2.0",

@@ -1,29 +1,35 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { ScrollView, Image } from 'react-native';
 import { Button, TextArea, YStack, View } from 'tamagui';
 import * as ImagePicker from 'expo-image-picker';
 import { colors, borderWidth, spacing, borderRadius, image } from '../styles/styles';
 import { Camera, XCircle } from '@tamagui/lucide-icons';
 
-export default function RichTextEditor({ content, setContent, images, setImages }) {
-  async function handleImageInsert() {
-    const result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.Images,
-      quality: 1,
-    });
-  
-    if (!result.canceled && result.assets && result.assets.length > 0) {
-      const uri = result.assets[0].uri;
-      console.log("Selected Image URI:", uri);
-      setImages((prevImages) => [...prevImages, uri]);
-    } else {
-      console.log("Image selection was canceled or failed");
-    }
-  };
+export default function RichTextEditor({ content, setContent, images, onImageAdd, onImageRemove }) {
+  // const [isModalOpen, setIsModalOpen] = useState(false);
 
-  function handleDeleteImage(index) {
-    setImages((prevImages) => prevImages.filter((_, i) => i !== index));
-  }
+  // async function handleImageInsertFromLibrary() {
+  //   const result = await ImagePicker.launchImageLibraryAsync({
+  //     mediaTypes: ImagePicker.MediaTypeOptions.Images,
+  //     quality: 1,
+  //   });
+  
+  //   if (!result.canceled && result.assets && result.assets.length > 0) {
+  //     const uri = result.assets[0].uri;
+  //     console.log("Selected Image URI:", uri);
+  //     setImages((prevImages) => [...prevImages, uri]);
+  //   } else {
+  //     console.log("Image selection was canceled or failed");
+  //   }
+  //   setIsSheetOpen(false);
+  // };
+
+  // async function handleImageInsertFromCamera() {
+
+
+  // function handleDeleteImage(index) {
+  //   setImages((prevImages) => prevImages.filter((_, i) => i !== index));
+  // }
 
   return (
     <YStack flex={1} padding="$4">
@@ -61,7 +67,7 @@ export default function RichTextEditor({ content, setContent, images, setImages 
               />
               <XCircle
                 color={colors.icon.unfocused}
-                onPress={() => handleDeleteImage(index)}
+                onPress={() => onImageRemove(index)}
                 style={{
                   position: 'absolute',
                   right: 0,
@@ -80,11 +86,12 @@ export default function RichTextEditor({ content, setContent, images, setImages 
           value={content}
           onChangeText={setContent}
           multiline
+          placeholder="Type your note here..."
           flex={1}
           padding={spacing.md}
         />
       </ScrollView>
-
+{/* 
       <Button 
         icon={Camera} 
         size="$2" 
@@ -99,7 +106,7 @@ export default function RichTextEditor({ content, setContent, images, setImages 
           borderRadius: borderRadius.xl,
           backgroundColor: colors.theme,
         }}
-      />
+      /> */}
     </YStack>
   );
 }

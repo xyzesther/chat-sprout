@@ -1,14 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, SafeAreaView } from 'react-native';
 import { updateToDB, writeToDB } from '../Firebase/firebaseHelper';
-import { Button } from 'tamagui';
+import { Button, Sheet } from 'tamagui';
 import RichTextEditor from '../Components/RichTextEditor';
-import { borderWidth, colors, fontSize, image } from '../styles/styles';
+import ImageManager from '../Components/ImageManager';
+import { colors, fontSize, image, spacing, borderRadius } from '../styles/styles';
+import { Camera } from '@tamagui/lucide-icons';
 
 export default function AddNoteScreen({ navigation, route }) {
   const existingNote = route.params?.note;
   const [noteContent, setNoteContent] = useState(existingNote ? `${existingNote.title}\n${existingNote.content}` : '');
   const [images, setImages] = useState(existingNote?.images || []);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const collectionName = 'notes';
 
   useEffect(() => {
@@ -26,6 +29,20 @@ export default function AddNoteScreen({ navigation, route }) {
       ),
     });
   }, [navigation, noteContent, images]);
+
+  async function handleImageAction(actionType) {
+    let result;
+    if (actionType === 'library') {
+      result = await ImageManager.selectFromLibrary();
+    } else if (actionType === 'camera') {
+      result = await ImageManager.takePhoto();
+    }
+
+    if (result) {
+      setImages((prevImages) => [...prevImages, result]);
+    }
+    setIsModalOpen(false);
+  }
 
   async function handleSaveNote() {
     if (noteContent.trim() || images.length > 0) {
@@ -64,8 +81,53 @@ export default function AddNoteScreen({ navigation, route }) {
         content={noteContent}
         setContent={setNoteContent}
         images={images}
-        setImages={setImages}
+        onImageAdd={() => setIsModalOpen(true)}
+        onImageRemove={(index) => setImages((prevImages) => prevImages.filter((_, i) => i !== index))}
       />
+
+      <Button 
+        icon={Camera} 
+        size="$2" 
+        borderColor={colors.theme}
+        onPress={() => setIsModalOpen(true)}
+        style={{
+          position: 'absolute',
+          bottom: spacing.xl,
+          right: spacing.xl,
+          width: image.buttonImg,
+          height: image.buttonImg,
+          borderRadius: borderRadius.xl,
+          backgroundColor: colors.theme,
+        }}
+      />
+      <Sheet
+        modal
+        open={isModalOpen}
+        onOpenChange={setIsModalOpen}
+        snapPoints={[20]}
+      >
+        <Sheet.Frame>
+          <Sheet.Handle />
+          <Button
+            onPress={() => handleImageAction('library')}
+            style={styles.button}
+          >
+            Select from Library
+          </Button>
+          <Button
+            onPress={() => handleImageAction('camera')}
+            style={styles.button}
+          >
+            Take a Photo
+          </Button>
+          <Button 
+            onPress={() => setIsModalOpen(false)}
+            style={[styles.button, { color: colors.text.black }]}
+          >
+            Cancel
+          </Button>
+        </Sheet.Frame>
+      </Sheet>
     </SafeAreaView>
   );
 }
@@ -74,5 +136,11 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: colors.lightTheme,
+  },
+
+  button: {
+    padding: spacing.md,
+    backgroundColor: colors.background.transparent,
+    color: colors.text.secondary,
   },
 });
