@@ -41,7 +41,7 @@ export default function AddNoteScreen({ navigation, route }) {
     if (uri) {
       const downloadURL = await ImageManager.uploadImage(uri);
       if (downloadURL) {
-        setImages((prevImages) => [...prevImages, uri]);
+        setImages((prevImages) => [...prevImages, downloadURL]);
       } else {
         Alert.alert('Upload Failed', 'Unable to upload the image. Please try again.');
       }
