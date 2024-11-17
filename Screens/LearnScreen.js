@@ -92,9 +92,6 @@ export default function LearnScreen({ navigation }) {
     },
   ];
 
-  console.log("Topics:", topics);
-  console.log("Spots:", spots);
-
   return (
     <View style={styles.container}>
       <ScrollView contentContainerStyle={styles.scrollContainer}>

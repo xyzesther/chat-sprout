@@ -3,23 +3,40 @@ import { StyleSheet, View, Dimensions, Text, Alert } from "react-native";
 import MapView, { Marker } from "react-native-maps";
 import * as Location from "expo-location";
 
+const windowWidth = Dimensions.get("window").width;
+
 export default function ExploreScreen() {
   const [location, setLocation] = useState(null);
-  const [permissionResponse, requestPermission] =
-    Location.useForegroundPermissions();
+  const [permissionResponse, requestPermission] = Location.useForegroundPermissions();
 
   useEffect(() => {
-    (async () => {
+    let isMounted = true;
+
+    const getLocation = async () => {
       const hasPermission = await verifyPermission();
-      if (hasPermission) {
-        const locationResponse = await Location.getCurrentPositionAsync();
-        setLocation({
-          latitude: locationResponse.coords.latitude,
-          longitude: locationResponse.coords.longitude,
-        });
+      console.log("Has permission:", hasPermission);
+      if (hasPermission && isMounted) {
+        try {
+          const locationResponse = await Location.getCurrentPositionAsync();
+          console.log("Location response:", locationResponse);
+          if (isMounted) {
+            setLocation({
+              latitude: locationResponse.coords.latitude,
+              longitude: locationResponse.coords.longitude,
+            });
+          }
+        } catch (err) {
+          console.log("Error getting location:", err);
+        }
       }
-    })();
-  }, [permissionResponse]);
+    };
+
+    getLocation();
+
+    return () => {
+      isMounted = false;
+    };
+  }, []);
 
   async function verifyPermission() {
     try {
@@ -66,8 +83,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   map: {
-    width: "90%",
-    height: "80%",
+    width: "80%",
+    height: "50%",
   },
   loadingContainer: {
     flex: 1,
