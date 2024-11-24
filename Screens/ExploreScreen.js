@@ -1,54 +1,52 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, View, Dimensions, Text, Alert } from "react-native";
+import { StyleSheet, View, Text, Alert, Dimensions } from "react-native";
 import MapView, { Marker } from "react-native-maps";
 import * as Location from "expo-location";
-
-const windowWidth = Dimensions.get("window").width;
 
 export default function ExploreScreen() {
   const [location, setLocation] = useState(null);
   const [permissionResponse, requestPermission] = Location.useForegroundPermissions();
 
-  useEffect(() => {
-    let isMounted = true;
-
-    const getLocation = async () => {
-      const hasPermission = await verifyPermission();
-      console.log("Has permission:", hasPermission);
-      if (hasPermission && isMounted) {
-        try {
-          const locationResponse = await Location.getCurrentPositionAsync();
-          console.log("Location response:", locationResponse);
-          if (isMounted) {
-            setLocation({
-              latitude: locationResponse.coords.latitude,
-              longitude: locationResponse.coords.longitude,
-            });
-          }
-        } catch (err) {
-          console.log("Error getting location:", err);
-        }
-      }
-    };
-
-    getLocation();
-
-    return () => {
-      isMounted = false;
-    };
-  }, []);
-
+  // Verify Location Permission
   async function verifyPermission() {
     try {
-      if (permissionResponse && permissionResponse.granted) {
+      if (permissionResponse?.granted) {
         return true;
       }
-      const permissionResponse = await requestPermission();
-      return permissionResponse.granted;
+      const response = await requestPermission();
+      return response.granted;
     } catch (err) {
-      console.log("verify permission ", err);
+      console.error("Permission verification error:", err);
+      Alert.alert("Permission Error", "Unable to access location. Please try again.");
       return false;
     }
+  }
+
+  // Fetch User's Current Location
+  useEffect(() => {
+    async function fetchLocation() {
+      const hasPermission = await verifyPermission();
+      if (hasPermission) {
+        try {
+          const locationResponse = await Location.getCurrentPositionAsync();
+          const userLocation = {
+            latitude: locationResponse.coords.latitude,
+            longitude: locationResponse.coords.longitude,
+          };
+          setLocation(userLocation);
+        } catch (err) {
+          console.error("Error fetching location:", err);
+          Alert.alert("Error", "Unable to fetch your current location.");
+        }
+      }
+    }
+    fetchLocation();
+  }, []);
+
+  // Update Location Marker on Map Press
+  function handleMapPress(event) {
+    const newLocation = event.nativeEvent.coordinate;
+    setLocation(newLocation);
   }
 
   return (
@@ -62,14 +60,15 @@ export default function ExploreScreen() {
             latitudeDelta: 0.0922,
             longitudeDelta: 0.0421,
           }}
-          zoomEnabled={true}
-          zoomControlEnabled={true}
+          zoomEnabled
+          zoomControlEnabled
+          onPress={handleMapPress}
         >
-          <Marker coordinate={location} />
+          <Marker coordinate={location} title="Current Location" />
         </MapView>
       ) : (
         <View style={styles.loadingContainer}>
-          <Text>Loading...</Text>
+          <Text>Loading your location...</Text>
         </View>
       )}
     </View>
@@ -83,8 +82,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   map: {
-    width: "100%",
-    flex: 1,
+    width: Dimensions.get("window").width,
+    height: Dimensions.get("window").height,
   },
   loadingContainer: {
     flex: 1,
