@@ -17,10 +17,12 @@ Our app is designed to simplify social situations and help you establish meaning
 ![App Screenshot](./assets/screenshots/add-conversation-to-notes.png)
 3. *Finished notebook related features: browse the notes, add/edit/delete notes.*
 ![App Screenshot](./assets/screenshots/notes-related-screenshots.png)
-4. *Account Screen: display user profile and notification setting*
+4. *New implemented in Iteration 2: when add/update a note, photos can be taken by camera, and the photos saved are saved in firebase storage*
+![App Screenshot](./assets/screenshots/take-a-photo-to-add.png)
+5. *New implemented in Iteration 2: Explore Screen: implemented Google Maps API to show the map, will implement the external API Google Places in iteration 3*
+![App Screenshot](./assets/screenshots/explore-location.png)
+6. *Account Screen: display user profile and notification setting*
 ![App Screenshot](./assets/screenshots/profile-setting.png)
-5. *Explore Screen: will implement the external API, EventBrite or Google Places*
-![App Screenshot](./assets/screenshots/explore.png)
 ---
 
 ### Data Model and Collections
@@ -42,8 +44,19 @@ Our app is designed to simplify social situations and help you establish meaning
    - Delete: Not provided on the mobile app.
 
 ---
+### Team Contributions in Iteration 2
 
-### Team Contributions
+**Xinyu Zeng:**
+
+- **Built a reusable ImageManager utility component to handle**:
+   - Verifying permissions for both camera and library access.
+   - Launching the camera or library for image selection. 
+- **Firebase Integration**:
+   - Updated ImageManager to upload images to Firebase Storage under the notes/ directory and returning the download URL.
+   - Updated Firestore notes collection to include image URLs for easier preview and retrieval in other parts of the app
+
+
+### Team Contributions in Iteration 1
 
 **Xinyu Zeng:**
 
