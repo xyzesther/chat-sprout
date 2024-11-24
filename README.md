@@ -55,6 +55,15 @@ Our app is designed to simplify social situations and help you establish meaning
    - Updated ImageManager to upload images to Firebase Storage under the notes/ directory and returning the download URL.
    - Updated Firestore notes collection to include image URLs for easier preview and retrieval in other parts of the app
 
+**Mingyi Li:**
+- **Display User Location**
+   - Users can explore their current location through an interactive map interface, enhancing the user experience with a real-time view. The map interface allows users to see their current position, marked with a location pin, creating a sense of personalization.
+   - Clicking on the map enables users to update their location dynamically, making the feature interactive and adaptable.
+
+- **Interactive Map Features**
+   - The map includes a Marker to pinpoint the user’s real-time location and supports standard map interactions like zooming and panning.
+   - The interface provides a seamless experience by showing a loading prompt when fetching the user's location and automatically updating the map once the location is retrieved.
+
 
 ### Team Contributions in Iteration 1
 
