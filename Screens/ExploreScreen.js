@@ -83,8 +83,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   map: {
-    width: "80%",
-    height: "50%",
+    width: "100%",
+    flex: 1,
   },
   loadingContainer: {
     flex: 1,
