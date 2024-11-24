@@ -23,12 +23,19 @@
     "web": {
       "favicon": "./assets/favicon.png"
     },
+    "newArchEnabled": true,
     "plugins": [
       [
         "expo-image-picker",
         {
           "cameraPermission": "The app accesses your camera to let you take photos to insert into the notes.",
           "photosPermission": "The app accesses your photos to let you insert photos into the notes."
+        }
+      ],
+      [
+        "expo-location",
+        {
+          "locationAlwaysAndWhenInUsePermission": "Allow $(PRODUCT_NAME) to use your location."
         }
       ]
     ]
