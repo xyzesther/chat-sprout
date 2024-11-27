@@ -81,6 +81,7 @@ export default function NotebookScreen({ navigation }) {
         <View style={styles.searchBar}>
           <SearchBar searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
         </View>
+        <Text style={styles.sorting}>Sorted By Dates</Text>
         <View style={styles.noteList}>
           {notes.length === 0 ? (
             <Text style={styles.noteListEmptyText}>Add a note to get started!</Text>
@@ -107,6 +108,13 @@ const styles = StyleSheet.create({
 
   searchBar: {
     padding: spacing.md,
+  },
+
+  sorting: {
+    alignSelf: 'flex-end',
+    marginRight: spacing.md,
+    marginBottom: spacing.sm,
+    color: colors.theme,
   },
 
   noteList: {
