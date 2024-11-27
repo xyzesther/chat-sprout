@@ -19,8 +19,8 @@ export default function ExploreScreen() {
       }
       const response = await requestPermission();
       return response.granted;
-    } catch (err) {
-      console.error("Permission verification error:", err);
+    } catch (error) {
+      console.error("Permission verification error:", error);
       Alert.alert("Permission Error", "Unable to access location. Please try again.");
       return false;
     }
@@ -38,8 +38,9 @@ export default function ExploreScreen() {
             longitude: locationResponse.coords.longitude,
           };
           setLocation(userLocation);
-        } catch (err) {
-          console.error("Error fetching location:", err);
+          fetchNearbyPlaces(userLocation.latitude, userLocation.longitude);
+        } catch (error) {
+          console.error("Error fetching location:", error);
           Alert.alert("Error", "Unable to fetch your current location.");
         }
       }
