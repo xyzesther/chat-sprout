@@ -35,7 +35,7 @@ export default function App() {
                 component={AddNoteScreen}
                 options={{
                   headerBackTitleVisible: false,
-                  title: "Add Note",
+                  title: "Note",
                 }}
               />
               <Stack.Screen
