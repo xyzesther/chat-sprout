@@ -5,6 +5,8 @@ import { Button, Card } from "tamagui";
 import { colors } from "../styles/styles";
 import ProfileEditPassword from "./ProfileEditPassword";
 import ProfileEditName from "./ProfileEditName";
+import { auth } from "../Firebase/firebaseSetup";
+
 
 const Profile = () => {
   const [isPasswordSheetOpen, setPasswordSheetOpen] = useState(false);
@@ -21,6 +23,8 @@ const Profile = () => {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Profile</Text>
+      <Text>{auth.currentUser.email}</Text>
+      <Text>{auth.currentUser.uid}</Text>
 
       <Card
         paddingVertical="$2"
