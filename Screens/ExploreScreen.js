@@ -73,11 +73,13 @@ export default function ExploreScreen() {
           setPlaces(response.data.results);
           setModalVisible(true);
         } else {
-          Alert.alert("No Places Found", "No nearby places match your criteria.");
-        }
+          Alert.alert("No Places Found", "No nearby language learning places found.");
+        } 
+      } else if (response.data.status === "ZERO_RESULTS") {
+        Alert.alert("No Places Found", "No nearby language learning places found.");
       } else {
         console.error("Google Places API Error:", response.data.status);
-        Alert.alert("API Error", "Unable to fetch places. Please try again.");
+        Alert.alert("No Places Found", "Unable to fetch places. Please try again.");
       }
     } catch (error) {
       console.error("Error fetching nearby places:", error);
