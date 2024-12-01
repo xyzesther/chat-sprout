@@ -16,6 +16,51 @@ const Profile = ({ setIsUserLoggedIn }) => {
   const [userData, setUserData] = useState(null);
   const [loading, setLoading] = useState(true);
 
+  const fetchUserData = async () => {
+    try {
+      const uid = auth.currentUser?.uid;
+      if (!uid) {
+        console.error("No user is logged in.");
+        return;
+      }
+
+      const firestore = getFirestore();
+      const userDocRef = doc(firestore, "users", uid);
+      const userDoc = await getDoc(userDocRef);
+
+      if (userDoc.exists()) {
+        setUserData(userDoc.data());
+      } else {
+        console.error("No user data found for UID:", uid);
+      }
+    } catch (error) {
+      console.error("Error fetching user data:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchUserData();
+  }, []);
+
+  const handleSavePassword = (newPassword) => {
+    console.log(`Updated Password: ${newPassword}`);
+  };
+
+  const handleSaveName = (newName) => {
+    console.log(`Updated Name: ${newName}`);
+    fetchUserData();
+  };
+
+  if (loading) {
+    return (
+      <View style={styles.container}>
+        <ActivityIndicator size="large" color="#0000ff" />
+        <Text>Loading user data...</Text>
+      </View>
+    );
+  }
 
   const handleLogout = async () => {
     try {
