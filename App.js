@@ -18,39 +18,6 @@ const config = createTamagui(defaultConfig);
 
 const Stack = createNativeStackNavigator();
 
-const AuthStack = (
-  <>
-    <Stack.Screen name="Login" component={LoginScreen} />
-    <Stack.Screen name="Signup" component={SignupScreen} />
-  </>
-);
-
-const AppStack = (
-  <>
-    <Stack.Screen
-      name="BottomTabNavigator"
-      children={() => <TabNavigator />}
-      options={{ headerShown: false }}
-    />
-    <Stack.Screen
-      name="AddNote"
-      component={AddNoteScreen}
-      options={{
-        headerBackTitleVisible: false,
-        title: "Note",
-      }}
-    />
-    <Stack.Screen
-      name="ConversationScreen"
-      component={ConversationScreen}
-      options={({ route }) => ({
-        title: route.params?.title || "Conversation",
-        headerBackTitleVisible: false,
-      })}
-    />
-  </>
-);
-
 export default function App() {
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
 
@@ -76,13 +43,41 @@ export default function App() {
       <PortalProvider shouldAddRootHost>
         <NavigationContainer>
           <Stack.Navigator
-            initialRouteName="Login"
             screenOptions={{
               headerStyle: { backgroundColor: colors.theme },
               headerTintColor: colors.text.primary,
             }}
           >
-            {isUserLoggedIn ? AppStack : AuthStack}
+            {isUserLoggedIn ? (
+              <>
+                <Stack.Screen
+                  name="BottomTabNavigator"
+                  children={() => <TabNavigator setIsUserLoggedIn={setIsUserLoggedIn} />}
+                  options={{ headerShown: false }}
+                />
+                <Stack.Screen
+                  name="AddNote"
+                  component={AddNoteScreen}
+                  options={{
+                    headerBackTitleVisible: false,
+                    title: "Note",
+                  }}
+                />
+                <Stack.Screen
+                  name="ConversationScreen"
+                  component={ConversationScreen}
+                  options={({ navigation, route }) => ({
+                    title: route.params?.title || "Conversation",
+                    headerBackTitleVisible: false,
+                  })}
+                />
+              </>
+            ) : (
+              <>
+                <Stack.Screen name="Login" component={LoginScreen} />
+                <Stack.Screen name="Signup" component={SignupScreen} />
+              </>
+            )}
           </Stack.Navigator>
         </NavigationContainer>
         <Toast />
