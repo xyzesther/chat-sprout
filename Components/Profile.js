@@ -77,10 +77,11 @@ const Profile = ({ setIsUserLoggedIn }) => {
       <View style={styles.header}>
         <Text style={styles.title}>Profile</Text>
         <View style={styles.logoutContainer}>
-          <Text style={styles.logoutText}>Log Out</Text>
-          <Button onPress={handleLogout} style={styles.logoutButton}>
-            <MaterialIcons name="logout" size={24} color="black" />
-          </Button>
+          <MaterialIcons
+            name="logout"
+            onPress={handleLogout}
+            style={styles.logoutButton}
+          />
         </View>
       </View>
 
@@ -184,18 +185,9 @@ const styles = StyleSheet.create({
     fontSize: fontSize.header,
     fontWeight: "bold",
   },
-  logoutContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-  },
-  logoutText: {
-    marginRight: 5,
-    fontSize: fontSize.body,
-  },
   logoutButton: {
-    width: "15%",
-    alignItems: "center",
-    backgroundColor: "transparent",
+    padding: 10,
+    fontSize: fontSize.header,
   },
   cardContainer: {
     paddingVertical: 10,
