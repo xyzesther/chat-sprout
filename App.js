@@ -13,8 +13,17 @@ import { auth } from "./Firebase/firebaseSetup";
 import LoginScreen from "./Screens/LoginScreen";
 import SignupScreen from "./Screens/SignupScreen";
 import { useEffect, useState } from "react";
+import * as Notifications from 'expo-notifications';
 
 const config = createTamagui(defaultConfig);
+
+Notifications.setNotificationHandler({
+  handleNotification: async () => {
+    return {
+      shouldShowAlert: true,
+    }
+  },
+});
 
 const Stack = createNativeStackNavigator();
 
