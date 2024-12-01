@@ -7,7 +7,7 @@ import { colors } from "../styles/styles";
 export default function AccountScreen({ setIsUserLoggedIn }) {
   return (
     <View style={styles.container}>
-      <Profile setIsUserLoggedIn={setIsUserLoggedIn}/>
+      <Profile setIsUserLoggedIn={setIsUserLoggedIn} />
       <Setting />
     </View>
   );

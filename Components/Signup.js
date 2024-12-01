@@ -2,14 +2,16 @@ import { createUserWithEmailAndPassword } from "firebase/auth";
 import { useState } from "react";
 import { View, Text, TextInput, Button, StyleSheet, Alert } from "react-native";
 import { auth } from "../Firebase/firebaseSetup";
+import { getFirestore, doc, setDoc, serverTimestamp } from "firebase/firestore";
 
 export default function Signup({ navigation }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
+  const db = getFirestore();
+
   const loginHandler = () => {
-    // go to login
     navigation.replace("Login");
   };
   const signupHandler = async () => {
@@ -22,6 +24,7 @@ export default function Signup({ navigation }) {
         Alert.alert("Password and confirm password should match");
         return;
       }
+
       if (
         email.length === 0 ||
         password.length === 0 ||
@@ -30,21 +33,41 @@ export default function Signup({ navigation }) {
         Alert.alert("No field should be empty");
         return;
       }
+
       const userCred = await createUserWithEmailAndPassword(
         auth,
         email,
         password
       );
-      console.log(userCred);
+
+      console.log("New Account Created: ", userCred);
+
+      // Add user document to Firestore
+      if (userCred.user.uid) {
+        const userDocRef = doc(db, "users", userCred.user.uid); // Use UID as the document ID
+        await setDoc(userDocRef, {
+          displayName: "new sprout",
+          notificationEnabled: false,
+          createdAt: serverTimestamp(),
+          points: 0,
+          photoURL:
+            "https://scontent.fyvr3-1.fna.fbcdn.net/v/t39.30808-6/301507690_444882737660603_6815372983150332319_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=ZBpiOhvwpDgQ7kNvgGY20Z2&_nc_zt=23&_nc_ht=scontent.fyvr3-1.fna&_nc_gid=AG60tJNetbztRGXNaNpT3cv&oh=00_AYDwyHWHSqUnMuod_6pM9HGcwCwRIEjj9W8UTC3AUyg4yw&oe=6751A62C",
+        });
+
+        console.log("User successfully signed up and added to Firestore!");
+        Alert.alert("Registration successful!", "You can now log in.");
+        navigation.replace("Login"); // Redirect to login page after signup
+      }
     } catch (err) {
       console.log("Sign up ", err.code);
       // tell user if an error happens
       if (err.code === "auth/weak-password") {
-        Alert.alert("Your password should be at least    6 characters");
+        Alert.alert("Your password should be at least 6 characters");
       }
       Alert.alert(err.message);
     }
   };
+
   return (
     <View style={styles.container}>
       <Text style={styles.label}>Email</Text>
