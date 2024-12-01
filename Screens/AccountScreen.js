@@ -1,14 +1,14 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import React from "react";
 import Profile from "../Components/Profile";
-import Setting from "../Components/Setting";
+import NotificationSetting from "../Components/NotificationSetting";
 import { colors } from "../styles/styles";
 
 export default function AccountScreen({ setIsUserLoggedIn }) {
   return (
     <View style={styles.container}>
       <Profile setIsUserLoggedIn={setIsUserLoggedIn} />
-      <Setting />
+      <NotificationSetting />
     </View>
   );
 }
