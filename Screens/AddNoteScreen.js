@@ -1,18 +1,27 @@
-import React, { useState, useEffect } from 'react';
-import { StyleSheet, SafeAreaView } from 'react-native';
-import { updateToDB, writeToDB } from '../Firebase/firebaseHelper';
-import { Button, Sheet } from 'tamagui';
-import RichTextEditor from '../Components/RichTextEditor';
-import ImageManager from '../Components/ImageManager';
-import { colors, fontSize, image, spacing, borderRadius } from '../styles/styles';
-import { Camera } from '@tamagui/lucide-icons';
+import React, { useState, useEffect } from "react";
+import { StyleSheet, SafeAreaView } from "react-native";
+import { updateToDB, writeToDB } from "../Firebase/firebaseHelper";
+import { Button, Sheet } from "tamagui";
+import RichTextEditor from "../Components/RichTextEditor";
+import ImageManager from "../Components/ImageManager";
+import {
+  colors,
+  fontSize,
+  image,
+  spacing,
+  borderRadius,
+} from "../styles/styles";
+import { Camera } from "@tamagui/lucide-icons";
+import { auth } from "../Firebase/firebaseSetup";
 
 export default function AddNoteScreen({ navigation, route }) {
   const existingNote = route.params?.note;
-  const [noteContent, setNoteContent] = useState(existingNote ? `${existingNote.title}\n${existingNote.content}` : '');
+  const [noteContent, setNoteContent] = useState(
+    existingNote ? `${existingNote.title}\n${existingNote.content}` : ""
+  );
   const [images, setImages] = useState(existingNote?.images || []);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const collectionName = 'notes';
+  const collectionName = "notes";
 
   useEffect(() => {
     navigation.setOptions({
@@ -32,9 +41,9 @@ export default function AddNoteScreen({ navigation, route }) {
 
   async function handleImageAction(actionType) {
     let uri;
-    if (actionType === 'library') {
+    if (actionType === "library") {
       uri = await ImageManager.selectFromLibrary();
-    } else if (actionType === 'camera') {
+    } else if (actionType === "camera") {
       uri = await ImageManager.takePhoto();
     }
 
@@ -43,7 +52,10 @@ export default function AddNoteScreen({ navigation, route }) {
       if (downloadURL) {
         setImages((prevImages) => [...prevImages, downloadURL]);
       } else {
-        Alert.alert('Upload Failed', 'Unable to upload the image. Please try again.');
+        Alert.alert(
+          "Upload Failed",
+          "Unable to upload the image. Please try again."
+        );
       }
     }
     setIsModalOpen(false);
@@ -52,19 +64,20 @@ export default function AddNoteScreen({ navigation, route }) {
   async function handleSaveNote() {
     if (noteContent.trim() || images.length > 0) {
       // Automatically set the first line of the note as the title
-      const lines = noteContent.split('\n');
+      const lines = noteContent.split("\n");
       const title = lines[0];
-      const content = lines.slice(1).join('\n');
-       
+      const content = lines.slice(1).join("\n");
+
       // Create a new note document
       const newNote = {
         title: title,
         content: content,
         images: images,
         timestamp: new Date().toISOString(),
+        owner: auth.currentUser.uid,
       };
 
-      // Call the updateToDB or writeToDB function to write the note to the database  
+      // Call the updateToDB or writeToDB function to write the note to the database
       try {
         if (existingNote) {
           await updateToDB(collectionName, existingNote.id, newNote);
@@ -73,7 +86,7 @@ export default function AddNoteScreen({ navigation, route }) {
         }
         navigation.goBack();
       } catch (error) {
-        console.log('Error adding a new note: ', error);
+        console.log("Error adding a new note: ", error);
       }
     }
   }
@@ -85,16 +98,18 @@ export default function AddNoteScreen({ navigation, route }) {
         setContent={setNoteContent}
         images={images}
         onImageAdd={() => setIsModalOpen(true)}
-        onImageRemove={(index) => setImages((prevImages) => prevImages.filter((_, i) => i !== index))}
+        onImageRemove={(index) =>
+          setImages((prevImages) => prevImages.filter((_, i) => i !== index))
+        }
       />
 
-      <Button 
-        icon={Camera} 
-        size="$2" 
+      <Button
+        icon={Camera}
+        size="$2"
         borderColor={colors.theme}
         onPress={() => setIsModalOpen(true)}
         style={{
-          position: 'absolute',
+          position: "absolute",
           bottom: spacing.xl,
           right: spacing.xl,
           width: image.buttonImg,
@@ -112,18 +127,18 @@ export default function AddNoteScreen({ navigation, route }) {
         <Sheet.Frame>
           <Sheet.Handle />
           <Button
-            onPress={() => handleImageAction('library')}
+            onPress={() => handleImageAction("library")}
             style={styles.button}
           >
             Select from Library
           </Button>
           <Button
-            onPress={() => handleImageAction('camera')}
+            onPress={() => handleImageAction("camera")}
             style={styles.button}
           >
             Take a Photo
           </Button>
-          <Button 
+          <Button
             onPress={() => setIsModalOpen(false)}
             style={[styles.button, { color: colors.text.black }]}
           >
