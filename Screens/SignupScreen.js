@@ -4,7 +4,7 @@ import { View, Text, TextInput, Button, StyleSheet, Alert } from "react-native";
 import { auth } from "../Firebase/firebaseSetup";
 import { getFirestore, doc, setDoc, serverTimestamp } from "firebase/firestore";
 
-export default function Signup({ navigation }) {
+export default function SignupScreen({ navigation }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -20,17 +20,17 @@ export default function Signup({ navigation }) {
       // no field should be empty
       // valid email address @ .
       // password and confirm password match
-      if (password !== confirmPassword) {
-        Alert.alert("Password and confirm password should match");
+      if (!email || !password || !confirmPassword) {
+        Alert.alert('No field should be empty');
         return;
       }
-
-      if (
-        email.length === 0 ||
-        password.length === 0 ||
-        confirmPassword.length === 0
-      ) {
-        Alert.alert("No field should be empty");
+      if (password !== confirmPassword) {
+        Alert.alert('Password and confirm password should match');
+        return;
+      }
+      const emailRegex = /^[\w\.-]+@[a-zA-Z\d\.-]+\.[a-zA-Z]{2,}$/;
+      if (emailRegex.test(email) === false) {
+        Alert.alert('Please enter a valid email address');
         return;
       }
 
@@ -39,7 +39,6 @@ export default function Signup({ navigation }) {
         email,
         password
       );
-
       console.log("New Account Created: ", userCred);
 
       // Add user document to Firestore
@@ -53,10 +52,7 @@ export default function Signup({ navigation }) {
           photoURL:
             "https://scontent.fyvr3-1.fna.fbcdn.net/v/t39.30808-6/301507690_444882737660603_6815372983150332319_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=ZBpiOhvwpDgQ7kNvgGY20Z2&_nc_zt=23&_nc_ht=scontent.fyvr3-1.fna&_nc_gid=AG60tJNetbztRGXNaNpT3cv&oh=00_AYDwyHWHSqUnMuod_6pM9HGcwCwRIEjj9W8UTC3AUyg4yw&oe=6751A62C",
         });
-
         console.log("User successfully signed up and added to Firestore!");
-        Alert.alert("Registration successful!", "You can now log in.");
-        navigation.replace("Login"); // Redirect to login page after signup
       }
     } catch (err) {
       console.log("Sign up ", err.code);
