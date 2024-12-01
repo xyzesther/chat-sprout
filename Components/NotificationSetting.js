@@ -9,10 +9,9 @@ import { colors } from "../styles/styles";
 
 export default function NotificationSetting() {
   const [isReminderOn, setReminderOn] = useState(false);
-  const [reminderTime, setReminderTime] = useState(new Date());
+  const [reminderTime, setReminderTime] = useState(null);
   const [tempTime, setTempTime] = useState(new Date());
   const [showTimePicker, setShowTimePicker] = useState(false);
-  const [isTimeChanged, setIsTimeChanged] = useState(false);
 
   // Verify notification permission
   async function verifyPermission() {
@@ -31,7 +30,7 @@ export default function NotificationSetting() {
   }
 
   // Schedule notification
-  async function scheduleNotificationHandler() {
+  async function scheduleNotificationHandler(time) {
     try {
       const hasPermission = await verifyPermission();
       if (!hasPermission) {
@@ -39,57 +38,37 @@ export default function NotificationSetting() {
         return;
       }
 
-      const triggerTime = new Date(reminderTime);
-
       const notificationId = await Notifications.scheduleNotificationAsync({
         content: {
           title: "Time to Practice!",
           body: "Don't forget to practice your skills today.",
         },
         trigger: {
-          hour: triggerTime.getHours(),
-          minute: triggerTime.getMinutes(),
-          repeats: true,
+          hour: time.getHours(),
+          minute: time.getMinutes(),
+          type: Notifications.SchedulableTriggerInputTypes.DAILY,
         },
       });
 
       console.log("Notification scheduled with ID:", notificationId);
 
-      const toastMessage = isTimeChanged
-        ? {
-            type: "success",
-            text1: "Reminder Time Changed",
-            text2: `New time set for ${triggerTime.toLocaleTimeString()}`,
-          }
-        : {
-            type: "success",
-            text1: "Reminder Set",
-            text2: `Reminder set for ${triggerTime.toLocaleTimeString()}`,
-          };
-
       Toast.show({
-        ...toastMessage,
+        type: "success",
+        text1: "Reminder Set",
+        text2: `Reminder scheduled for ${time.toLocaleTimeString()}.`,
         position: "top",
         topOffset: 120,
       });
-
-      setIsTimeChanged(false);
     } catch (error) {
       console.log("Error scheduling notification:", error);
     }
   }
 
   // Handle the toggle switch
-  async function handleSwitchChange(value) {
+  function handleSwitchChange(value) {
     setReminderOn(value);
-    if (value) {
-      // Set default reminder time and schedule notification
-      setReminderTime(new Date());
-      setTempTime(new Date());
-      setIsTimeChanged(false);
-      await scheduleNotificationHandler();
-    } else {
-      setShowTimePicker(false);
+    if (!value) {
+      setReminderTime(null);
       Toast.show({
         type: "info",
         text1: "Reminder Disabled",
@@ -107,26 +86,20 @@ export default function NotificationSetting() {
     }
     if (selectedTime) {
       setTempTime(selectedTime);
-      setIsTimeChanged(true);
     }
   }
 
   function confirmTimeSelection() {
-    setReminderTime(tempTime);
+    setReminderTime(tempTime); // Update the reminder time
     setShowTimePicker(false);
-    if (isReminderOn) {
-      scheduleNotificationHandler();
-    }
-  }
-
-  function toggleTimePicker() {
-    setShowTimePicker(!showTimePicker);
+    scheduleNotificationHandler(tempTime);
   }
 
   return (
     <YStack padding="$4">
       <Text style={styles.title}>Notification</Text>
 
+      {/* Toggle switch */}
       <XStack justifyContent="space-between" alignItems="center">
         <Text>Enable Daily Reminder</Text>
         <Switch
@@ -143,10 +116,11 @@ export default function NotificationSetting() {
         </Switch>
       </XStack>
 
+      {/* Reminder time button */}
       {isReminderOn && (
         <YStack marginTop="$2">
-          <Button onPress={toggleTimePicker}>
-            Reminder Time: {reminderTime.toLocaleTimeString()}
+          <Button onPress={() => setShowTimePicker(true)}>
+            Reminder Time: {reminderTime ? reminderTime.toLocaleTimeString() : "Not Set"}
           </Button>
           {showTimePicker && (
             <>
