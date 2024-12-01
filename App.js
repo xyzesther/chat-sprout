@@ -10,8 +10,8 @@ import { PortalProvider } from "@tamagui/portal";
 import Toast from "react-native-toast-message";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "./Firebase/firebaseSetup";
-import Login from "./Components/Login";
-import Signup from "./Components/Signup";
+import LoginScreen from "./Screens/LoginScreen";
+import SignupScreen from "./Screens/SignupScreen";
 import { useEffect, useState } from "react";
 
 const config = createTamagui(defaultConfig);
@@ -74,8 +74,8 @@ export default function App() {
               </>
             ) : (
               <>
-                <Stack.Screen name="Login" component={Login} />
-                <Stack.Screen name="Signup" component={Signup} />
+                <Stack.Screen name="Login" component={LoginScreen} />
+                <Stack.Screen name="Signup" component={SignupScreen} />
               </>
             )}
           </Stack.Navigator>
