@@ -1,17 +1,35 @@
 import React, { useState } from "react";
-import { Sheet, Fieldset, Input, Label, XStack, Button, YStack, View } from "tamagui";
+import { Alert } from "react-native";
+import { Sheet, Input, Label, XStack, Button, YStack, View } from "tamagui";
+import { auth } from "../Firebase/firebaseSetup";
+import { reauthenticateWithCredential, EmailAuthProvider, updatePassword } from "firebase/auth";
 
 const ProfileEditPassword = ({ isOpen, onClose, onSave }) => {
   const [currentPassword, setCurrentPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmNewPassword, setConfirmNewPassword] = useState("");
 
-  const handleSave = () => {
+  const handleSave = async () => {
     if (newPassword === confirmNewPassword) {
-      onSave(newPassword);
-      onClose();
+      try {
+        const user = auth.currentUser;
+        const credential = EmailAuthProvider.credential(user.email, currentPassword);
+
+        // Reauthenticate the user
+        await reauthenticateWithCredential(user, credential);
+
+        // Update the password
+        await updatePassword(user, newPassword);
+
+        onSave(newPassword);
+        onClose();
+        Alert.alert("Success", "Password updated successfully");
+      } catch (error) {
+        console.error("Error updating password:", error);
+        Alert.alert("Error", error.message || "Failed to update password. Please try again.");
+      }
     } else {
-      alert("New passwords do not match");
+      Alert.alert("Error", "New passwords do not match");
     }
   };
 
@@ -50,7 +68,7 @@ const ProfileEditPassword = ({ isOpen, onClose, onSave }) => {
           />
         </YStack>
 
-        <View style={{ marginTop: 20 }} /> 
+        <View style={{ marginTop: 20 }} />
 
         <XStack gap="$2" justifyContent="flex-end">
           <Button onPress={onClose}>Cancel</Button>
