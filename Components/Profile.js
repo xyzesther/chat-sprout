@@ -6,9 +6,10 @@ import { colors } from "../styles/styles";
 import ProfileEditPassword from "./ProfileEditPassword";
 import ProfileEditName from "./ProfileEditName";
 import { auth } from "../Firebase/firebaseSetup";
+import MaterialIcons from "@expo/vector-icons/MaterialIcons";
+import { signOut } from "firebase/auth";
 
-
-const Profile = () => {
+const Profile = ({ setIsUserLoggedIn }) => {
   const [isPasswordSheetOpen, setPasswordSheetOpen] = useState(false);
   const [isNameSheetOpen, setNameSheetOpen] = useState(false);
 
@@ -20,11 +21,25 @@ const Profile = () => {
     console.log(`Updated Name: ${newName}`);
   };
 
+  const handleLogout = async () => {
+    try {
+      await signOut(auth);
+      console.log("User signed out");
+      setIsUserLoggedIn(false);
+    } catch (err) {
+      console.error("Sign out error", err);
+    }
+  };
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Profile</Text>
       <Text>{auth.currentUser.email}</Text>
       <Text>{auth.currentUser.uid}</Text>
+
+      <Button onPress={handleLogout}>
+        <MaterialIcons name="logout" size={24} color="black" />
+      </Button>
 
       <Card
         paddingVertical="$2"

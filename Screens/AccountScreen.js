@@ -4,10 +4,10 @@ import Profile from "../Components/Profile";
 import Setting from "../Components/Setting";
 import { colors } from "../styles/styles";
 
-export default function AccountScreen() {
+export default function AccountScreen({ setIsUserLoggedIn }) {
   return (
     <View style={styles.container}>
-      <Profile />
+      <Profile setIsUserLoggedIn={setIsUserLoggedIn}/>
       <Setting />
     </View>
   );
