@@ -2,8 +2,9 @@ import { sendPasswordResetEmail, signInWithEmailAndPassword } from "firebase/aut
 import { useState } from "react";
 import { View, Text, TextInput, StyleSheet, Alert } from "react-native";
 import { auth } from "../Firebase/firebaseSetup";
-import { borderRadius, borderWidth, colors, fontSize, spacing } from "../styles/styles";
-import { Button, Input, Sheet, XStack, YStack } from "tamagui";
+import { borderRadius, borderWidth, colors, fontSize, image, spacing } from "../styles/styles";
+import { Button, Input, Label, Sheet, XStack, YStack } from "tamagui";
+import { Mail, Lock } from "@tamagui/lucide-icons";
 
 export default function LoginScreen({ navigation }) {
   const [email, setEmail] = useState("");
@@ -64,69 +65,113 @@ export default function LoginScreen({ navigation }) {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.label}>Email</Text>
-      <TextInput
-        placeholder="Email"
-        style={styles.input}
-        value={email}
-        onChangeText={(changedText) => {
-          setEmail(changedText);
-        }}
-      />
-      <Text style={styles.label}>Password</Text>
-      <TextInput
-        style={styles.input}
-        secureTextEntry={true}
-        placeholder="Password"
-        value={password}
-        onChangeText={(changedText) => {
-          setPassword(changedText);
-        }}
-      />
-      <Button onPress={loginHandler}>
-        Login
-      </Button>
+      <View>
+        {/* Ellipse 1 */}
+        <View style={styles.ellipse1} />
+        {/* Ellipse 2 */}
+        <View style={styles.ellipse2} />
+      </View>
+      <Text style={styles.title}>Chat Sprout</Text>
+      <Text style={styles.subtitle}>
+        Master small talk and networking – your guide to confident conversations!
+      </Text>
+
+      {/* <View style={styles.tabContainer}> */}
+      <Text style={styles.loginText}>Sign In</Text>
+        
+      {/* </View> */}
+
+      <View style={styles.inputContainer}>
+        <Mail style={styles.icon} size={image.iconImg} color={colors.theme} />
+        <TextInput
+          placeholder="Email Address"
+          style={styles.input}
+          value={email}
+          onChangeText={(changedText) => {
+            setEmail(changedText);
+          }}
+        />
+      </View>
+      <View style={styles.inputContainer}>
+        <Lock style={styles.icon} size={image.iconImg} color={colors.theme} />
+        <TextInput
+          style={styles.input}
+          secureTextEntry={true}
+          placeholder="Password"
+          value={password}
+          onChangeText={(changedText) => {
+            setPassword(changedText);
+          }}
+        />
+      </View>
       <Text
         style={styles.forgotPassword}
         onPress={() => setSheetOpen(true)}
       >
         Forgot Password?
       </Text>
-      <Button onPress={signupHandler}>
-        New User? Create An Account
+      <Button 
+        onPress={loginHandler}
+        style={styles.loginButton}
+        textProps={{
+          fontSize: fontSize.body,
+          fontWeight: "bold",
+          color: colors.text.primary,
+        }}
+      >
+        Login
       </Button>
+      <Text style={styles.signupText} onPress={signupHandler}>
+        New User? Create An Account
+      </Text>
 
-      {/* Forgot Password Sheet */}
+      {/* Reset Password Sheet */}
       <Sheet
         modal
         open={sheetOpen}
         onOpenChange={setSheetOpen}
-        snapPoints={[50]}
+        snapPoints={[40]}
         dismissOnSnapToBottom
       >
-        <Sheet.Frame padding="$4" borderRadius="$4">
-          <Sheet.Handle />
+        <Sheet.Overlay />
+        <Sheet.Handle />
+        <Sheet.Frame paddingHorizontal="$4"
+          paddingVertical="$6"
+          backgroundColor={colors.background.white}
+          borderTopLeftRadius={borderRadius.lg}
+          borderTopRightRadius={borderRadius.lg}
+        >
           <YStack gap="$4">
-            <Text style={styles.dialogTitle}>Reset Your Password</Text>
-            <Input
-              placeholder="Enter your registered email"
-              value={resetEmail}
-              onChangeText={setResetEmail}
-              style={styles.dialogInput}
-            />
-            <XStack justifyContent="space-between" gap="$3">
+            <Text fontWeight="bold" fontSize="$4" textAlign="center">
+              Reset Your Password
+            </Text>
+
+            <YStack gap="$2">
+              <Label>Your Email Address</Label>
+              <Input
+                placeholder="Enter your registered email"
+                value={resetEmail}
+                onChangeText={setResetEmail}
+              />
+            </YStack>
+
+            <XStack gap="$4" justifyContent="flex-end" marginTop="$4">
               <Button
                 onPress={() => {
                   setSheetOpen(false);
                   setResetEmail("");
                 }}
-                theme="secondary"
+                theme="neutral"
+                borderRadius="$4"
+                size="$4"
               >
                 Cancel
               </Button>
-              <Button 
+              <Button
                 onPress={resetPasswordHandler} 
-                theme="primary"
+                theme="active"
+                borderRadius="$4"
+                size="$4"
               >
                 Send Reset Link
               </Button>
@@ -142,44 +187,108 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff",
-    alignItems: "stretch",
-    justifyContent: "center",
-    padding: spacing.md,
+    alignItems: "center",
+    justifyContent: "flex-start",
+    paddingHorizontal: spacing.md,
+    overflow: "hidden",
+  },
+
+  // Ellipse 1
+  ellipse1: {
+    position: "absolute",
+    width: 460,
+    height: 460,
+    left: -450,
+    top: 250,
+    backgroundColor: colors.lightTheme,
+    borderRadius: 230,
+  },
+
+  // Ellipse 2
+  ellipse2: {
+    position: "absolute",
+    width: 460,
+    height: 460,
+    left: -250,
+    top: 550,
+    backgroundColor: colors.midTheme,
+    borderRadius: 230,
+  },
+
+  title: {
+    fontFamily: "Aclonica",
+    fontSize: 36,
+    fontWeight: "400",
+    lineHeight: 41,
+    color: colors.theme,
+    textAlign: "center",
+    marginTop: 120,
+    marginBottom: spacing.lg,
+  },
+
+  subtitle: {
+    color: colors.theme,
+    fontFamily: "Roboto",
+    fontSize: fontSize.body,
+    fontWeight: "400",
+    lineHeight: 19,
+    textAlign: "center",
+    marginBottom: spacing.xxl,
+    paddingHorizontal: 50,
+  },
+
+  loginText: {
+    color: colors.theme,
+    fontFamily: "Roboto",
+    fontWeight: "400",
+    fontSize: fontSize.header,
+    lineHeight: 35,
+  },
+
+  inputContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    borderBottomWidth: borderWidth.sm,
+    borderColor: colors.theme,
+    marginTop: spacing.xl,
+    marginHorizontal: spacing.lg,
+    paddingBottom: spacing.sm,
+  },
+
+  icon: {
+    marginRight: spacing.sm,
   },
 
   input: {
-    borderColor: "#552055",
-    borderWidth: borderWidth.md,
-    width: "90%",
-    alignSelf: "center",
-    margin: spacing.sm,
-    padding: spacing.sm,
-    borderRadius: borderRadius.md,
-  },
-
-  label: {
-    marginLeft: spacing.md,
-    fontSize: fontSize.body,
+    flex: 1,
+    fontSize: 16,
+    padding: 8,
   },
 
   forgotPassword: {
     color: colors.text.secondary,
     textAlign: "center",
-    marginVertical: spacing.md,
-    textDecorationLine: "underline",
+    alignSelf: "flex-end",
+    marginRight: spacing.lg,
     fontSize: fontSize.body,
+    marginBottom: spacing.xxl,
+    marginTop: spacing.md,
   },
 
-  sheetTitle: {
-    fontSize: fontSize.title,
-    fontWeight: "bold",
-    textAlign: "center",
+  loginButton: {
+    backgroundColor: colors.theme,
+    borderRadius: borderRadius.md,
+    padding: spacing.md,
+    width: "90%",
+    alignItems: "center",
+    marginTop: spacing.xxl,
   },
 
-  sheetInput: {
-    borderColor: colors.theme,
-    borderWidth: borderWidth.sm,
-    padding: spacing.sm,
-    borderRadius: borderRadius.lg,
+  signupText: {
+    color: colors.theme,
+    fontSize: fontSize.body,
+    fontWeight: "400",
+    lineHeight: 35,
+    marginTop: spacing.lg,
   },
 });

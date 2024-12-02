@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Alert } from "react-native";
-import { Sheet, Input, Label, XStack, Button, YStack, View } from "tamagui";
+import { Sheet, Input, Label, XStack, Button, YStack, Text } from "tamagui";
 import { auth } from "../Firebase/firebaseSetup";
 import { reauthenticateWithCredential, EmailAuthProvider, updatePassword } from "firebase/auth";
 
@@ -38,44 +38,81 @@ const ProfileEditPassword = ({ isOpen, onClose, onSave }) => {
       modal
       open={isOpen}
       onOpenChange={onClose}
-      snapPoints={[85, 50, 25]}
+      snapPoints={[60]}
       dismissOnSnapToBottom
     >
       <Sheet.Overlay />
       <Sheet.Handle />
-      <Sheet.Frame padding="$2" justifyContent="center" alignItems="center">
-        <YStack gap="$2">
-          <Label>Current Password</Label>
-          <Input
-            value={currentPassword}
-            onChangeText={setCurrentPassword}
-            placeholder="Enter current password"
-            secureTextEntry
-          />
-          <Label>New Password</Label>
-          <Input
-            value={newPassword}
-            onChangeText={setNewPassword}
-            placeholder="Enter new password"
-            secureTextEntry
-          />
-          <Label>Confirm New Password</Label>
-          <Input
-            value={confirmNewPassword}
-            onChangeText={setConfirmNewPassword}
-            placeholder="Confirm new password"
-            secureTextEntry
-          />
+      <Sheet.Frame
+        padding="$6"
+        borderTopLeftRadius="$4"
+        borderTopRightRadius="$4"
+        backgroundColor="white"
+      >
+        <YStack gap="$4">
+          <Text fontWeight="bold" fontSize="$4" textAlign="center">
+            Update Password
+          </Text>
+
+          <YStack gap="$2">
+            <YStack>
+              <Label htmlFor="current-password">Current Password</Label>
+              <Input
+                id="current-password"
+                value={currentPassword}
+                onChangeText={setCurrentPassword}
+                placeholder="Enter current password"
+                secureTextEntry
+              />
+            </YStack>
+
+            <YStack>
+              <Label htmlFor="new-password">New Password</Label>
+              <Input
+                id="new-password"
+                value={newPassword}
+                onChangeText={setNewPassword}
+                placeholder="Enter new password"
+                secureTextEntry
+              />
+            </YStack>
+
+            <YStack>
+              <Label htmlFor="confirm-new-password">Confirm New Password</Label>
+              <Input
+                id="confirm-new-password"
+                value={confirmNewPassword}
+                onChangeText={setConfirmNewPassword}
+                placeholder="Confirm new password"
+                secureTextEntry
+              />
+            </YStack>
+          </YStack>
+
+          <XStack gap="$4" justifyContent="flex-end" marginTop="$4">
+            <Button
+              size="$4"
+              theme="neutral"
+              borderRadius="$4"
+              onPress={() => {
+                setCurrentPassword("");
+                setNewPassword("");
+                setConfirmNewPassword("");
+                onClose();
+              }}
+            >
+              Cancel
+            </Button>
+            <Button
+              size="$4"
+              theme="active"
+              borderRadius="$4"
+              onPress={handleSave}
+            >
+              Save
+            </Button>
+          </XStack>
         </YStack>
-
-        <View style={{ marginTop: 20 }} />
-
-        <XStack gap="$2" justifyContent="flex-end">
-          <Button onPress={onClose}>Cancel</Button>
-          <Button theme="active" onPress={handleSave}>
-            Save
-          </Button>
-        </XStack>
       </Sheet.Frame>
     </Sheet>
   );
