@@ -1,5 +1,6 @@
 import React from "react";
-import { View, Text, StyleSheet, Animated } from "react-native";
+import { View, Text, StyleSheet, Animated, ImageBackground } from "react-native";
+import { Card } from "tamagui";
 
 const StackCards = () => {
   // 创建一些动画值
@@ -18,7 +19,13 @@ const StackCards = () => {
             { transform: [{ translateY: translateY3 }, { rotate: "-3deg" }] },
           ]}
         >
-          <Text style={styles.cardContent}>卡片 3 的内容</Text>
+          <ImageBackground
+            source={require("./../assets/cardbg03.png")}
+            style={styles.imageBackground}
+            imageStyle={styles.imageStyle}
+          >
+            <Text style={styles.cardContent}>卡片 3 的内容</Text>
+          </ImageBackground>
         </Animated.View>
         {/* 卡片 2 */}
         <Animated.View
@@ -27,7 +34,13 @@ const StackCards = () => {
             { transform: [{ translateY: translateY2 }, { rotate: "5deg" }] },
           ]}
         >
-          <Text style={styles.cardContent}>卡片 2 的内容</Text>
+          <ImageBackground
+            source={require("./../assets/cardbg02.png")}
+            style={styles.imageBackground}
+            imageStyle={styles.imageStyle}
+          >
+            <Text style={styles.cardContent}>卡片 2 的内容</Text>
+          </ImageBackground>
         </Animated.View>
         {/* 卡片 1 */}
         <Animated.View
@@ -36,7 +49,14 @@ const StackCards = () => {
             { transform: [{ translateY: translateY1 }, { rotate: "0deg" }] },
           ]}
         >
-          <Text style={styles.cardContent}>卡片 1 的内容</Text>
+          <ImageBackground
+            source={require("./../assets/cardbg01.png")}
+            style={styles.imageBackground}
+            imageStyle={styles.imageStyle}
+          >
+            <Text style={styles.cardContent}>卡片 1 的内容</Text>
+            <Card style={styles.contentCard}>内容卡</Card>
+          </ImageBackground>
         </Animated.View>
       </View>
     </View>
@@ -53,10 +73,14 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 20,
     fontWeight: "bold",
-    marginBottom: 20,
+    marginBottom: 10,
+    zIndex: 1, 
+    backgroundColor: "lightblue",
+    padding: 10,
+    borderRadius: 5,
   },
   cardContainer: {
-    width: "80%",
+    width: "100%", // 设置 cardContainer 的宽度为 100%
     height: 300,
     justifyContent: "center",
     alignItems: "center",
@@ -64,9 +88,8 @@ const styles = StyleSheet.create({
   },
   card: {
     position: "absolute", // 让每张卡片叠在一起
-    width: "100%",
+    width: "90%", // 设置卡片宽度为 90%
     height: "90%",
-    backgroundColor: "#fff",
     borderRadius: 10,
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 2 },
@@ -76,9 +99,29 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
+  imageBackground: {
+    flex: 1,
+    width: "100%", // 确保背景图像宽度为 100%
+    justifyContent: "center",
+    alignItems: "center",
+    borderRadius: 10,
+    overflow: "hidden",
+  },
+  imageStyle: {
+    borderRadius: 10,
+  },
   cardContent: {
     fontSize: 16,
     color: "#333",
+  },
+  contentCard: {
+    flex: 1,
+    height: 100,
+    width: 200,
+    position: "absolute",
+    bottom: 10,
+    padding: 10,
+    backgroundColor: "yellow",
   },
 });
 
