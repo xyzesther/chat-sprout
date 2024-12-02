@@ -75,12 +75,11 @@ export default function LoginScreen({ navigation }) {
       <Text style={styles.subtitle}>
         Master small talk and networking – your guide to confident conversations!
       </Text>
-      <View style={styles.tabContainer}>
-        <Text style={styles.loginText}>Login</Text>
-        <Text style={styles.signupText} onPress={signupHandler}>
-          Register
-        </Text>
-      </View>
+
+      {/* <View style={styles.tabContainer}> */}
+      <Text style={styles.loginText}>Sign In</Text>
+        
+      {/* </View> */}
 
       <View style={styles.inputContainer}>
         <Mail style={styles.icon} size={image.iconImg} color={colors.theme} />
@@ -122,6 +121,9 @@ export default function LoginScreen({ navigation }) {
       >
         Login
       </Button>
+      <Text style={styles.signupText} onPress={signupHandler}>
+        New User? Create An Account
+      </Text>
 
       {/* Reset Password Sheet */}
       <Sheet
@@ -197,7 +199,7 @@ const styles = StyleSheet.create({
     width: 460,
     height: 460,
     left: -450,
-    top: 150,
+    top: 250,
     backgroundColor: colors.lightTheme,
     borderRadius: 230,
   },
@@ -208,7 +210,7 @@ const styles = StyleSheet.create({
     width: 460,
     height: 460,
     left: -250,
-    top: 450,
+    top: 550,
     backgroundColor: colors.midTheme,
     borderRadius: 230,
   },
@@ -220,8 +222,8 @@ const styles = StyleSheet.create({
     lineHeight: 41,
     color: colors.theme,
     textAlign: "center",
-    marginTop: 60,
-    marginBottom: spacing.xl,
+    marginTop: 120,
+    marginBottom: spacing.lg,
   },
 
   subtitle: {
@@ -231,29 +233,15 @@ const styles = StyleSheet.create({
     fontWeight: "400",
     lineHeight: 19,
     textAlign: "center",
-    marginBottom: 60,
+    marginBottom: spacing.xxl,
     paddingHorizontal: 50,
-  },
-
-  tabContainer: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    width: "40%",
-    marginBottom: spacing.md,
   },
 
   loginText: {
     color: colors.theme,
-    fontFamily: "Aclonica",
-    fontSize: fontSize.body,
-    lineHeight: 35,
-    textDecorationLine: "underline",
-  },
-
-  signupText: {
-    color: colors.text.unfocused,
-    fontFamily: "Aclonica",
-    fontSize: fontSize.body,
+    fontFamily: "Roboto",
+    fontWeight: "400",
+    fontSize: fontSize.header,
     lineHeight: 35,
   },
 
@@ -294,5 +282,13 @@ const styles = StyleSheet.create({
     width: "90%",
     alignItems: "center",
     marginTop: spacing.xxl,
+  },
+
+  signupText: {
+    color: colors.theme,
+    fontSize: fontSize.body,
+    fontWeight: "400",
+    lineHeight: 35,
+    marginTop: spacing.lg,
   },
 });

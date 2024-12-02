@@ -77,20 +77,13 @@ export default function SignupScreen({ navigation }) {
       </View>
       <Text style={styles.title}>Chat Sprout</Text>
       <Text style={styles.subtitle}>
-        Master small talk and networking – your guide to confident conversations!
+        Master small talk and networking – 
+        your guide to confident conversations!
       </Text>
 
-      <View style={styles.tabContainer}>
-        <Text 
-          style={styles.loginText} 
-          onPress={loginHandler}
-        >
-          Login
-        </Text>
-        <Text style={styles.signupText}>
-          Register
-        </Text>
-      </View>
+      <Text style={styles.signupText}>
+        Create Account
+      </Text>
 
       <View style={styles.inputContainer}>
         <Mail style={styles.icon} size={image.iconImg} color={colors.theme} />
@@ -142,6 +135,13 @@ export default function SignupScreen({ navigation }) {
       >
         Register
       </Button>
+      <Text 
+        title="Login" 
+        onPress={loginHandler}
+        style={styles.loginText}
+      >
+        Already have an account? Login
+      </Text>
     </View>
   );
 }
@@ -162,7 +162,7 @@ const styles = StyleSheet.create({
     width: 460,
     height: 460,
     left: -450,
-    top: 150,
+    top: 250,
     backgroundColor: colors.lightTheme,
     borderRadius: 230,
   },
@@ -173,7 +173,7 @@ const styles = StyleSheet.create({
     width: 460,
     height: 460,
     left: -250,
-    top: 450,
+    top: 550,
     backgroundColor: colors.midTheme,
     borderRadius: 230,
   },
@@ -185,8 +185,8 @@ const styles = StyleSheet.create({
     lineHeight: 41,
     color: colors.theme,
     textAlign: "center",
-    marginTop: 60,
-    marginBottom: spacing.xl,
+    marginTop: 120,
+    marginBottom: spacing.lg,
   },
 
   subtitle: {
@@ -196,30 +196,16 @@ const styles = StyleSheet.create({
     fontWeight: "400",
     lineHeight: 19,
     textAlign: "center",
-    marginBottom: 60,
+    marginBottom: spacing.xxl,
     paddingHorizontal: 50,
-  },
-
-  tabContainer: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    width: "40%",
-    marginBottom: spacing.md,
-  },
-
-  loginText: {
-    color: colors.text.unfocused,
-    fontFamily: "Aclonica",
-    fontSize: fontSize.body,
-    lineHeight: 35,
   },
 
   signupText: {
     color: colors.theme,
-    fontFamily: "Aclonica",
-    fontSize: fontSize.body,
+    fontFamily: "Roboto",
+    fontWeight: "400",
+    fontSize: fontSize.header,
     lineHeight: 35,
-    textDecorationLine: "underline",
   },
 
   inputContainer: {
@@ -249,5 +235,13 @@ const styles = StyleSheet.create({
     width: "90%",
     alignItems: "center",
     marginTop: spacing.xxl,
+  },
+
+  loginText: {
+    color: colors.theme,
+    fontSize: fontSize.body,
+    lineHeight: 35,
+    fontWeight: "400",
+    marginTop: spacing.lg,
   },
 });
