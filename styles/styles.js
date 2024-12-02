@@ -2,10 +2,12 @@ import tinycolor from "tinycolor2";
 
 const theme = "#63AE8D";
 const lightTheme = tinycolor(theme).lighten(35).toString();
+const midTheme = tinycolor(theme).lighten(25).toString();
 
 export const colors = {
   theme,
   lightTheme,
+  midTheme,
   disabled: "#D1D1D1",
   background: {
     white: "#fff",
@@ -42,6 +44,7 @@ export const spacing = {
   md: 10,
   lg: 20,
   xl: 30,
+  xxl: 40,
 };
 
 export const borderRadius = {

@@ -14,6 +14,7 @@ import LoginScreen from "./Screens/LoginScreen";
 import SignupScreen from "./Screens/SignupScreen";
 import { useEffect, useState } from "react";
 import * as Notifications from 'expo-notifications';
+import { useFonts } from "expo-font";
 
 const config = createTamagui(defaultConfig);
 
@@ -29,11 +30,13 @@ const Stack = createNativeStackNavigator();
 
 export default function App() {
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
+  const [fontsLoaded] = useFonts({
+    Aclonica: require("./assets/fonts/Aclonica.ttf"),
+  });
 
   useEffect(() => {
     // Set up auth listener
     const unsubscribe = onAuthStateChanged(auth, (user) => {
-      console.log("listener ", user);
       // If user is not logged in we receive null
       // Else we receive user data
       if (user) {
