@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import { Sheet, Input, Label, XStack, Button, YStack, View } from "tamagui";
+import { Sheet, Input, XStack, Button, YStack, Text, Label } from "tamagui";
 import { getFirestore, doc, updateDoc } from "firebase/firestore";
 import { auth } from "../Firebase/firebaseSetup";
+import { fontSize, spacing, colors, borderRadius } from "../styles/styles";
 
 const ProfileEditName = ({ isOpen, onClose, onSave }) => {
   const [newName, setNewName] = useState("");
@@ -33,29 +34,52 @@ const ProfileEditName = ({ isOpen, onClose, onSave }) => {
       modal
       open={isOpen}
       onOpenChange={onClose}
-      snapPoints={[85, 50, 25]}
+      snapPoints={[40]}
       dismissOnSnapToBottom
     >
       <Sheet.Overlay />
       <Sheet.Handle />
-      <Sheet.Frame padding="$2" justifyContent="center" alignItems="center">
-        <YStack gap="$2">
-          <Label>New Name</Label>
-          <Input
-            value={newName}
-            onChangeText={setNewName}
-            placeholder="Enter new name"
-          />
+      <Sheet.Frame
+        paddingHorizontal="$4"
+        paddingVertical="$6"
+        backgroundColor={colors.background.white}
+        borderTopLeftRadius={borderRadius.lg}
+        borderTopRightRadius={borderRadius.lg}
+      >
+        <YStack gap="$4">
+          <Text fontWeight="bold" fontSize="$4" textAlign="center">
+            Edit Your Name
+          </Text>
+
+          <YStack gap="$2">
+            <Label htmlFor="confirm-new-password">New Name</Label>
+            <Input
+              id="new-name"
+              value={newName}
+              onChangeText={setNewName}
+              placeholder="Enter your new name"
+            />
+          </YStack>
+
+          <XStack gap="$4" justifyContent="flex-end" marginTop="$4">
+            <Button
+              size="$4"
+              theme="neutral"
+              borderRadius="$4"
+              onPress={onClose}
+            >
+              Cancel
+            </Button>
+            <Button
+              size="$4"
+              theme="active"
+              borderRadius="$4"
+              onPress={handleSave}
+            >
+              Save
+            </Button>
+          </XStack>
         </YStack>
-
-        <View style={{ marginTop: 20 }} />
-
-        <XStack gap="$2" justifyContent="flex-end" marginTop="$4">
-          <Button onPress={onClose}>Cancel</Button>
-          <Button theme="active" onPress={handleSave}>
-            Save
-          </Button>
-        </XStack>
       </Sheet.Frame>
     </Sheet>
   );

@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { StyleSheet, Text, View, ActivityIndicator, Image, Alert } from "react-native";
-import { Card, YStack, XStack } from "tamagui";
+import { Card, YStack, XStack, Button } from "tamagui";
 import { auth } from "../Firebase/firebaseSetup";
 import { signOut } from "firebase/auth";
 import { getFirestore, doc, getDoc } from "firebase/firestore";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
+import { Edit3, Key } from "@tamagui/lucide-icons";
 import { colors, fontSize, spacing } from "../styles/styles";
 import ProfileEditPassword from "./ProfileEditPassword";
 import ProfileEditName from "./ProfileEditName";
@@ -90,29 +91,47 @@ export default function Profile({ setIsUserLoggedIn }) {
           />
           <View style={styles.profileDetails}>
             <YStack gap="$2">
-              <XStack alignItems="center" gap="$2">
+              {/* <XStack alignItems="center" gap="$2"> */}
                 <Text style={styles.userName}>{userData?.displayName || "Username"}</Text>
-                <Text
+                {/* <Text
                   style={styles.editProfileText}
                   onPress={() => setNameSheetOpen(true)}
                 >
                   Change Name
-                </Text>
-              </XStack>
-              <XStack alignItems="center" gap="$2">
+                </Text> */}
+              {/* </XStack>
+              <XStack alignItems="center" gap="$2"> */}
                 <Text style={styles.userEmail}>{auth.currentUser?.email}</Text>
-                <Text
+                {/* <Text
                   style={styles.editProfileText}
                   onPress={() => setPasswordSheetOpen(true)}
                 >
                   Edit Password
                 </Text>
-              </XStack>
+              </XStack> */}
               <Text>Points: {userData?.points || 0}</Text>
               <Text>Account Created: {userData?.createdAt?.toDate().toLocaleDateString() || "N/A"}</Text>
             </YStack>
           </View>
         </View>
+
+        {/* Action Buttons */}
+        <XStack gap="$2" justifyContent="center" marginTop="$4">
+        <Button
+            icon={Edit3}
+            theme="primary"
+            onPress={() => setNameSheetOpen(true)}
+          >
+            Change Name
+          </Button>
+          <Button
+            icon={Key}
+            theme="secondary"
+            onPress={() => setPasswordSheetOpen(true)}
+          >
+            Edit Password
+          </Button>
+        </XStack>
       </Card>
 
       {/* Edit Modals */}
