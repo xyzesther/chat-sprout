@@ -184,6 +184,8 @@ export default function LoginScreen({ navigation }) {
 }
 
 const { height } = Dimensions.get("window");
+const { width } = Dimensions.get("window").width;
+const dynamicFontSize = width > 360 ? 36 : 30;
 
 const styles = StyleSheet.create({
   container: {
@@ -201,7 +203,7 @@ const styles = StyleSheet.create({
     width: 460,
     height: 460,
     left: -450,
-    top: 250,
+    top: 200,
     backgroundColor: colors.lightTheme,
     borderRadius: 230,
   },
@@ -212,14 +214,14 @@ const styles = StyleSheet.create({
     width: 460,
     height: 460,
     left: -250,
-    top: 550,
+    top: 500,
     backgroundColor: colors.midTheme,
     borderRadius: 230,
   },
 
   title: {
     fontFamily: "Aclonica",
-    fontSize: 36,
+    fontSize: dynamicFontSize,
     fontWeight: "400",
     lineHeight: 41,
     color: colors.theme,
