@@ -72,7 +72,6 @@ export default function AddNoteScreen({ navigation, route }) {
       const newNote = {
         title: title,
         content: content,
-        images: images,
         timestamp: new Date().toISOString(),
         owner: auth.currentUser.uid,
       };

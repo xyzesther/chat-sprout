@@ -4,6 +4,7 @@ import { YStack, SizableText, Spinner } from "tamagui";
 import { colors } from "../styles/styles";
 import { Ionicons } from "@expo/vector-icons";
 import { Audio } from "expo-av";
+import { useFocusEffect } from "@react-navigation/native";
 
 let currentPlayingSound = null;
 
@@ -21,6 +22,21 @@ function ConversationBubble({ message, isSender, audio }) {
   const [sound, setSound] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [allLoaded, setAllLoaded] = useState(allAudioLoaded);
+
+  useFocusEffect(
+    React.useCallback(() => {
+      console.log("Page focused");
+      return () => {
+        console.log("Page unfocused");
+        if (currentPlayingSound) {
+          currentPlayingSound.stopAsync().then(() => {
+            console.log("Stopped sound due to page exit");
+            currentPlayingSound = null;
+          });
+        }
+      };
+    }, [])
+  );
 
   useEffect(() => {
     totalAudioCount++;
