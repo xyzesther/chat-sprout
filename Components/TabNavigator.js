@@ -65,7 +65,7 @@ export default function TabNavigator({ setIsUserLoggedIn }) {
         headerTintColor: colors.text.primary,
       })}
     >
-      <Tab.Screen name="Learn" component={LearnScreen} />
+      <Tab.Screen name="Learn" component={LearnScreen} options={{headerShown: false}}/>
       <Tab.Screen name="Notebook" component={NotebookScreen} />
       <Tab.Screen name="Explore" component={ExploreScreen} />
       <Tab.Screen name="Thoughts" component={ThoughtsScreen} />
