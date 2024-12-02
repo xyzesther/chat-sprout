@@ -1,13 +1,39 @@
 import { StyleSheet, View, FlatList, Alert } from "react-native";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import ConversationCard from "../Components/ConversationCard";
 import { writeToDB } from "../Firebase/firebaseHelper";
-import Toast from 'react-native-toast-message';
+import Toast from "react-native-toast-message";
 import { spacing } from "../styles/styles";
+import { getFirestore, collection, getDocs } from "firebase/firestore";
+import { auth } from "../Firebase/firebaseSetup";
 
 export default function ConversationScreen({ route }) {
   const { topic } = route.params;
-  // const toast = useToastController();
+  const [conversations, setConversations] = useState([]);
+  const firestore = getFirestore();
+
+  useEffect(() => {
+    console.log("Topic:", topic);
+
+    async function fetchConversations() {
+      try {
+        const conversationsCollectionRef = collection(
+          firestore,
+          `themes/${topic.theme}/topics/${topic.topic}/conversations`
+        );
+        const querySnapshot = await getDocs(conversationsCollectionRef);
+        const fetchedConversations = querySnapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+        setConversations(fetchedConversations);
+      } catch (error) {
+        console.error("Error fetching conversations:", error);
+      }
+    }
+
+    fetchConversations();
+  }, [firestore, topic]);
 
   async function handleAddToNotebook(conversation) {
     Alert.alert(
@@ -22,17 +48,18 @@ export default function ConversationScreen({ route }) {
               title: `${conversation.content1}`,
               content: `${conversation.content2}`,
               timestamp: new Date().toISOString(),
+              owner: auth.currentUser.uid,
             };
 
             try {
               await writeToDB("notes", newNote);
-              
+
               // Show success toast
               Toast.show({
-                type: 'success',
-                text1: 'Save Successful',
-                text2: 'You can view and edit it in the notebook.',
-                position: 'top',
+                type: "success",
+                text1: "Save Successful",
+                text2: "You can view and edit it in the notebook.",
+                position: "top",
                 topOffset: 120,
               });
             } catch (error) {
@@ -48,7 +75,7 @@ export default function ConversationScreen({ route }) {
   function renderItem({ item }) {
     return (
       <ConversationCard
-        key={item.conversation_id}
+        key={item.id}
         conversation={item}
         onAddToNotebook={handleAddToNotebook}
       />
@@ -58,15 +85,14 @@ export default function ConversationScreen({ route }) {
   return (
     <View style={styles.container}>
       <FlatList
-        data={topic.conversations}
+        data={conversations}
         renderItem={renderItem}
-        keyExtractor={(item) => item.conversation_id.toString()}
+        keyExtractor={(item) => item.id.toString()}
         contentContainerStyle={styles.listContent}
       />
     </View>
-    
   );
-};
+}
 
 const styles = StyleSheet.create({
   container: {
