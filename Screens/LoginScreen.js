@@ -115,7 +115,6 @@ export default function LoginScreen({ navigation }) {
         onPress={loginHandler}
         style={styles.loginButton}
         textProps={{
-          fontFamily: "Aclonica",
           fontSize: fontSize.body,
           fontWeight: "bold",
           color: colors.text.primary,
@@ -189,7 +188,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "flex-start",
     paddingHorizontal: spacing.md,
-    overflow: "visible",
+    overflow: "hidden",
   },
 
   // Ellipse 1
@@ -197,7 +196,7 @@ const styles = StyleSheet.create({
     position: "absolute",
     width: 460,
     height: 460,
-    left: -430,
+    left: -450,
     top: 150,
     backgroundColor: colors.lightTheme,
     borderRadius: 230,
@@ -252,7 +251,7 @@ const styles = StyleSheet.create({
   },
 
   signupText: {
-    color: colors.text.black,
+    color: colors.text.unfocused,
     fontFamily: "Aclonica",
     fontSize: fontSize.body,
     lineHeight: 35,

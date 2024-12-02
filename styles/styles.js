@@ -18,6 +18,7 @@ export const colors = {
     primary: "white",
     secondary: "#63AE8D",
     black: "black",
+    unfocused: "#A6A6A6",
   },
   icon: {
     primary: "#63AE8D",
