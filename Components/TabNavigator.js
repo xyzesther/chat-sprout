@@ -5,11 +5,13 @@ import LearnScreen from "../Screens/LearnScreen";
 import ExploreScreen from "../Screens/ExploreScreen";
 import NotebookScreen from "../Screens/NotebookScreen";
 import AccountScreen from "../Screens/AccountScreen";
+import ThoughtsScreen from "../Screens/ThoughtsScreen";
 import Entypo from "@expo/vector-icons/Entypo";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import { colors, image, fontSize, spacing } from "../styles/styles";
+import Ionicons from "@expo/vector-icons/Ionicons";
 
 const Tab = createBottomTabNavigator();
 
@@ -44,6 +46,14 @@ export default function TabNavigator({ setIsUserLoggedIn }) {
                 color={color}
               />
             );
+          } else if (route.name === "Thoughts") {
+            return (
+              <Ionicons
+                name="sparkles-outline"
+                size={image.iconImg}
+                color={color}
+              />
+            );
           }
         },
 
@@ -58,6 +68,7 @@ export default function TabNavigator({ setIsUserLoggedIn }) {
       <Tab.Screen name="Learn" component={LearnScreen} />
       <Tab.Screen name="Notebook" component={NotebookScreen} />
       <Tab.Screen name="Explore" component={ExploreScreen} />
+      <Tab.Screen name="Thoughts" component={ThoughtsScreen} />
       <Tab.Screen
         name="Account"
         children={() => <AccountScreen setIsUserLoggedIn={setIsUserLoggedIn} />}
