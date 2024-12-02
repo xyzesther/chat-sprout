@@ -1,6 +1,6 @@
 import { sendPasswordResetEmail, signInWithEmailAndPassword } from "firebase/auth";
 import { useState } from "react";
-import { View, Text, TextInput, StyleSheet, Alert } from "react-native";
+import { View, Text, TextInput, StyleSheet, Alert, Dimensions } from "react-native";
 import { auth } from "../Firebase/firebaseSetup";
 import { borderRadius, borderWidth, colors, fontSize, image, spacing } from "../styles/styles";
 import { Button, Input, Label, Sheet, XStack, YStack } from "tamagui";
@@ -183,6 +183,8 @@ export default function LoginScreen({ navigation }) {
   );
 }
 
+const { height } = Dimensions.get("window");
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -222,7 +224,7 @@ const styles = StyleSheet.create({
     lineHeight: 41,
     color: colors.theme,
     textAlign: "center",
-    marginTop: 120,
+    marginTop: height * 0.12,
     marginBottom: spacing.lg,
   },
 
