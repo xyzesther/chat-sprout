@@ -1,6 +1,6 @@
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { useState } from "react";
-import { View, Text, TextInput, StyleSheet, Alert } from "react-native";
+import { View, Text, TextInput, StyleSheet, Alert, Dimensions } from "react-native";
 import { auth } from "../Firebase/firebaseSetup";
 import { getFirestore, doc, setDoc, serverTimestamp } from "firebase/firestore";
 import { borderRadius, borderWidth, colors, fontSize, image, spacing } from "../styles/styles";
@@ -146,6 +146,10 @@ export default function SignupScreen({ navigation }) {
   );
 }
 
+const { height } = Dimensions.get("window");
+const { width } = Dimensions.get("window").width;
+const dynamicFontSize = width > 360 ? 36 : 30;
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -162,7 +166,7 @@ const styles = StyleSheet.create({
     width: 460,
     height: 460,
     left: -450,
-    top: 250,
+    top: 200,
     backgroundColor: colors.lightTheme,
     borderRadius: 230,
   },
@@ -173,19 +177,19 @@ const styles = StyleSheet.create({
     width: 460,
     height: 460,
     left: -250,
-    top: 550,
+    top: 500,
     backgroundColor: colors.midTheme,
     borderRadius: 230,
   },
 
   title: {
     fontFamily: "Aclonica",
-    fontSize: 36,
+    fontSize: dynamicFontSize,
     fontWeight: "400",
     lineHeight: 41,
     color: colors.theme,
     textAlign: "center",
-    marginTop: 120,
+    marginTop: height * 0.12,
     marginBottom: spacing.lg,
   },
 
