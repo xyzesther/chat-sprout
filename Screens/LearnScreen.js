@@ -1,95 +1,87 @@
-import conversationData from "../data/conversations.json";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { View, Text, ImageBackground, Pressable, ScrollView, StyleSheet } from "react-native";
 import { colors, fontSize } from "../styles/styles";
-import {
-  View,
-  Text,
-  ImageBackground,
-  Pressable,
-  ScrollView,
-  StyleSheet,
-} from "react-native";
+import { getFirestore, doc, getDoc, collection, getDocs } from "firebase/firestore";
 
 export default function LearnScreen({ navigation }) {
-  const topics = [
-    conversationData[0].topics[0],
-    conversationData[0].topics[1],
-    conversationData[0].topics[2],
-    conversationData[1].topics[0],
-    conversationData[1].topics[1],
-    conversationData[1].topics[2],
-    conversationData[2].topics[0],
-    conversationData[2].topics[1],
-    conversationData[2].topics[2],
+  const firestore = getFirestore();
+
+  const conversations = [
+    { theme: 0, topic: 0 },
+    { theme: 0, topic: 1 },
+    { theme: 0, topic: 2 },
+    { theme: 1, topic: 0 },
+    { theme: 1, topic: 1 },
+    { theme: 1, topic: 2 },
+    { theme: 2, topic: 0 },
+    { theme: 2, topic: 1 },
+    { theme: 2, topic: 2 },
   ];
+
+  const [topicNames, setTopicNames] = useState(Array(9).fill(""));
+  const [themeNames, setThemeNames] = useState(Array(3).fill(""));
+
+  useEffect(() => {
+    async function fetchThemeAndTopicNames() {
+      try {
+        const themePromises = [0, 1, 2].map(async (themeIndex) => {
+          const docRef = doc(firestore, "themes", `${themeIndex}`);
+          const docSnap = await getDoc(docRef);
+
+          if (docSnap.exists()) {
+            const data = docSnap.data();
+            console.log(`Fetched theme ${themeIndex} data:`, data);
+
+            setThemeNames((prev) => {
+              const newThemeNames = [...prev];
+              newThemeNames[themeIndex] = data.themeName;
+              return newThemeNames;
+            });
+
+            const topicsCollectionRef = collection(docRef, "topics");
+            const topicsSnapshot = await getDocs(topicsCollectionRef);
+
+            if (!topicsSnapshot.empty) {
+              topicsSnapshot.docs.forEach((topicDoc, topicIndex) => {
+                const topicData = topicDoc.data();
+                console.log(`Fetched topic ${themeIndex}-${topicIndex} data:`, topicData);
+
+                setTopicNames((prev) => {
+                  const newTopicNames = [...prev];
+                  newTopicNames[themeIndex * 3 + topicIndex] = topicData.topicName;
+                  return newTopicNames;
+                });
+              });
+            } else {
+              console.log(`No topics found for theme ${themeIndex}`);
+            }
+          } else {
+            console.log(`No such document for theme ${themeIndex}`);
+          }
+        });
+
+        await Promise.all(themePromises);
+      } catch (error) {
+        console.error("Error fetching theme and topic names:", error);
+      }
+    }
+
+    fetchThemeAndTopicNames();
+  }, [firestore]);
 
   const imageWidth = 420;
   const imageHeight = 1100;
 
   const spots = [
-    {
-      id: 0,
-      name: topics[0].topic_name,
-      xPercentStart: 33,
-      yPercentStart: 20,
-      text_position: true,
-    },
-    {
-      id: 1,
-      name: topics[1].topic_name,
-      xPercentStart: 28,
-      yPercentStart: 28,
-      text_position: true,
-    },
-    {
-      id: 2,
-      name: topics[2].topic_name,
-      xPercentStart: 35,
-      yPercentStart: 35,
-      text_position: true,
-    },
-    {
-      id: 3,
-      name: topics[3].topic_name,
-      xPercentStart: 50,
-      yPercentStart: 49,
-      text_position: false,
-    },
-    {
-      id: 4,
-      name: topics[4].topic_name,
-      xPercentStart: 60,
-      yPercentStart: 55,
-      text_position: false,
-    },
-    {
-      id: 5,
-      name: topics[5].topic_name,
-      xPercentStart: 65,
-      yPercentStart: 62,
-      text_position: false,
-    },
-    {
-      id: 6,
-      name: topics[6].topic_name,
-      xPercentStart: 25,
-      yPercentStart: 74,
-      text_position: true,
-    },
-    {
-      id: 7,
-      name: topics[7].topic_name,
-      xPercentStart: 10,
-      yPercentStart: 80,
-      text_position: true,
-    },
-    {
-      id: 8,
-      name: topics[8].topic_name,
-      xPercentStart: 7,
-      yPercentStart: 88,
-      text_position: true,
-    },
+    { id: 0, xPercentStart: 33, yPercentStart: 20, text_position: true },
+    { id: 1, xPercentStart: 28, yPercentStart: 28, text_position: true },
+    { id: 2, xPercentStart: 35, yPercentStart: 35, text_position: true },
+    { id: 3, xPercentStart: 50, yPercentStart: 49, text_position: false },
+    { id: 4, xPercentStart: 60, yPercentStart: 55, text_position: false },
+    { id: 5, xPercentStart: 65, yPercentStart: 62, text_position: false },
+    { id: 6, xPercentStart: 25, yPercentStart: 74, text_position: true },
+    { id: 7, xPercentStart: 10, yPercentStart: 80, text_position: true },
+    { id: 8, xPercentStart: 7, yPercentStart: 88, text_position: true },
   ];
 
   return (
@@ -100,19 +92,19 @@ export default function LearnScreen({ navigation }) {
           style={[styles.image, { width: imageWidth, height: imageHeight }]}
         >
           <Text style={[styles.theme, { top: "12%", left: "30%" }]}>
-            💬 {conversationData[0].theme_name}
+            💬 {themeNames[0]}
           </Text>
           <Text style={[styles.theme, { top: "43%", left: "15%" }]}>
-            💬 {conversationData[1].theme_name}
+            💬 {themeNames[1]}
           </Text>
           <Text style={[styles.theme, { top: "68%", left: "18%" }]}>
-            💬 {conversationData[2].theme_name}
+            💬 {themeNames[2]}
           </Text>
 
           {spots.map((spot) => (
             <Pressable
               key={spot.id}
-              style={() => [
+              style={[
                 styles.spot,
                 {
                   left: `${spot.xPercentStart}%`,
@@ -124,8 +116,8 @@ export default function LearnScreen({ navigation }) {
               onPress={() => {
                 console.log("Pressed spot:", spot);
                 navigation.navigate("ConversationScreen", {
-                  title: topics[spot.id].topic_name,
-                  topic: topics[spot.id],
+                  title: topicNames[spot.id],
+                  topic: conversations[spot.id],
                 });
               }}
               android_ripple={{ color: "rgba(0, 0, 255, 0.3)", radius: 50 }}
@@ -138,7 +130,7 @@ export default function LearnScreen({ navigation }) {
                     : styles.topicNameLeft,
                 ]}
               >
-                {spot.name}
+                {topicNames[spot.id]}
               </Text>
             </Pressable>
           ))}
