@@ -1,11 +1,34 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { View, Text, StyleSheet, Animated, ImageBackground, TouchableOpacity } from "react-native";
 import { Card } from "tamagui";
 import { Ionicons } from "@expo/vector-icons";
 import { colors } from "../styles/styles";
 
 const ThoughtsCard = ({ article }) => {
+  const cardbgs = [
+    require("../assets/cardbg01.png"),
+    require("../assets/cardbg02.png"),
+    require("../assets/cardbg03.png"),
+    require("../assets/cardbg04.png"),
+    require("../assets/cardbg05.png"),
+    require("../assets/cardbg06.png"),
+    require("../assets/cardbg07.png"),
+    require("../assets/cardbg08.png"),
+  ];
+
   const [currentPage, setCurrentPage] = useState(0);
+  const [backgroundIndexes, setBackgroundIndexes] = useState([]);
+
+  useEffect(() => {
+    const indexes = [];
+    while (indexes.length < 3) {
+      const randomIndex = Math.floor(Math.random() * cardbgs.length);
+      if (!indexes.includes(randomIndex)) {
+        indexes.push(randomIndex);
+      }
+    }
+    setBackgroundIndexes(indexes);
+  }, []);
 
   const handleNextPage = () => {
     if (currentPage < article.pages.length - 1) {
@@ -19,14 +42,12 @@ const ThoughtsCard = ({ article }) => {
     }
   };
 
-  // 创建一些动画值
-  const translateY1 = new Animated.Value(0);
-  const translateY2 = new Animated.Value(-5);
-  const translateY3 = new Animated.Value(-10);
+  const translateY1 = useRef(new Animated.Value(0)).current;
+  const translateY2 = useRef(new Animated.Value(-5)).current;
+  const translateY3 = useRef(new Animated.Value(-10)).current;
 
   return (
     <View style={styles.cardContainer}>
-      {/* 卡片 3 */}
       <Animated.View
         style={[
           styles.card,
@@ -34,14 +55,12 @@ const ThoughtsCard = ({ article }) => {
         ]}
       >
         <ImageBackground
-          source={article.image3}
+          source={cardbgs[backgroundIndexes[2]]} 
           style={styles.imageBackground}
           imageStyle={styles.imageStyle}
         >
-          <Text style={styles.cardContent}>卡片 3 的内容</Text>
         </ImageBackground>
       </Animated.View>
-      {/* 卡片 2 */}
       <Animated.View
         style={[
           styles.card,
@@ -49,14 +68,12 @@ const ThoughtsCard = ({ article }) => {
         ]}
       >
         <ImageBackground
-          source={article.image2}
+          source={cardbgs[backgroundIndexes[1]]} 
           style={styles.imageBackground}
           imageStyle={styles.imageStyle}
         >
-          <Text style={styles.cardContent}>卡片 2 的内容</Text>
         </ImageBackground>
       </Animated.View>
-      {/* 卡片 1 */}
       <Animated.View
         style={[
           styles.card,
@@ -64,7 +81,7 @@ const ThoughtsCard = ({ article }) => {
         ]}
       >
         <ImageBackground
-          source={article.image1}
+          source={cardbgs[backgroundIndexes[0]]} 
           style={styles.imageBackground}
           imageStyle={styles.imageStyle}
         >
@@ -95,29 +112,29 @@ const ThoughtsCard = ({ article }) => {
 
 const styles = StyleSheet.create({
   cardContainer: {
-    width: "100%", // 设置 cardContainer 的宽度为 100%
+    width: "100%",
     height: 300,
     justifyContent: "center",
     alignItems: "center",
-    position: "relative", // 让卡片叠在一起
-    marginBottom: 20, // 每个卡片之间的间距
+    position: "relative",
+    marginBottom: 20,
   },
   card: {
-    position: "absolute", // 让每张卡片叠在一起
-    width: "90%", // 设置卡片宽度为 90%
+    position: "absolute",
+    width: "90%",
     height: "90%",
     borderRadius: 10,
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,
     shadowRadius: 5,
-    elevation: 5, // Android 上的阴影
+    elevation: 5,
     justifyContent: "center",
     alignItems: "center",
   },
   imageBackground: {
     flex: 1,
-    width: "100%", // 确保背景图像宽度为 100%
+    width: "100%",
     justifyContent: "center",
     alignItems: "center",
     borderRadius: 10,
@@ -135,7 +152,7 @@ const styles = StyleSheet.create({
     position: "absolute",
     padding: 5,
     backgroundColor: "rgba(255, 255, 255, 0.9)",
-    flexDirection: "column", // 将 contentCard 分成三行
+    flexDirection: "column",
   },
   contentCardRow: {
     flex: 1,
@@ -144,7 +161,7 @@ const styles = StyleSheet.create({
   },
   contentRow: {
     flex: 4,
-    flexDirection: "row", // 将第二行分成三列
+    flexDirection: "row",
   },
   textContainer: {
     flex: 8,
@@ -161,7 +178,7 @@ const styles = StyleSheet.create({
   cardContent: {
     fontSize: 18,
     color: "#333",
-    textAlign: "left", // 将文本靠左排列
+    textAlign: "left",
     color: colors.theme,
   },
   pageIndicator: {
