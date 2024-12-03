@@ -1,64 +1,72 @@
 import React from "react";
-import { View, Text, StyleSheet, Animated, ImageBackground } from "react-native";
-import { Card } from "tamagui";
+import { View, StyleSheet, FlatList } from "react-native";
+import ThoughtsCard from "../Components/ThoughtsCard";
 
-const StackCards = () => {
-  // 创建一些动画值
-  const translateY1 = new Animated.Value(0);
-  const translateY2 = new Animated.Value(-20);
-  const translateY3 = new Animated.Value(-30);
+const ThoughtsScreen = () => {
+  const articles = [
+    {
+      title: "Real Over Perfect",
+      pages: [
+        "You don’t need to be perfect in every conversation—your small mistakes or awkward moments often go unnoticed by others. Even if someone notices, they’re rarely as important as you think. ",
+        "These little flaws are what make you human, and they often make you more approachable and relatable. People value authenticity, not forced perfection. True relationships grow from ",
+        "genuine connections, not from flawless performances. Be yourself and embrace what makes you unique—being real has a much stronger impact than trying to be perfect.",
+      ],
+      image1: require("./../assets/cardbg01.png"),
+      image2: require("./../assets/cardbg02.png"),
+      image3: require("./../assets/cardbg03.png"),
+    },
+    {
+      title: "Permission to Pause",
+      pages: [
+        "Everyone has good days and bad days, and it’s normal to not feel like being social sometimes. Life can be busy and stressful, and there’s no rule that says you always have to talk to others. ",
+        "It’s okay to listen to your feelings and take a break when you’re tired or overwhelmed. Socializing should bring happiness, not stress. Give yourself time to rest and recharge — it’s a simple way",
+        "to take care of yourself. When you’re ready, you’ll feel more positive and ready to connect. Quality over quantity matters in relationships, and your well-being should always come first.",
+      ],
+      image1: require("./../assets/cardbg02.png"),
+      image2: require("./../assets/cardbg03.png"),
+      image3: require("./../assets/cardbg04.png"),
+    },
+    {
+      title: "A Smile Goes a Long Way",
+      pages: [
+        "Short chats can totally make someone’s day! A smile, a quick “hi,” or a kind word can leave a bigger impression than you think. You don’t always need a deep, soul-searching conversation",
+        "to connect — sometimes the little things say it all. Keep it light, keep it warm, and remember: it’s not about how long you talk, but how genuine you are.",
+      ],
+      image1: require("./../assets/cardbg05.png"),
+      image2: require("./../assets/cardbg06.png"),
+      image3: require("./../assets/cardbg07.png"),
+    },
+    {
+      title: "It’s a Unique Journey",
+      pages: [
+        "Socializing is a skill you build over time—every conversation is a step forward. There’s no such thing as a “perfect” chat, and that’s totally okay.",
+        "Each interaction is a chance to learn something new, whether it’s about the other person or even yourself.",
+        "So, don’t stress about the outcome—just enjoy the process. The more you practice, the more natural it’ll feel, and hey, you’re already doing great!",
+      ],
+      image1: require("./../assets/cardbg08.png"),
+      image2: require("./../assets/cardbg07.png"),
+      image3: require("./../assets/cardbg06.png"),
+    },
+    {
+      title: "Curiosity Leads the Way",
+      pages: [
+        "Curiosity about others’ thoughts and experiences opens the door to meaningful connections. Everyone carries a unique story, offering something new to discover and learn.",
+        "Conversations aren’t about perfect responses or getting everything right—they’re about being present,",
+        "enjoying the moment, and exploring the unknown. Each interaction is a small adventure, filled with opportunities to grow and connect. That’s what makes them so rewarding!",
+      ],
+      image1: require("./../assets/cardbg06.png"),
+      image2: require("./../assets/cardbg04.png"),
+      image3: require("./../assets/cardbg01.png"),
+    },
+  ];
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>卡片叠加示例</Text>
-      <View style={styles.cardContainer}>
-        {/* 卡片 3 */}
-        <Animated.View
-          style={[
-            styles.card,
-            { transform: [{ translateY: translateY3 }, { rotate: "-3deg" }] },
-          ]}
-        >
-          <ImageBackground
-            source={require("./../assets/cardbg03.png")}
-            style={styles.imageBackground}
-            imageStyle={styles.imageStyle}
-          >
-            <Text style={styles.cardContent}>卡片 3 的内容</Text>
-          </ImageBackground>
-        </Animated.View>
-        {/* 卡片 2 */}
-        <Animated.View
-          style={[
-            styles.card,
-            { transform: [{ translateY: translateY2 }, { rotate: "5deg" }] },
-          ]}
-        >
-          <ImageBackground
-            source={require("./../assets/cardbg02.png")}
-            style={styles.imageBackground}
-            imageStyle={styles.imageStyle}
-          >
-            <Text style={styles.cardContent}>卡片 2 的内容</Text>
-          </ImageBackground>
-        </Animated.View>
-        {/* 卡片 1 */}
-        <Animated.View
-          style={[
-            styles.card,
-            { transform: [{ translateY: translateY1 }, { rotate: "0deg" }] },
-          ]}
-        >
-          <ImageBackground
-            source={require("./../assets/cardbg01.png")}
-            style={styles.imageBackground}
-            imageStyle={styles.imageStyle}
-          >
-            <Text style={styles.cardContent}>卡片 1 的内容</Text>
-            <Card style={styles.contentCard}>内容卡</Card>
-          </ImageBackground>
-        </Animated.View>
-      </View>
+      <FlatList
+        data={articles}
+        renderItem={({ item }) => <ThoughtsCard article={item} />}
+        keyExtractor={(item, index) => index.toString()}
+      />
     </View>
   );
 };
@@ -70,59 +78,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
-  title: {
-    fontSize: 20,
-    fontWeight: "bold",
-    marginBottom: 10,
-    zIndex: 1, 
-    backgroundColor: "lightblue",
-    padding: 10,
-    borderRadius: 5,
-  },
-  cardContainer: {
-    width: "100%", // 设置 cardContainer 的宽度为 100%
-    height: 300,
-    justifyContent: "center",
-    alignItems: "center",
-    position: "relative", // 让卡片叠在一起
-  },
-  card: {
-    position: "absolute", // 让每张卡片叠在一起
-    width: "90%", // 设置卡片宽度为 90%
-    height: "90%",
-    borderRadius: 10,
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 5,
-    elevation: 5, // Android 上的阴影
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  imageBackground: {
-    flex: 1,
-    width: "100%", // 确保背景图像宽度为 100%
-    justifyContent: "center",
-    alignItems: "center",
-    borderRadius: 10,
-    overflow: "hidden",
-  },
-  imageStyle: {
-    borderRadius: 10,
-  },
-  cardContent: {
-    fontSize: 16,
-    color: "#333",
-  },
-  contentCard: {
-    flex: 1,
-    height: 100,
-    width: 200,
-    position: "absolute",
-    bottom: 10,
-    padding: 10,
-    backgroundColor: "yellow",
-  },
 });
 
-export default StackCards;
+export default ThoughtsScreen;

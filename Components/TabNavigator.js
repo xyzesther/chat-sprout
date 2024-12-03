@@ -49,7 +49,7 @@ export default function TabNavigator({ setIsUserLoggedIn }) {
           } else if (route.name === "Thoughts") {
             return (
               <Ionicons
-                name="sparkles-outline"
+                name="sparkles"
                 size={image.iconImg}
                 color={color}
               />
