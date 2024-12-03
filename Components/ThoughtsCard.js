@@ -1,7 +1,12 @@
-import React, { useState, useRef, useEffect } from "react";
-import { View, Text, StyleSheet, Animated, ImageBackground, TouchableOpacity } from "react-native";
+import React, { useState, useEffect, useRef } from "react";
+import {
+  View,
+  Text,
+  StyleSheet,
+  Animated,
+  ImageBackground,
+} from "react-native";
 import { Card } from "tamagui";
-import { Ionicons } from "@expo/vector-icons";
 import { colors } from "../styles/styles";
 
 const ThoughtsCard = ({ article }) => {
@@ -12,11 +17,8 @@ const ThoughtsCard = ({ article }) => {
     require("../assets/cardbg04.png"),
     require("../assets/cardbg05.png"),
     require("../assets/cardbg06.png"),
-    require("../assets/cardbg07.png"),
-    require("../assets/cardbg08.png"),
   ];
 
-  const [currentPage, setCurrentPage] = useState(0);
   const [backgroundIndexes, setBackgroundIndexes] = useState([]);
 
   useEffect(() => {
@@ -28,19 +30,7 @@ const ThoughtsCard = ({ article }) => {
       }
     }
     setBackgroundIndexes(indexes);
-  }, []);
-
-  const handleNextPage = () => {
-    if (currentPage < article.pages.length - 1) {
-      setCurrentPage(currentPage + 1);
-    }
-  };
-
-  const handlePrevPage = () => {
-    if (currentPage > 0) {
-      setCurrentPage(currentPage - 1);
-    }
-  };
+  }, [article]);
 
   const translateY1 = useRef(new Animated.Value(0)).current;
   const translateY2 = useRef(new Animated.Value(-5)).current;
@@ -55,11 +45,10 @@ const ThoughtsCard = ({ article }) => {
         ]}
       >
         <ImageBackground
-          source={cardbgs[backgroundIndexes[2]]} 
+          source={cardbgs[backgroundIndexes[2]]}
           style={styles.imageBackground}
           imageStyle={styles.imageStyle}
-        >
-        </ImageBackground>
+        ></ImageBackground>
       </Animated.View>
       <Animated.View
         style={[
@@ -68,11 +57,10 @@ const ThoughtsCard = ({ article }) => {
         ]}
       >
         <ImageBackground
-          source={cardbgs[backgroundIndexes[1]]} 
+          source={cardbgs[backgroundIndexes[1]]}
           style={styles.imageBackground}
           imageStyle={styles.imageStyle}
-        >
-        </ImageBackground>
+        ></ImageBackground>
       </Animated.View>
       <Animated.View
         style={[
@@ -81,7 +69,7 @@ const ThoughtsCard = ({ article }) => {
         ]}
       >
         <ImageBackground
-          source={cardbgs[backgroundIndexes[0]]} 
+          source={cardbgs[backgroundIndexes[0]]}
           style={styles.imageBackground}
           imageStyle={styles.imageStyle}
         >
@@ -89,19 +77,8 @@ const ThoughtsCard = ({ article }) => {
             <View style={styles.contentCardRow}>
               <Text style={styles.cardTitle}>{article.title}</Text>
             </View>
-            <View style={[styles.contentCardRow, styles.contentRow]}>
-              <TouchableOpacity style={styles.buttonLeft} onPress={handlePrevPage}>
-                <Ionicons name="chevron-back" size={24} color={colors.theme} />
-              </TouchableOpacity>
-              <View style={styles.textContainer}>
-                <Text style={styles.cardContent}>{article.pages[currentPage]}</Text>
-              </View>
-              <TouchableOpacity style={styles.buttonRight} onPress={handleNextPage}>
-                <Ionicons name="chevron-forward" size={24} color={colors.theme} />
-              </TouchableOpacity>
-            </View>
-            <View style={styles.contentCardRow}>
-              <Text style={styles.pageIndicator}>{`${currentPage + 1}/${article.pages.length}`}</Text>
+            <View style={styles.textContainer}>
+              <Text style={styles.cardContent}>{article.content}</Text>
             </View>
           </Card>
         </ImageBackground>
@@ -113,7 +90,7 @@ const ThoughtsCard = ({ article }) => {
 const styles = StyleSheet.create({
   cardContainer: {
     width: "100%",
-    height: 300,
+    height: 600,
     justifyContent: "center",
     alignItems: "center",
     position: "relative",
@@ -145,12 +122,13 @@ const styles = StyleSheet.create({
   },
   contentCard: {
     flex: 1,
-    height: "95%",
+    height: "65%",
     width: "95%",
     justifyContent: "center",
     alignItems: "center",
     position: "absolute",
-    padding: 5,
+    bottom: 10,
+    padding: 10,
     backgroundColor: "rgba(255, 255, 255, 0.9)",
     flexDirection: "column",
   },
@@ -158,10 +136,8 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-  },
-  contentRow: {
-    flex: 4,
-    flexDirection: "row",
+    width: "100%",
+    paddingHorizontal: 10,
   },
   textContainer: {
     flex: 8,
@@ -172,30 +148,15 @@ const styles = StyleSheet.create({
   cardTitle: {
     fontSize: 20,
     fontWeight: "bold",
-    textAlign: "center",
+    textAlign: "left",
     color: colors.theme,
+    width: "100%",
   },
   cardContent: {
     fontSize: 18,
     color: "#333",
     textAlign: "left",
     color: colors.theme,
-  },
-  pageIndicator: {
-    fontSize: 14,
-    color: "#666",
-    textAlign: "center",
-    color: colors.theme,
-  },
-  buttonLeft: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  buttonRight: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
   },
 });
 
