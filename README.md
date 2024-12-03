@@ -23,6 +23,9 @@ Our app is designed to simplify social situations and help you establish meaning
 ![App Screenshot](./assets/screenshots/explore-location.png)
 6. *Account Screen: display user profile and notification setting*
 ![App Screenshot](./assets/screenshots/profile-setting.png)
+7. *New implemented in Iteration 3: Explore Screen: implemented Google Places API to show the nearby language learning schools when user pick a location*
+8. *New implemented in Iteration 3: Account Screen: improved the layout of account screen and implemented local notification setting*
+9. *New implemented in Iteration 3: Login & Signup Screen: implemented user authentication and build the pages*
 ---
 
 ### Data Model and Collections
@@ -44,6 +47,27 @@ Our app is designed to simplify social situations and help you establish meaning
    - Delete: Not provided on the mobile app.
 
 ---
+### Team Contributions in Iteration 3
+
+**Xinyu Zeng:**
+
+- **External API Integration: Google Places API**:
+   - Integrated Google Places API into the Explore Screen to enhance functionality by allowing users to discover nearby language learning places such as schools or study centers.
+   - Location Permissions: Verified and requested foreground location permissions using Expo's Location library to ensure user privacy and app compliance.
+   - Dynamic Place Fetching: Implemented logic to fetch and display nearby locations dynamically based on the user's current location or map interactions.
+   - Customizable Search: Configured the API to filter results for language-learning-related places by type (school) and keyword (English). 
+- **Notification: Daily Study Reminder**:
+   - Implemented a local notification system that allows users to set daily reminders for their study sessions.
+   - Notification Scheduling: Used Expo's Notifications API to schedule daily reminders at a user-defined time.
+   - Permission Handling: Verified notification permissions and guided users through enabling them if necessary.
+- **UI Beautification: Account, Login, and Signup Screens**
+   - Built and improved the visual design and user experience for the Account Screen, Login Screen, Signup Screen, and related components.
+   - Consistent Theming: Ensured a consistent color palette, typography, and spacing across screens for better UI coherence.
+   - Account Screen: Redesigned the layout to showcase user information cleanly and intuitively.
+   - Login & Signup Screens: design the layout and style of the screens, improved component design.
+ 
+**Mingyi Li:**
+
 ### Team Contributions in Iteration 2
 
 **Xinyu Zeng:**
