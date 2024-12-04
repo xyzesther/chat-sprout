@@ -1,7 +1,20 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, ImageBackground, Pressable, ScrollView, StyleSheet } from "react-native";
+import {
+  View,
+  Text,
+  ImageBackground,
+  Pressable,
+  ScrollView,
+  StyleSheet,
+} from "react-native";
 import { colors, fontSize } from "../styles/styles";
-import { getFirestore, doc, getDoc, collection, getDocs } from "firebase/firestore";
+import {
+  getFirestore,
+  doc,
+  getDoc,
+  collection,
+  getDocs,
+} from "firebase/firestore";
 
 export default function LearnScreen({ navigation }) {
   const firestore = getFirestore();
@@ -44,11 +57,15 @@ export default function LearnScreen({ navigation }) {
             if (!topicsSnapshot.empty) {
               topicsSnapshot.docs.forEach((topicDoc, topicIndex) => {
                 const topicData = topicDoc.data();
-                console.log(`Fetched topic ${themeIndex}-${topicIndex} data:`, topicData);
+                console.log(
+                  `Fetched topic ${themeIndex}-${topicIndex} data:`,
+                  topicData
+                );
 
                 setTopicNames((prev) => {
                   const newTopicNames = [...prev];
-                  newTopicNames[themeIndex * 3 + topicIndex] = topicData.topicName;
+                  newTopicNames[themeIndex * 3 + topicIndex] =
+                    topicData.topicName;
                   return newTopicNames;
                 });
               });
@@ -84,6 +101,8 @@ export default function LearnScreen({ navigation }) {
     { id: 8, xPercentStart: 7, yPercentStart: 88, text_position: true },
   ];
 
+  const themeColors = ["#6863AE", "#e0a71c", "#ae6f63"]; // 定义颜色数组
+
   return (
     <View style={styles.container}>
       <ScrollView contentContainerStyle={styles.scrollContainer}>
@@ -91,14 +110,29 @@ export default function LearnScreen({ navigation }) {
           source={require("./../assets/long.png")}
           style={[styles.image, { width: imageWidth, height: imageHeight }]}
         >
-          <Text style={[styles.theme, { top: "12%", left: "30%" }]}>
-            💬 {themeNames[0]}
+          <Text
+            style={[
+              styles.theme,
+              { top: "12%", left: "30%", color: themeColors[0] },
+            ]}
+          >
+            {themeNames[0]}
           </Text>
-          <Text style={[styles.theme, { top: "43%", left: "15%" }]}>
-            💬 {themeNames[1]}
+          <Text
+            style={[
+              styles.theme,
+              { top: "43%", left: "15%", color: themeColors[1] },
+            ]}
+          >
+            {themeNames[1]}
           </Text>
-          <Text style={[styles.theme, { top: "68%", left: "18%" }]}>
-            💬 {themeNames[2]}
+          <Text
+            style={[
+              styles.theme,
+              { top: "68%", left: "18%", color: themeColors[2] },
+            ]}
+          >
+            {themeNames[2]}
           </Text>
 
           {spots.map((spot) => (
@@ -109,7 +143,7 @@ export default function LearnScreen({ navigation }) {
                 {
                   left: `${spot.xPercentStart}%`,
                   top: `${spot.yPercentStart}%`,
-                  backgroundColor: "#C6C6E6",
+                  backgroundColor: themeColors[conversations[spot.id].theme], // 根据 theme 设置颜色
                   shadowOpacity: 0.2,
                 },
               ]}
@@ -122,16 +156,25 @@ export default function LearnScreen({ navigation }) {
               }}
               android_ripple={{ color: "rgba(0, 0, 255, 0.3)", radius: 50 }}
             >
-              <Text
-                style={[
-                  styles.topicName,
+              <View
+                style={
                   spot.text_position
-                    ? styles.topicNameRight
-                    : styles.topicNameLeft,
-                ]}
+                    ? styles.topicNamePositionRight
+                    : styles.topicNamePositionLeft
+                }
               >
-                {topicNames[spot.id]}
-              </Text>
+                <Text
+                  style={[
+                    styles.topicName,
+                    spot.text_position
+                      ? styles.topicNameRight
+                      : styles.topicNameLeft,
+                    { color: themeColors[conversations[spot.id].theme] }, // 根据 theme 设置文字颜色
+                  ]}
+                >
+                  {topicNames[spot.id]}
+                </Text>
+              </View>
             </Pressable>
           ))}
         </ImageBackground>
@@ -157,28 +200,28 @@ const styles = StyleSheet.create({
     elevation: 6,
   },
   topicName: {
-    position: "absolute",
-    fontSize: fontSize.body,
-    color: "#000",
-    backgroundColor: "rgba(255, 255, 255, 0.8)",
+    fontSize: 18,
     padding: 4,
-    textAlign: "center",
-    width: 200,
+    fontFamily: "LatoBold",
+    flex: 1,
+    width: 250,
   },
   topicNameRight: {
-    left: 45,
+    left: 150,
+    textAlign: "left",
   },
   topicNameLeft: {
-    right: 45,
+    right: 150,
+    textAlign: "right",
   },
   theme: {
     position: "absolute",
     left: "50%",
-    fontSize: fontSize.header,
+    fontSize: 20,
     fontWeight: "bold",
-    color: "gray",
     padding: 10,
     textAlign: "center",
     width: 260,
+    fontFamily: "Futura",
   },
 });
