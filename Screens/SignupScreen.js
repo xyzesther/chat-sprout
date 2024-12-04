@@ -1,9 +1,23 @@
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { useState } from "react";
-import { View, Text, TextInput, StyleSheet, Alert, Dimensions } from "react-native";
+import {
+  View,
+  Text,
+  TextInput,
+  StyleSheet,
+  Alert,
+  Dimensions,
+} from "react-native";
 import { auth } from "../Firebase/firebaseSetup";
 import { getFirestore, doc, setDoc, serverTimestamp } from "firebase/firestore";
-import { borderRadius, borderWidth, colors, fontSize, image, spacing } from "../styles/styles";
+import {
+  borderRadius,
+  borderWidth,
+  colors,
+  fontSize,
+  image,
+  spacing,
+} from "../styles/styles";
 import { Lock, Mail } from "@tamagui/lucide-icons";
 import { Button } from "tamagui";
 
@@ -24,16 +38,16 @@ export default function SignupScreen({ navigation }) {
       // valid email address @ .
       // password and confirm password match
       if (!email || !password || !confirmPassword) {
-        Alert.alert('No field should be empty');
+        Alert.alert("No field should be empty");
         return;
       }
       if (password !== confirmPassword) {
-        Alert.alert('Password and confirm password should match');
+        Alert.alert("Password and confirm password should match");
         return;
       }
       const emailRegex = /^[\w\.-]+@[a-zA-Z\d\.-]+\.[a-zA-Z]{2,}$/;
       if (emailRegex.test(email) === false) {
-        Alert.alert('Please enter a valid email address');
+        Alert.alert("Please enter a valid email address");
         return;
       }
 
@@ -49,7 +63,6 @@ export default function SignupScreen({ navigation }) {
         const userDocRef = doc(db, "users", userCred.user.uid); // Use UID as the document ID
         await setDoc(userDocRef, {
           displayName: "new sprout",
-          notificationEnabled: false,
           createdAt: serverTimestamp(),
           points: 0,
           photoURL:
@@ -77,24 +90,22 @@ export default function SignupScreen({ navigation }) {
       </View>
       <Text style={styles.title}>Chat Sprout</Text>
       <Text style={styles.subtitle}>
-        Master small talk and networking – 
-        your guide to confident conversations!
+        Master small talk and networking – your guide to confident
+        conversations!
       </Text>
 
-      <Text style={styles.signupText}>
-        Create Account
-      </Text>
+      <Text style={styles.signupText}>Create Account</Text>
 
       <View style={styles.inputContainer}>
         <Mail style={styles.icon} size={image.iconImg} color={colors.theme} />
         <TextInput
-        style={styles.input}
-        placeholder="Email"
-        value={email}
-        onChangeText={(changedText) => {
-          setEmail(changedText);
-        }}
-      />
+          style={styles.input}
+          placeholder="Email"
+          value={email}
+          onChangeText={(changedText) => {
+            setEmail(changedText);
+          }}
+        />
       </View>
 
       <View style={styles.inputContainer}>
@@ -109,9 +120,9 @@ export default function SignupScreen({ navigation }) {
           }}
         />
       </View>
-      
+
       <View style={styles.inputContainer}>
-      <Lock style={styles.icon} size={image.iconImg} color={colors.theme} />
+        <Lock style={styles.icon} size={image.iconImg} color={colors.theme} />
         <TextInput
           style={styles.input}
           secureTextEntry={true}
@@ -123,8 +134,8 @@ export default function SignupScreen({ navigation }) {
         />
       </View>
 
-      <Button 
-        title="Register" 
+      <Button
+        title="Register"
         onPress={signupHandler}
         style={styles.button}
         textProps={{
@@ -135,11 +146,7 @@ export default function SignupScreen({ navigation }) {
       >
         Register
       </Button>
-      <Text 
-        title="Login" 
-        onPress={loginHandler}
-        style={styles.loginText}
-      >
+      <Text title="Login" onPress={loginHandler} style={styles.loginText}>
         Already have an account? Login
       </Text>
     </View>

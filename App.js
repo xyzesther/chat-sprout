@@ -13,7 +13,7 @@ import { auth } from "./Firebase/firebaseSetup";
 import LoginScreen from "./Screens/LoginScreen";
 import SignupScreen from "./Screens/SignupScreen";
 import { useEffect, useState } from "react";
-import * as Notifications from 'expo-notifications';
+import * as Notifications from "expo-notifications";
 import { useFonts } from "expo-font";
 
 const config = createTamagui(defaultConfig);
@@ -22,7 +22,7 @@ Notifications.setNotificationHandler({
   handleNotification: async () => {
     return {
       shouldShowAlert: true,
-    }
+    };
   },
 });
 
@@ -32,6 +32,10 @@ export default function App() {
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
   const [fontsLoaded] = useFonts({
     Aclonica: require("./assets/fonts/Aclonica.ttf"),
+    Roboto: require("./assets/fonts/Roboto-Regular.ttf"),
+    RobotoBold: require("./assets/fonts/Roboto-Bold.ttf"),
+    Lato: require("./assets/fonts/Lato-Regular.ttf"),
+    LatoBold: require("./assets/fonts/Lato-Bold.ttf"),
   });
 
   useEffect(() => {
@@ -64,7 +68,9 @@ export default function App() {
               <>
                 <Stack.Screen
                   name="BottomTabNavigator"
-                  children={() => <TabNavigator setIsUserLoggedIn={setIsUserLoggedIn} />}
+                  children={() => (
+                    <TabNavigator setIsUserLoggedIn={setIsUserLoggedIn} />
+                  )}
                   options={{ headerShown: false }}
                 />
                 <Stack.Screen
@@ -86,15 +92,15 @@ export default function App() {
               </>
             ) : (
               <>
-                <Stack.Screen 
-                  name="Login" 
-                  component={LoginScreen} 
-                  options={{headerShown: false}}
+                <Stack.Screen
+                  name="Login"
+                  component={LoginScreen}
+                  options={{ headerShown: false }}
                 />
-                <Stack.Screen 
-                  name="Signup" 
-                  component={SignupScreen} 
-                  options={{headerShown: false}}
+                <Stack.Screen
+                  name="Signup"
+                  component={SignupScreen}
+                  options={{ headerShown: false }}
                 />
               </>
             )}

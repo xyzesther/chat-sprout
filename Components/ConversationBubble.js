@@ -42,22 +42,34 @@ function ConversationBubble({ message, isSender, audio }) {
     totalAudioCount++;
     async function loadSound() {
       console.log("Loading Sound");
-      const { sound } = await Audio.Sound.createAsync({ uri: audio });
-      setSound(sound);
-      setIsLoading(false);
-      loadedAudioCount++;
 
-      if (loadedAudioCount === totalAudioCount) {
-        allAudioLoaded = true;
-        notifyAllAudioLoaded();
-      }
+      try {
+        await Audio.setAudioModeAsync({
+          allowsRecordingIOS: false,
+          playsInSilentModeIOS: true,
+          shouldDuckAndroid: true,
+          playThroughEarpieceAndroid: false,
+        });
 
-      sound.setOnPlaybackStatusUpdate((status) => {
-        if (status.didJustFinish) {
-          console.log("Playback finished");
-          currentPlayingSound = null;
+        const { sound } = await Audio.Sound.createAsync({ uri: audio });
+        setSound(sound);
+        setIsLoading(false);
+        loadedAudioCount++;
+
+        if (loadedAudioCount === totalAudioCount) {
+          allAudioLoaded = true;
+          notifyAllAudioLoaded();
         }
-      });
+
+        sound.setOnPlaybackStatusUpdate((status) => {
+          if (status.didJustFinish) {
+            console.log("Playback finished");
+            currentPlayingSound = null;
+          }
+        });
+      } catch (error) {
+        console.error("Error loading sound:", error);
+      }
     }
 
     loadSound();
