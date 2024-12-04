@@ -44,7 +44,6 @@ function ConversationBubble({ message, isSender, audio }) {
       console.log("Loading Sound");
 
       try {
-        // 设置音频模式
         await Audio.setAudioModeAsync({
           allowsRecordingIOS: false,
           playsInSilentModeIOS: true,
