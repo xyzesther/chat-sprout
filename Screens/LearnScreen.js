@@ -101,7 +101,7 @@ export default function LearnScreen({ navigation }) {
     { id: 8, xPercentStart: 7, yPercentStart: 88, text_position: true },
   ];
 
-  const themeColors = ["#6863AE", "#e0a71c", "#ae6f63"]; // 定义颜色数组
+  const themeColors = ["#6863AE", "#e0a71c", "#ae6f63"];
 
   return (
     <View style={styles.container}>
@@ -143,7 +143,7 @@ export default function LearnScreen({ navigation }) {
                 {
                   left: `${spot.xPercentStart}%`,
                   top: `${spot.yPercentStart}%`,
-                  backgroundColor: themeColors[conversations[spot.id].theme], // 根据 theme 设置颜色
+                  backgroundColor: themeColors[conversations[spot.id].theme],
                   shadowOpacity: 0.2,
                 },
               ]}
@@ -169,7 +169,7 @@ export default function LearnScreen({ navigation }) {
                     spot.text_position
                       ? styles.topicNameRight
                       : styles.topicNameLeft,
-                    { color: themeColors[conversations[spot.id].theme] }, // 根据 theme 设置文字颜色
+                    { color: themeColors[conversations[spot.id].theme] },
                   ]}
                 >
                   {topicNames[spot.id]}
