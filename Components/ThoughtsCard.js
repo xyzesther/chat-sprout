@@ -151,12 +151,14 @@ const styles = StyleSheet.create({
     textAlign: "left",
     color: colors.theme,
     width: "100%",
+    fontFamily: "Futura",
   },
   cardContent: {
     fontSize: 18,
     color: "#333",
     textAlign: "left",
     color: colors.theme,
+    fontFamily: "Roboto",
   },
 });
 
