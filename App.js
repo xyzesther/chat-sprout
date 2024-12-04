@@ -32,6 +32,8 @@ export default function App() {
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
   const [fontsLoaded] = useFonts({
     Aclonica: require("./assets/fonts/Aclonica.ttf"),
+    Roboto: require("./assets/fonts/Roboto-Regular.ttf"),
+    Lato: require("./assets/fonts/Lato-Regular.ttf"),
   });
 
   useEffect(() => {
