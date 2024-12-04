@@ -36,32 +36,37 @@ export default function LoginScreen({ navigation }) {
         return;
       }
       await sendPasswordResetEmail(auth, resetEmail)
-        .then(() => {
+      Alert.alert(
+        "Password Reset Email Sent",
+        "If the email you entered is registered, you'll receive an email with reset instructions."
+      );
+      setSheetOpen(false);
+      setResetEmail("");
+    } catch (err) {
+      console.error("Error:", err);
+      // Handle some specific errors
+      switch (err.code) {
+        case "auth/invalid-email":
+          Alert.alert("Error", "The email address is not valid. Please try again.");
+          break;
+        case "auth/user-not-found":
+          Alert.alert("Error", "No account found with this email address.");
+          break;
+        case "auth/too-many-requests":
           Alert.alert(
-            "Password Reset Email Sent",
-            "Check your inbox for further instructions."
+            "Error",
+            "Too many requests. Please wait and try again later."
           );
-          setSheetOpen(false);
-          setResetEmail("");
-        })
-        .catch((error) => {
-          console.error("Reset Password error:", error);
-          if (error.code === "auth/invalid-email") {
-            Alert.alert("Error", "Invalid email address format.");
-          } else if (error.code === "auth/user-not-found") {
-            Alert.alert("Error", "No account found with this email.");
-          } else {
-            Alert.alert("Error", "An unknown error occurred. Please try again.");
-          }
-        });
-      } catch (err) {
-        console.error("Unexpected error:", err);
-        Alert.alert(
-          "Error",
-          "An unexpected error occurred. Please try again later."
-        );
+          break;
+        default:
+          Alert.alert(
+            "Error",
+            "An unexpected error occurred. Please try again later."
+          );
+          break;
       }
     }
+  }
 
   return (
     <View style={styles.container}>
@@ -135,7 +140,8 @@ export default function LoginScreen({ navigation }) {
       >
         <Sheet.Overlay />
         <Sheet.Handle />
-        <Sheet.Frame paddingHorizontal="$4"
+        <Sheet.Frame 
+          paddingHorizontal="$4"
           paddingVertical="$6"
           backgroundColor={colors.background.white}
           borderTopLeftRadius={borderRadius.lg}
@@ -154,7 +160,6 @@ export default function LoginScreen({ navigation }) {
                 onChangeText={setResetEmail}
               />
             </YStack>
-
             <XStack gap="$4" justifyContent="flex-end" marginTop="$4">
               <Button
                 onPress={() => {
