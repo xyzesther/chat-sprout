@@ -1,9 +1,9 @@
 import { sendPasswordResetEmail, signInWithEmailAndPassword } from "firebase/auth";
 import { useState } from "react";
-import { View, Text, TextInput, StyleSheet, Alert, Dimensions } from "react-native";
+import { View, TextInput, StyleSheet, Alert, Dimensions } from "react-native";
 import { auth } from "../Firebase/firebaseSetup";
 import { borderRadius, borderWidth, colors, fontSize, image, spacing } from "../styles/styles";
-import { Button, Input, Label, Sheet, XStack, YStack } from "tamagui";
+import { Button, Input, Label, Sheet, Text, XStack, YStack } from "tamagui";
 import { Mail, Lock } from "@tamagui/lucide-icons";
 
 export default function LoginScreen({ navigation }) {
@@ -81,10 +81,7 @@ export default function LoginScreen({ navigation }) {
         Master small talk and networking – your guide to confident conversations!
       </Text>
 
-      {/* <View style={styles.tabContainer}> */}
       <Text style={styles.loginText}>Sign In</Text>
-        
-      {/* </View> */}
 
       <View style={styles.inputContainer}>
         <Mail style={styles.icon} size={image.iconImg} color={colors.theme} />
