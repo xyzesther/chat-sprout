@@ -50,6 +50,11 @@ export default function Profile({ setIsUserLoggedIn }) {
     try {
       await signOut(auth);
       console.log("User signed out");
+
+      // Cancel all scheduled notifications
+      await Notifications.cancelAllScheduledNotificationsAsync();
+      console.log("All scheduled notifications canceled");
+
       setIsUserLoggedIn(false);
     } catch (err) {
       console.error("Sign out error", err);
