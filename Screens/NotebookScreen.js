@@ -6,7 +6,7 @@ import { auth, database } from "../Firebase/firebaseSetup";
 import { collection, onSnapshot, query, where } from "firebase/firestore";
 import { Button, ScrollView } from "tamagui";
 import { Plus } from "@tamagui/lucide-icons";
-import { colors, spacing } from "../styles/styles";
+import { colors, fontSize, spacing } from "../styles/styles";
 import { deleteFromDB } from "../Firebase/firebaseHelper";
 
 export default function NotebookScreen({ navigation }) {
@@ -138,6 +138,8 @@ const styles = StyleSheet.create({
     marginRight: spacing.md,
     marginBottom: spacing.sm,
     color: colors.theme,
+    fontSize: fontSize.tab,
+    fontFamily: "Lato",
   },
 
   noteList: {
@@ -149,5 +151,7 @@ const styles = StyleSheet.create({
     marginTop: spacing.lg,
     textAlign: "center",
     color: colors.text.black,
+    fontSize: fontSize.body,
+    fontFamily: "Lato",
   },
 });

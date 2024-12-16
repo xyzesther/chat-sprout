@@ -1,7 +1,7 @@
 import React from 'react';
-import { ScrollView, Image } from 'react-native';
+import { ScrollView, Image, StyleSheet } from 'react-native';
 import { TextArea, YStack, View } from 'tamagui';
-import { colors, borderWidth, spacing, borderRadius } from '../styles/styles';
+import { colors, borderWidth, spacing, borderRadius, fontSize } from '../styles/styles';
 import { XCircle } from '@tamagui/lucide-icons';
 
 export default function RichTextEditor({ content, setContent, images, onImageRemove }) {
@@ -64,8 +64,16 @@ export default function RichTextEditor({ content, setContent, images, onImageRem
           placeholder="Type your note here..."
           flex={1}
           padding={spacing.md}
+          style={styles.content}
         />
       </ScrollView>
     </YStack>
   );
 }
+
+const styles = StyleSheet.create({
+  content: {
+    fontSize: fontSize.body,
+    fontFamily: "Lato",
+  },
+});
